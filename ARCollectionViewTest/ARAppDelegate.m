@@ -7,6 +7,8 @@
 //
 
 #import "ARAppDelegate.h"
+#import "ARCollectionViewController.h"
+#import "ARCollectionViewMasonryLayout.h"
 
 @implementation ARAppDelegate
 
@@ -15,6 +17,11 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    ARCollectionViewMasonryLayout *layout = [[ARCollectionViewMasonryLayout alloc] initWithDirection:ARCollectionViewMasonryLayoutDirectionVertical];
+    ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
+    self.window.rootViewController = viewController;
+    
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -19,6 +19,9 @@
 		5E8C892418DDB77300E9D521 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C890C18DDB77300E9D521 /* UIKit.framework */; };
 		5E8C892C18DDB77300E9D521 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5E8C892A18DDB77300E9D521 /* InfoPlist.strings */; };
 		5E8C892E18DDB77300E9D521 /* ARCollectionViewTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E8C892D18DDB77300E9D521 /* ARCollectionViewTestTests.m */; };
+		5E8C893918DDB8E100E9D521 /* ARCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E8C893818DDB8E100E9D521 /* ARCollectionViewController.m */; };
+		5E8C893C18DDB8F800E9D521 /* ARCollectionViewMasonryLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E8C893B18DDB8F800E9D521 /* ARCollectionViewMasonryLayout.m */; };
+		5E8C893F18DDBA3000E9D521 /* ARModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E8C893E18DDBA3000E9D521 /* ARModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,12 @@
 		5E8C892918DDB77300E9D521 /* ARCollectionViewTestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ARCollectionViewTestTests-Info.plist"; sourceTree = "<group>"; };
 		5E8C892B18DDB77300E9D521 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5E8C892D18DDB77300E9D521 /* ARCollectionViewTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARCollectionViewTestTests.m; sourceTree = "<group>"; };
+		5E8C893718DDB8E100E9D521 /* ARCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCollectionViewController.h; sourceTree = "<group>"; };
+		5E8C893818DDB8E100E9D521 /* ARCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCollectionViewController.m; sourceTree = "<group>"; };
+		5E8C893A18DDB8F800E9D521 /* ARCollectionViewMasonryLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCollectionViewMasonryLayout.h; sourceTree = "<group>"; };
+		5E8C893B18DDB8F800E9D521 /* ARCollectionViewMasonryLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCollectionViewMasonryLayout.m; sourceTree = "<group>"; };
+		5E8C893D18DDBA3000E9D521 /* ARModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARModel.h; sourceTree = "<group>"; };
+		5E8C893E18DDBA3000E9D521 /* ARModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +118,12 @@
 			children = (
 				5E8C891718DDB77300E9D521 /* ARAppDelegate.h */,
 				5E8C891818DDB77300E9D521 /* ARAppDelegate.m */,
+				5E8C893718DDB8E100E9D521 /* ARCollectionViewController.h */,
+				5E8C893818DDB8E100E9D521 /* ARCollectionViewController.m */,
+				5E8C893D18DDBA3000E9D521 /* ARModel.h */,
+				5E8C893E18DDBA3000E9D521 /* ARModel.m */,
+				5E8C893A18DDB8F800E9D521 /* ARCollectionViewMasonryLayout.h */,
+				5E8C893B18DDB8F800E9D521 /* ARCollectionViewMasonryLayout.m */,
 				5E8C891A18DDB77300E9D521 /* Images.xcassets */,
 				5E8C890F18DDB77300E9D521 /* Supporting Files */,
 			);
@@ -240,8 +255,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E8C893F18DDBA3000E9D521 /* ARModel.m in Sources */,
 				5E8C891518DDB77300E9D521 /* main.m in Sources */,
+				5E8C893918DDB8E100E9D521 /* ARCollectionViewController.m in Sources */,
 				5E8C891918DDB77300E9D521 /* ARAppDelegate.m in Sources */,
+				5E8C893C18DDB8F800E9D521 /* ARCollectionViewMasonryLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

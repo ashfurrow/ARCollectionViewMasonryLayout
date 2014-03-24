@@ -42,7 +42,7 @@ static NSString *CellIdentifier = @"Cell";
     
     for (NSInteger i = 0; i < capacity; i++) {
         UIColor *randomColour = [UIColor colorWithRed:randomColourComponent() green:randomColourComponent() blue:randomColourComponent() alpha:1.0f];
-        CGFloat randomDimension = (CGFloat)(arc4random() % 80);
+        CGFloat randomDimension = (CGFloat)(arc4random() % 80) + 40; // Generates a random dimension between [40...120].
         
         ARModel *model = [[ARModel alloc] initWithColour:randomColour dimension:randomDimension];
         [mutableArray addObject:model];

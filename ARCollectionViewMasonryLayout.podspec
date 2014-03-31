@@ -5,7 +5,8 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/AshFurrow/ARCollectionViewMasonryLayout"
   s.screenshots  = "http://f.cl.ly/items/0j1z0e2X0j0Y203O0y25/Screen%20Shot%202014-03-24%20at%2012.57.00%20PM.png"
   s.license      = 'MIT'
-  s.author             = { "Orta Therox" => "orta.therox@gmail.com" }
+  s.authors      = { "Orta Therox" => "orta.therox@gmail.com",
+                     "Ash Furrow" => "ash@ashfurrow.com" }
   s.social_media_url = "http://twitter.com/orta"
   s.platform     = :ios
   s.platform     = :ios, '7.0'

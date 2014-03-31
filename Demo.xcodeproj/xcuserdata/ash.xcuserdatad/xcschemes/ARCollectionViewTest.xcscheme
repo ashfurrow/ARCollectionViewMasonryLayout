@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5E8C890418DDB77300E9D521"
                BuildableName = "ARCollectionViewTest.app"
-               BlueprintName = "ARCollectionViewTest"
-               ReferencedContainer = "container:ARCollectionViewTest.xcodeproj">
+               BlueprintName = "Demo"
+               ReferencedContainer = "container:Demo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5E8C891F18DDB77300E9D521"
                BuildableName = "ARCollectionViewTestTests.xctest"
-               BlueprintName = "ARCollectionViewTestTests"
-               ReferencedContainer = "container:ARCollectionViewTest.xcodeproj">
+               BlueprintName = "DemoTests"
+               ReferencedContainer = "container:Demo.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -44,8 +44,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5E8C890418DDB77300E9D521"
             BuildableName = "ARCollectionViewTest.app"
-            BlueprintName = "ARCollectionViewTest"
-            ReferencedContainer = "container:ARCollectionViewTest.xcodeproj">
+            BlueprintName = "Demo"
+            ReferencedContainer = "container:Demo.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -63,8 +63,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5E8C890418DDB77300E9D521"
             BuildableName = "ARCollectionViewTest.app"
-            BlueprintName = "ARCollectionViewTest"
-            ReferencedContainer = "container:ARCollectionViewTest.xcodeproj">
+            BlueprintName = "Demo"
+            ReferencedContainer = "container:Demo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -81,8 +81,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5E8C890418DDB77300E9D521"
             BuildableName = "ARCollectionViewTest.app"
-            BlueprintName = "ARCollectionViewTest"
-            ReferencedContainer = "container:ARCollectionViewTest.xcodeproj">
+            BlueprintName = "Demo"
+            ReferencedContainer = "container:Demo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

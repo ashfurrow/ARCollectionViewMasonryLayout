@@ -13,7 +13,6 @@
 		5E8C891318DDB77300E9D521 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5E8C891118DDB77300E9D521 /* InfoPlist.strings */; };
 		5E8C891518DDB77300E9D521 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E8C891418DDB77300E9D521 /* main.m */; };
 		5E8C891918DDB77300E9D521 /* ARAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E8C891818DDB77300E9D521 /* ARAppDelegate.m */; };
-		5E8C891B18DDB77300E9D521 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E8C891A18DDB77300E9D521 /* Images.xcassets */; };
 		5E8C892218DDB77300E9D521 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C892118DDB77300E9D521 /* XCTest.framework */; };
 		5E8C892318DDB77300E9D521 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C890818DDB77300E9D521 /* Foundation.framework */; };
 		5E8C892418DDB77300E9D521 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8C890C18DDB77300E9D521 /* UIKit.framework */; };
@@ -35,28 +34,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5E8C890518DDB77300E9D521 /* ARCollectionViewTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARCollectionViewTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E8C890518DDB77300E9D521 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E8C890818DDB77300E9D521 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5E8C890A18DDB77300E9D521 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		5E8C890C18DDB77300E9D521 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		5E8C891018DDB77300E9D521 /* ARCollectionViewTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ARCollectionViewTest-Info.plist"; sourceTree = "<group>"; };
+		5E8C891018DDB77300E9D521 /* Demo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Demo-Info.plist"; sourceTree = "<group>"; };
 		5E8C891218DDB77300E9D521 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5E8C891418DDB77300E9D521 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		5E8C891618DDB77300E9D521 /* ARCollectionViewTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ARCollectionViewTest-Prefix.pch"; sourceTree = "<group>"; };
-		5E8C891718DDB77300E9D521 /* ARAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARAppDelegate.h; sourceTree = "<group>"; };
-		5E8C891818DDB77300E9D521 /* ARAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARAppDelegate.m; sourceTree = "<group>"; };
-		5E8C891A18DDB77300E9D521 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		5E8C892018DDB77300E9D521 /* ARCollectionViewTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARCollectionViewTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E8C891618DDB77300E9D521 /* Demo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Demo-Prefix.pch"; sourceTree = "<group>"; };
+		5E8C891718DDB77300E9D521 /* ARAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ARAppDelegate.h; path = ../Demo/ARAppDelegate.h; sourceTree = "<group>"; };
+		5E8C891818DDB77300E9D521 /* ARAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ARAppDelegate.m; path = ../Demo/ARAppDelegate.m; sourceTree = "<group>"; };
+		5E8C892018DDB77300E9D521 /* DemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E8C892118DDB77300E9D521 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		5E8C892918DDB77300E9D521 /* ARCollectionViewTestTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ARCollectionViewTestTests-Info.plist"; sourceTree = "<group>"; };
+		5E8C892918DDB77300E9D521 /* DemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoTests-Info.plist"; sourceTree = "<group>"; };
 		5E8C892B18DDB77300E9D521 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		5E8C892D18DDB77300E9D521 /* ARCollectionViewTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARCollectionViewTestTests.m; sourceTree = "<group>"; };
-		5E8C893718DDB8E100E9D521 /* ARCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCollectionViewController.h; sourceTree = "<group>"; };
-		5E8C893818DDB8E100E9D521 /* ARCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCollectionViewController.m; sourceTree = "<group>"; };
-		5E8C893A18DDB8F800E9D521 /* ARCollectionViewMasonryLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCollectionViewMasonryLayout.h; sourceTree = "<group>"; };
-		5E8C893B18DDB8F800E9D521 /* ARCollectionViewMasonryLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCollectionViewMasonryLayout.m; sourceTree = "<group>"; };
-		5E8C893D18DDBA3000E9D521 /* ARModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARModel.h; sourceTree = "<group>"; };
-		5E8C893E18DDBA3000E9D521 /* ARModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARModel.m; sourceTree = "<group>"; };
+		5E8C892D18DDB77300E9D521 /* ARCollectionViewTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ARCollectionViewTestTests.m; path = ../ARCollectionViewTests/ARCollectionViewTestTests.m; sourceTree = "<group>"; };
+		5E8C893718DDB8E100E9D521 /* ARCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARCollectionViewController.h; path = ../Demo/ARCollectionViewController.h; sourceTree = "<group>"; };
+		5E8C893818DDB8E100E9D521 /* ARCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARCollectionViewController.m; path = ../Demo/ARCollectionViewController.m; sourceTree = "<group>"; };
+		5E8C893A18DDB8F800E9D521 /* ARCollectionViewMasonryLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARCollectionViewMasonryLayout.h; path = ../ARCollectionViewMasonryLayout.h; sourceTree = "<group>"; };
+		5E8C893B18DDB8F800E9D521 /* ARCollectionViewMasonryLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARCollectionViewMasonryLayout.m; path = ../ARCollectionViewMasonryLayout.m; sourceTree = "<group>"; };
+		5E8C893D18DDBA3000E9D521 /* ARModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARModel.h; path = ../Demo/ARModel.h; sourceTree = "<group>"; };
+		5E8C893E18DDBA3000E9D521 /* ARModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARModel.m; path = ../Demo/ARModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,8 +94,8 @@
 		5E8C890618DDB77300E9D521 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5E8C890518DDB77300E9D521 /* ARCollectionViewTest.app */,
-				5E8C892018DDB77300E9D521 /* ARCollectionViewTestTests.xctest */,
+				5E8C890518DDB77300E9D521 /* Demo.app */,
+				5E8C892018DDB77300E9D521 /* DemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -124,7 +122,6 @@
 				5E8C893E18DDBA3000E9D521 /* ARModel.m */,
 				5E8C893A18DDB8F800E9D521 /* ARCollectionViewMasonryLayout.h */,
 				5E8C893B18DDB8F800E9D521 /* ARCollectionViewMasonryLayout.m */,
-				5E8C891A18DDB77300E9D521 /* Images.xcassets */,
 				5E8C890F18DDB77300E9D521 /* Supporting Files */,
 			);
 			path = ARCollectionViewTest;
@@ -133,10 +130,10 @@
 		5E8C890F18DDB77300E9D521 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				5E8C891018DDB77300E9D521 /* ARCollectionViewTest-Info.plist */,
+				5E8C891018DDB77300E9D521 /* Demo-Info.plist */,
 				5E8C891118DDB77300E9D521 /* InfoPlist.strings */,
 				5E8C891418DDB77300E9D521 /* main.m */,
-				5E8C891618DDB77300E9D521 /* ARCollectionViewTest-Prefix.pch */,
+				5E8C891618DDB77300E9D521 /* Demo-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -153,7 +150,7 @@
 		5E8C892818DDB77300E9D521 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				5E8C892918DDB77300E9D521 /* ARCollectionViewTestTests-Info.plist */,
+				5E8C892918DDB77300E9D521 /* DemoTests-Info.plist */,
 				5E8C892A18DDB77300E9D521 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -162,9 +159,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5E8C890418DDB77300E9D521 /* ARCollectionViewTest */ = {
+		5E8C890418DDB77300E9D521 /* Demo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5E8C893118DDB77300E9D521 /* Build configuration list for PBXNativeTarget "ARCollectionViewTest" */;
+			buildConfigurationList = 5E8C893118DDB77300E9D521 /* Build configuration list for PBXNativeTarget "Demo" */;
 			buildPhases = (
 				5E8C890118DDB77300E9D521 /* Sources */,
 				5E8C890218DDB77300E9D521 /* Frameworks */,
@@ -174,14 +171,14 @@
 			);
 			dependencies = (
 			);
-			name = ARCollectionViewTest;
+			name = Demo;
 			productName = ARCollectionViewTest;
-			productReference = 5E8C890518DDB77300E9D521 /* ARCollectionViewTest.app */;
+			productReference = 5E8C890518DDB77300E9D521 /* Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5E8C891F18DDB77300E9D521 /* ARCollectionViewTestTests */ = {
+		5E8C891F18DDB77300E9D521 /* DemoTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5E8C893418DDB77300E9D521 /* Build configuration list for PBXNativeTarget "ARCollectionViewTestTests" */;
+			buildConfigurationList = 5E8C893418DDB77300E9D521 /* Build configuration list for PBXNativeTarget "DemoTests" */;
 			buildPhases = (
 				5E8C891C18DDB77300E9D521 /* Sources */,
 				5E8C891D18DDB77300E9D521 /* Frameworks */,
@@ -192,9 +189,9 @@
 			dependencies = (
 				5E8C892618DDB77300E9D521 /* PBXTargetDependency */,
 			);
-			name = ARCollectionViewTestTests;
+			name = DemoTests;
 			productName = ARCollectionViewTestTests;
-			productReference = 5E8C892018DDB77300E9D521 /* ARCollectionViewTestTests.xctest */;
+			productReference = 5E8C892018DDB77300E9D521 /* DemoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -212,7 +209,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5E8C890018DDB77300E9D521 /* Build configuration list for PBXProject "ARCollectionViewTest" */;
+			buildConfigurationList = 5E8C890018DDB77300E9D521 /* Build configuration list for PBXProject "Demo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -224,8 +221,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5E8C890418DDB77300E9D521 /* ARCollectionViewTest */,
-				5E8C891F18DDB77300E9D521 /* ARCollectionViewTestTests */,
+				5E8C890418DDB77300E9D521 /* Demo */,
+				5E8C891F18DDB77300E9D521 /* DemoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -236,7 +233,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E8C891318DDB77300E9D521 /* InfoPlist.strings in Resources */,
-				5E8C891B18DDB77300E9D521 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,7 +272,7 @@
 /* Begin PBXTargetDependency section */
 		5E8C892618DDB77300E9D521 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5E8C890418DDB77300E9D521 /* ARCollectionViewTest */;
+			target = 5E8C890418DDB77300E9D521 /* Demo */;
 			targetProxy = 5E8C892518DDB77300E9D521 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -377,9 +373,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ARCollectionViewTest/ARCollectionViewTest-Prefix.pch";
-				INFOPLIST_FILE = "ARCollectionViewTest/ARCollectionViewTest-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "ARCollectionViewTest/Demo-Prefix.pch";
+				INFOPLIST_FILE = "ARCollectionViewTest/Demo-Info.plist";
+				PRODUCT_NAME = Demo;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -390,9 +386,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ARCollectionViewTest/ARCollectionViewTest-Prefix.pch";
-				INFOPLIST_FILE = "ARCollectionViewTest/ARCollectionViewTest-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "ARCollectionViewTest/Demo-Prefix.pch";
+				INFOPLIST_FILE = "ARCollectionViewTest/Demo-Info.plist";
+				PRODUCT_NAME = Demo;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -412,8 +408,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "ARCollectionViewTestTests/ARCollectionViewTestTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "ARCollectionViewTestTests/DemoTests-Info.plist";
+				PRODUCT_NAME = DemoTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -430,8 +426,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ARCollectionViewTest/ARCollectionViewTest-Prefix.pch";
-				INFOPLIST_FILE = "ARCollectionViewTestTests/ARCollectionViewTestTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "ARCollectionViewTestTests/DemoTests-Info.plist";
+				PRODUCT_NAME = DemoTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -440,7 +436,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5E8C890018DDB77300E9D521 /* Build configuration list for PBXProject "ARCollectionViewTest" */ = {
+		5E8C890018DDB77300E9D521 /* Build configuration list for PBXProject "Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E8C892F18DDB77300E9D521 /* Debug */,
@@ -449,21 +445,23 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5E8C893118DDB77300E9D521 /* Build configuration list for PBXNativeTarget "ARCollectionViewTest" */ = {
+		5E8C893118DDB77300E9D521 /* Build configuration list for PBXNativeTarget "Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E8C893218DDB77300E9D521 /* Debug */,
 				5E8C893318DDB77300E9D521 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		5E8C893418DDB77300E9D521 /* Build configuration list for PBXNativeTarget "ARCollectionViewTestTests" */ = {
+		5E8C893418DDB77300E9D521 /* Build configuration list for PBXNativeTarget "DemoTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5E8C893518DDB77300E9D521 /* Debug */,
 				5E8C893618DDB77300E9D521 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -1,8 +1,8 @@
 //
 //  main.m
-//  ARCollectionViewTest
+//  Demo
 //
-//  Created by Ash Furrow on 2014-03-22.
+//  Created by Ash Furrow on 2014-04-03.
 //  Copyright (c) 2014 Artsy. All rights reserved.
 //
 

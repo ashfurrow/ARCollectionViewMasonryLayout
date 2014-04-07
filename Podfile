@@ -1,7 +1,7 @@
 workspace 'ARCollectionViewMasonryLayout'
 xcodeproj 'Demo/Demo.xcodeproj'
 
-target "ARCollectionViewMasonryLayoutTests" do
+target "IntegrationTests" do
   pod 'Specta', '~> 0.2.1'
   pod 'Expecta', '~> 0.2.3'
   pod 'FBSnapshotTestCase', '~> 1.1'

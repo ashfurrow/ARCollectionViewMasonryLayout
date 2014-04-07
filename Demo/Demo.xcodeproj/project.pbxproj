@@ -7,165 +7,162 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E57108F18F2E64800553EBD /* libPods-ARCollectionViewMasonryLayoutTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E57108E18F2E64800553EBD /* libPods-ARCollectionViewMasonryLayoutTests.a */; };
-		5E57109018F2E6F700553EBD /* ARCollectionViewMasonryLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E57108818F2E35000553EBD /* ARCollectionViewMasonryLayoutTests.m */; };
-		5EB33ADF18EE0E110081B678 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB33ADE18EE0E110081B678 /* Foundation.framework */; };
-		5EB33AE118EE0E110081B678 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB33AE018EE0E110081B678 /* CoreGraphics.framework */; };
-		5EB33AE318EE0E110081B678 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB33AE218EE0E110081B678 /* UIKit.framework */; };
-		5EB33AE918EE0E110081B678 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5EB33AE718EE0E110081B678 /* InfoPlist.strings */; };
-		5EB33AEB18EE0E110081B678 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB33AEA18EE0E110081B678 /* main.m */; };
-		5EB33AEF18EE0E110081B678 /* ARAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB33AEE18EE0E110081B678 /* ARAppDelegate.m */; };
-		5EB33AF118EE0E110081B678 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EB33AF018EE0E110081B678 /* Images.xcassets */; };
-		5EB33AF818EE0E110081B678 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB33AF718EE0E110081B678 /* XCTest.framework */; };
-		5EB33AF918EE0E110081B678 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB33ADE18EE0E110081B678 /* Foundation.framework */; };
-		5EB33AFA18EE0E110081B678 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB33AE218EE0E110081B678 /* UIKit.framework */; };
-		5EB33B0218EE0E110081B678 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5EB33B0018EE0E110081B678 /* InfoPlist.strings */; };
-		5EB33B1118EE0E2D0081B678 /* ARCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB33B0D18EE0E2D0081B678 /* ARCollectionViewController.m */; };
-		5EB33B1218EE0E2D0081B678 /* ARModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB33B1018EE0E2D0081B678 /* ARModel.m */; };
-		5EB33B1818EE0E5B0081B678 /* ARCollectionViewMasonryLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB33B1718EE0E5B0081B678 /* ARCollectionViewMasonryLayout.m */; };
+		31E8E642B561420DAA8491B7 /* libPods-IntegrationTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B96BB336034F9D8EA9350E /* libPods-IntegrationTests.a */; };
+		5E57110918F2EEF500553EBD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E57110818F2EEF500553EBD /* Foundation.framework */; };
+		5E57110B18F2EEF500553EBD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E57110A18F2EEF500553EBD /* CoreGraphics.framework */; };
+		5E57110D18F2EEF500553EBD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E57110C18F2EEF500553EBD /* UIKit.framework */; };
+		5E57111318F2EEF500553EBD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5E57111118F2EEF500553EBD /* InfoPlist.strings */; };
+		5E57111518F2EEF500553EBD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E57111418F2EEF500553EBD /* main.m */; };
+		5E57111B18F2EEF500553EBD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E57111A18F2EEF500553EBD /* Images.xcassets */; };
+		5E57113F18F2EF1B00553EBD /* ARAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E57113818F2EF1B00553EBD /* ARAppDelegate.m */; };
+		5E57114018F2EF1B00553EBD /* ARCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E57113A18F2EF1B00553EBD /* ARCollectionViewController.m */; };
+		5E57114218F2EF1B00553EBD /* ARModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E57113E18F2EF1B00553EBD /* ARModel.m */; };
+		5E57114518F2EF2B00553EBD /* ARCollectionViewMasonryLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E57114418F2EF2B00553EBD /* ARCollectionViewMasonryLayout.m */; };
+		5E57114B18F2F27B00553EBD /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E57112118F2EEF500553EBD /* XCTest.framework */; };
+		5E57114C18F2F27B00553EBD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E57110818F2EEF500553EBD /* Foundation.framework */; };
+		5E57114D18F2F27B00553EBD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E57110C18F2EEF500553EBD /* UIKit.framework */; };
+		5E57115318F2F27B00553EBD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5E57115118F2F27B00553EBD /* InfoPlist.strings */; };
+		5E57115D18F2F2D500553EBD /* ARCollectionViewMasonryLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E57115C18F2F2D500553EBD /* ARCollectionViewMasonryLayoutTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5E57109118F2E75000553EBD /* PBXContainerItemProxy */ = {
+		5E57115718F2F27B00553EBD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5EB33AD318EE0E110081B678 /* Project object */;
+			containerPortal = 5E5710FD18F2EEF500553EBD /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 5EB33ADA18EE0E110081B678;
+			remoteGlobalIDString = 5E57110418F2EEF500553EBD;
 			remoteInfo = Demo;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		06B2B0EAE5534EED9208E560 /* libPods-ARCollectionViewMasonryLayoutTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ARCollectionViewMasonryLayoutTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5E57108818F2E35000553EBD /* ARCollectionViewMasonryLayoutTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCollectionViewMasonryLayoutTests.m; sourceTree = "<group>"; };
-		5E57108C18F2E64300553EBD /* libPods-ARCollectionViewMasonryLayoutTests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-ARCollectionViewMasonryLayoutTests.a"; path = "../Pods/build/Debug-iphoneos/libPods-ARCollectionViewMasonryLayoutTests.a"; sourceTree = "<group>"; };
-		5E57108E18F2E64800553EBD /* libPods-ARCollectionViewMasonryLayoutTests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-ARCollectionViewMasonryLayoutTests.a"; path = "../Pods/build/Debug-iphoneos/libPods-ARCollectionViewMasonryLayoutTests.a"; sourceTree = "<group>"; };
-		5EB33ADB18EE0E110081B678 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5EB33ADE18EE0E110081B678 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		5EB33AE018EE0E110081B678 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		5EB33AE218EE0E110081B678 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		5EB33AE618EE0E110081B678 /* Demo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Demo-Info.plist"; sourceTree = "<group>"; };
-		5EB33AE818EE0E110081B678 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		5EB33AEA18EE0E110081B678 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		5EB33AEC18EE0E110081B678 /* Demo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Demo-Prefix.pch"; sourceTree = "<group>"; };
-		5EB33AED18EE0E110081B678 /* ARAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARAppDelegate.h; sourceTree = "<group>"; };
-		5EB33AEE18EE0E110081B678 /* ARAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARAppDelegate.m; sourceTree = "<group>"; };
-		5EB33AF018EE0E110081B678 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		5EB33AF618EE0E110081B678 /* ARCollectionViewMasonryLayoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARCollectionViewMasonryLayoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5EB33AF718EE0E110081B678 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		5EB33AFF18EE0E110081B678 /* DemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoTests-Info.plist"; sourceTree = "<group>"; };
-		5EB33B0118EE0E110081B678 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		5EB33B0D18EE0E2D0081B678 /* ARCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCollectionViewController.m; sourceTree = "<group>"; };
-		5EB33B0E18EE0E2D0081B678 /* ARCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCollectionViewController.h; sourceTree = "<group>"; };
-		5EB33B0F18EE0E2D0081B678 /* ARModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARModel.h; sourceTree = "<group>"; };
-		5EB33B1018EE0E2D0081B678 /* ARModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARModel.m; sourceTree = "<group>"; };
-		5EB33B1618EE0E5B0081B678 /* ARCollectionViewMasonryLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCollectionViewMasonryLayout.h; sourceTree = "<group>"; };
-		5EB33B1718EE0E5B0081B678 /* ARCollectionViewMasonryLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCollectionViewMasonryLayout.m; sourceTree = "<group>"; };
-		E561165407DC4FE59DFFF73C /* Pods-ARCollectionViewMasonryLayoutTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARCollectionViewMasonryLayoutTests.xcconfig"; path = "../Pods/Pods-ARCollectionViewMasonryLayoutTests.xcconfig"; sourceTree = "<group>"; };
+		5E57110518F2EEF500553EBD /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E57110818F2EEF500553EBD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5E57110A18F2EEF500553EBD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		5E57110C18F2EEF500553EBD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		5E57111018F2EEF500553EBD /* Demo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Demo-Info.plist"; sourceTree = "<group>"; };
+		5E57111218F2EEF500553EBD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5E57111418F2EEF500553EBD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5E57111618F2EEF500553EBD /* Demo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Demo-Prefix.pch"; sourceTree = "<group>"; };
+		5E57111A18F2EEF500553EBD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		5E57112118F2EEF500553EBD /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		5E57113718F2EF1B00553EBD /* ARAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARAppDelegate.h; sourceTree = "<group>"; };
+		5E57113818F2EF1B00553EBD /* ARAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARAppDelegate.m; sourceTree = "<group>"; };
+		5E57113918F2EF1B00553EBD /* ARCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCollectionViewController.h; sourceTree = "<group>"; };
+		5E57113A18F2EF1B00553EBD /* ARCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCollectionViewController.m; sourceTree = "<group>"; };
+		5E57113D18F2EF1B00553EBD /* ARModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARModel.h; sourceTree = "<group>"; };
+		5E57113E18F2EF1B00553EBD /* ARModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARModel.m; sourceTree = "<group>"; };
+		5E57114318F2EF2B00553EBD /* ARCollectionViewMasonryLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARCollectionViewMasonryLayout.h; path = ../../ARCollectionViewMasonryLayout.h; sourceTree = "<group>"; };
+		5E57114418F2EF2B00553EBD /* ARCollectionViewMasonryLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARCollectionViewMasonryLayout.m; path = ../../ARCollectionViewMasonryLayout.m; sourceTree = "<group>"; };
+		5E57114A18F2F27B00553EBD /* IntegrationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IntegrationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E57115018F2F27B00553EBD /* IntegrationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IntegrationTests-Info.plist"; sourceTree = "<group>"; };
+		5E57115218F2F27B00553EBD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5E57115618F2F27B00553EBD /* IntegrationTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IntegrationTests-Prefix.pch"; sourceTree = "<group>"; };
+		5E57115C18F2F2D500553EBD /* ARCollectionViewMasonryLayoutTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARCollectionViewMasonryLayoutTests.m; path = ../../IntegrationTests/ARCollectionViewMasonryLayoutTests.m; sourceTree = "<group>"; };
+		75B96BB336034F9D8EA9350E /* libPods-IntegrationTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IntegrationTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D8DB0BF75604C82ACCA1562 /* Pods-IntegrationTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntegrationTests.xcconfig"; path = "../Pods/Pods-IntegrationTests.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5EB33AD818EE0E110081B678 /* Frameworks */ = {
+		5E57110218F2EEF500553EBD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EB33AE118EE0E110081B678 /* CoreGraphics.framework in Frameworks */,
-				5EB33AE318EE0E110081B678 /* UIKit.framework in Frameworks */,
-				5EB33ADF18EE0E110081B678 /* Foundation.framework in Frameworks */,
+				5E57110B18F2EEF500553EBD /* CoreGraphics.framework in Frameworks */,
+				5E57110D18F2EEF500553EBD /* UIKit.framework in Frameworks */,
+				5E57110918F2EEF500553EBD /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5EB33AF318EE0E110081B678 /* Frameworks */ = {
+		5E57114718F2F27B00553EBD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EB33AF818EE0E110081B678 /* XCTest.framework in Frameworks */,
-				5EB33AFA18EE0E110081B678 /* UIKit.framework in Frameworks */,
-				5EB33AF918EE0E110081B678 /* Foundation.framework in Frameworks */,
-				5E57108F18F2E64800553EBD /* libPods-ARCollectionViewMasonryLayoutTests.a in Frameworks */,
+				5E57114B18F2F27B00553EBD /* XCTest.framework in Frameworks */,
+				5E57114D18F2F27B00553EBD /* UIKit.framework in Frameworks */,
+				5E57114C18F2F27B00553EBD /* Foundation.framework in Frameworks */,
+				31E8E642B561420DAA8491B7 /* libPods-IntegrationTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5EB33AD218EE0E110081B678 = {
+		5E5710FC18F2EEF500553EBD = {
 			isa = PBXGroup;
 			children = (
-				5EB33AE418EE0E110081B678 /* Demo */,
-				5EB33AFD18EE0E110081B678 /* DemoTests */,
-				5EB33ADD18EE0E110081B678 /* Frameworks */,
-				5EB33ADC18EE0E110081B678 /* Products */,
-				E561165407DC4FE59DFFF73C /* Pods-ARCollectionViewMasonryLayoutTests.xcconfig */,
+				5E57110E18F2EEF500553EBD /* Demo */,
+				5E57114E18F2F27B00553EBD /* IntegrationTests */,
+				5E57110718F2EEF500553EBD /* Frameworks */,
+				5E57110618F2EEF500553EBD /* Products */,
+				7D8DB0BF75604C82ACCA1562 /* Pods-IntegrationTests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
-		5EB33ADC18EE0E110081B678 /* Products */ = {
+		5E57110618F2EEF500553EBD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5EB33ADB18EE0E110081B678 /* Demo.app */,
-				5EB33AF618EE0E110081B678 /* ARCollectionViewMasonryLayoutTests.xctest */,
+				5E57110518F2EEF500553EBD /* Demo.app */,
+				5E57114A18F2F27B00553EBD /* IntegrationTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5EB33ADD18EE0E110081B678 /* Frameworks */ = {
+		5E57110718F2EEF500553EBD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5E57108E18F2E64800553EBD /* libPods-ARCollectionViewMasonryLayoutTests.a */,
-				5E57108C18F2E64300553EBD /* libPods-ARCollectionViewMasonryLayoutTests.a */,
-				5EB33ADE18EE0E110081B678 /* Foundation.framework */,
-				5EB33AE018EE0E110081B678 /* CoreGraphics.framework */,
-				5EB33AE218EE0E110081B678 /* UIKit.framework */,
-				5EB33AF718EE0E110081B678 /* XCTest.framework */,
-				06B2B0EAE5534EED9208E560 /* libPods-ARCollectionViewMasonryLayoutTests.a */,
+				5E57110818F2EEF500553EBD /* Foundation.framework */,
+				5E57110A18F2EEF500553EBD /* CoreGraphics.framework */,
+				5E57110C18F2EEF500553EBD /* UIKit.framework */,
+				5E57112118F2EEF500553EBD /* XCTest.framework */,
+				75B96BB336034F9D8EA9350E /* libPods-IntegrationTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5EB33AE418EE0E110081B678 /* Demo */ = {
+		5E57110E18F2EEF500553EBD /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				5EB33B1718EE0E5B0081B678 /* ARCollectionViewMasonryLayout.m */,
-				5EB33B1618EE0E5B0081B678 /* ARCollectionViewMasonryLayout.h */,
-				5EB33AED18EE0E110081B678 /* ARAppDelegate.h */,
-				5EB33AEE18EE0E110081B678 /* ARAppDelegate.m */,
-				5EB33B0E18EE0E2D0081B678 /* ARCollectionViewController.h */,
-				5EB33B0D18EE0E2D0081B678 /* ARCollectionViewController.m */,
-				5EB33B0F18EE0E2D0081B678 /* ARModel.h */,
-				5EB33B1018EE0E2D0081B678 /* ARModel.m */,
-				5EB33AF018EE0E110081B678 /* Images.xcassets */,
-				5EB33AE518EE0E110081B678 /* Supporting Files */,
+				5E57114318F2EF2B00553EBD /* ARCollectionViewMasonryLayout.h */,
+				5E57114418F2EF2B00553EBD /* ARCollectionViewMasonryLayout.m */,
+				5E57113718F2EF1B00553EBD /* ARAppDelegate.h */,
+				5E57113818F2EF1B00553EBD /* ARAppDelegate.m */,
+				5E57113918F2EF1B00553EBD /* ARCollectionViewController.h */,
+				5E57113A18F2EF1B00553EBD /* ARCollectionViewController.m */,
+				5E57113D18F2EF1B00553EBD /* ARModel.h */,
+				5E57113E18F2EF1B00553EBD /* ARModel.m */,
+				5E57111A18F2EEF500553EBD /* Images.xcassets */,
+				5E57110F18F2EEF500553EBD /* Supporting Files */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
 		};
-		5EB33AE518EE0E110081B678 /* Supporting Files */ = {
+		5E57110F18F2EEF500553EBD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				5EB33AE618EE0E110081B678 /* Demo-Info.plist */,
-				5EB33AE718EE0E110081B678 /* InfoPlist.strings */,
-				5EB33AEA18EE0E110081B678 /* main.m */,
-				5EB33AEC18EE0E110081B678 /* Demo-Prefix.pch */,
+				5E57111018F2EEF500553EBD /* Demo-Info.plist */,
+				5E57111118F2EEF500553EBD /* InfoPlist.strings */,
+				5E57111418F2EEF500553EBD /* main.m */,
+				5E57111618F2EEF500553EBD /* Demo-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		5EB33AFD18EE0E110081B678 /* DemoTests */ = {
+		5E57114E18F2F27B00553EBD /* IntegrationTests */ = {
 			isa = PBXGroup;
 			children = (
-				5E57108818F2E35000553EBD /* ARCollectionViewMasonryLayoutTests.m */,
-				5EB33AFE18EE0E110081B678 /* Supporting Files */,
+				5E57115C18F2F2D500553EBD /* ARCollectionViewMasonryLayoutTests.m */,
+				5E57114F18F2F27B00553EBD /* Supporting Files */,
 			);
-			name = DemoTests;
 			path = IntegrationTests;
 			sourceTree = "<group>";
 		};
-		5EB33AFE18EE0E110081B678 /* Supporting Files */ = {
+		5E57114F18F2F27B00553EBD /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				5EB33AFF18EE0E110081B678 /* DemoTests-Info.plist */,
-				5EB33B0018EE0E110081B678 /* InfoPlist.strings */,
+				5E57115018F2F27B00553EBD /* IntegrationTests-Info.plist */,
+				5E57115118F2F27B00553EBD /* InfoPlist.strings */,
+				5E57115618F2F27B00553EBD /* IntegrationTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -173,13 +170,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5EB33ADA18EE0E110081B678 /* Demo */ = {
+		5E57110418F2EEF500553EBD /* Demo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5EB33B0718EE0E110081B678 /* Build configuration list for PBXNativeTarget "Demo" */;
+			buildConfigurationList = 5E57113118F2EEF500553EBD /* Build configuration list for PBXNativeTarget "Demo" */;
 			buildPhases = (
-				5EB33AD718EE0E110081B678 /* Sources */,
-				5EB33AD818EE0E110081B678 /* Frameworks */,
-				5EB33AD918EE0E110081B678 /* Resources */,
+				5E57110118F2EEF500553EBD /* Sources */,
+				5E57110218F2EEF500553EBD /* Frameworks */,
+				5E57110318F2EEF500553EBD /* Resources */,
 			);
 			buildRules = (
 			);
@@ -187,124 +184,159 @@
 			);
 			name = Demo;
 			productName = Demo;
-			productReference = 5EB33ADB18EE0E110081B678 /* Demo.app */;
+			productReference = 5E57110518F2EEF500553EBD /* Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5EB33AF518EE0E110081B678 /* ARCollectionViewMasonryLayoutTests */ = {
+		5E57114918F2F27B00553EBD /* IntegrationTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5EB33B0A18EE0E110081B678 /* Build configuration list for PBXNativeTarget "ARCollectionViewMasonryLayoutTests" */;
+			buildConfigurationList = 5E57115B18F2F27B00553EBD /* Build configuration list for PBXNativeTarget "IntegrationTests" */;
 			buildPhases = (
-				5EB33AF218EE0E110081B678 /* Sources */,
-				5EB33AF318EE0E110081B678 /* Frameworks */,
-				5EB33AF418EE0E110081B678 /* Resources */,
+				E44C94CD34724F92A6F8A623 /* Check Pods Manifest.lock */,
+				5E57114618F2F27B00553EBD /* Sources */,
+				5E57114718F2F27B00553EBD /* Frameworks */,
+				5E57114818F2F27B00553EBD /* Resources */,
+				A577DE2E26CF436A9B684A90 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				5E57109218F2E75000553EBD /* PBXTargetDependency */,
+				5E57115818F2F27B00553EBD /* PBXTargetDependency */,
 			);
-			name = ARCollectionViewMasonryLayoutTests;
-			productName = DemoTests;
-			productReference = 5EB33AF618EE0E110081B678 /* ARCollectionViewMasonryLayoutTests.xctest */;
+			name = IntegrationTests;
+			productName = IntegrationTests;
+			productReference = 5E57114A18F2F27B00553EBD /* IntegrationTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		5EB33AD318EE0E110081B678 /* Project object */ = {
+		5E5710FD18F2EEF500553EBD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = AR;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Artsy;
 				TargetAttributes = {
-					5EB33AF518EE0E110081B678 = {
-						TestTargetID = 5EB33ADA18EE0E110081B678;
+					5E57114918F2F27B00553EBD = {
+						TestTargetID = 5E57110418F2EEF500553EBD;
 					};
 				};
 			};
-			buildConfigurationList = 5EB33AD618EE0E110081B678 /* Build configuration list for PBXProject "Demo" */;
+			buildConfigurationList = 5E57110018F2EEF500553EBD /* Build configuration list for PBXProject "Demo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 5EB33AD218EE0E110081B678;
-			productRefGroup = 5EB33ADC18EE0E110081B678 /* Products */;
+			mainGroup = 5E5710FC18F2EEF500553EBD;
+			productRefGroup = 5E57110618F2EEF500553EBD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5EB33ADA18EE0E110081B678 /* Demo */,
-				5EB33AF518EE0E110081B678 /* ARCollectionViewMasonryLayoutTests */,
+				5E57110418F2EEF500553EBD /* Demo */,
+				5E57114918F2F27B00553EBD /* IntegrationTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		5EB33AD918EE0E110081B678 /* Resources */ = {
+		5E57110318F2EEF500553EBD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EB33AE918EE0E110081B678 /* InfoPlist.strings in Resources */,
-				5EB33AF118EE0E110081B678 /* Images.xcassets in Resources */,
+				5E57111318F2EEF500553EBD /* InfoPlist.strings in Resources */,
+				5E57111B18F2EEF500553EBD /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5EB33AF418EE0E110081B678 /* Resources */ = {
+		5E57114818F2F27B00553EBD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EB33B0218EE0E110081B678 /* InfoPlist.strings in Resources */,
+				5E57115318F2F27B00553EBD /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A577DE2E26CF436A9B684A90 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Pods-IntegrationTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E44C94CD34724F92A6F8A623 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		5EB33AD718EE0E110081B678 /* Sources */ = {
+		5E57110118F2EEF500553EBD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EB33B1818EE0E5B0081B678 /* ARCollectionViewMasonryLayout.m in Sources */,
-				5EB33B1218EE0E2D0081B678 /* ARModel.m in Sources */,
-				5EB33AEB18EE0E110081B678 /* main.m in Sources */,
-				5EB33B1118EE0E2D0081B678 /* ARCollectionViewController.m in Sources */,
-				5EB33AEF18EE0E110081B678 /* ARAppDelegate.m in Sources */,
+				5E57114518F2EF2B00553EBD /* ARCollectionViewMasonryLayout.m in Sources */,
+				5E57114218F2EF1B00553EBD /* ARModel.m in Sources */,
+				5E57111518F2EEF500553EBD /* main.m in Sources */,
+				5E57114018F2EF1B00553EBD /* ARCollectionViewController.m in Sources */,
+				5E57113F18F2EF1B00553EBD /* ARAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5EB33AF218EE0E110081B678 /* Sources */ = {
+		5E57114618F2F27B00553EBD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E57109018F2E6F700553EBD /* ARCollectionViewMasonryLayoutTests.m in Sources */,
+				5E57115D18F2F2D500553EBD /* ARCollectionViewMasonryLayoutTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		5E57109218F2E75000553EBD /* PBXTargetDependency */ = {
+		5E57115818F2F27B00553EBD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5EB33ADA18EE0E110081B678 /* Demo */;
-			targetProxy = 5E57109118F2E75000553EBD /* PBXContainerItemProxy */;
+			target = 5E57110418F2EEF500553EBD /* Demo */;
+			targetProxy = 5E57115718F2F27B00553EBD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		5EB33AE718EE0E110081B678 /* InfoPlist.strings */ = {
+		5E57111118F2EEF500553EBD /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				5EB33AE818EE0E110081B678 /* en */,
+				5E57111218F2EEF500553EBD /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		5EB33B0018EE0E110081B678 /* InfoPlist.strings */ = {
+		5E57115118F2F27B00553EBD /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				5EB33B0118EE0E110081B678 /* en */,
+				5E57115218F2F27B00553EBD /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -312,7 +344,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		5EB33B0518EE0E110081B678 /* Debug */ = {
+		5E57112F18F2EEF500553EBD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -350,7 +382,7 @@
 			};
 			name = Debug;
 		};
-		5EB33B0618EE0E110081B678 /* Release */ = {
+		5E57113018F2EEF500553EBD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -382,9 +414,8 @@
 			};
 			name = Release;
 		};
-		5EB33B0818EE0E110081B678 /* Debug */ = {
+		5E57113218F2EEF500553EBD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E561165407DC4FE59DFFF73C /* Pods-ARCollectionViewMasonryLayoutTests.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -396,7 +427,7 @@
 			};
 			name = Debug;
 		};
-		5EB33B0918EE0E110081B678 /* Release */ = {
+		5E57113318F2EEF500553EBD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -409,8 +440,9 @@
 			};
 			name = Release;
 		};
-		5EB33B0B18EE0E110081B678 /* Debug */ = {
+		5E57115918F2F27B00553EBD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D8DB0BF75604C82ACCA1562 /* Pods-IntegrationTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Demo.app/Demo";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -419,22 +451,22 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Demo/Demo-Prefix.pch";
+				GCC_PREFIX_HEADER = "IntegrationTests/IntegrationTests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"FB_REFERENCE_IMAGE_DIR=\"\\\"$(SOURCE_ROOT)/IntegrationTests/ReferenceImages\\\"\"",
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "IntegrationTests/DemoTests-Info.plist";
+				INFOPLIST_FILE = "IntegrationTests/IntegrationTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
 		};
-		5EB33B0C18EE0E110081B678 /* Release */ = {
+		5E57115A18F2F27B00553EBD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E561165407DC4FE59DFFF73C /* Pods-ARCollectionViewMasonryLayoutTests.xcconfig */;
+			baseConfigurationReference = 7D8DB0BF75604C82ACCA1562 /* Pods-IntegrationTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Demo.app/Demo";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -443,8 +475,8 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Demo/Demo-Prefix.pch";
-				INFOPLIST_FILE = "IntegrationTests/DemoTests-Info.plist";
+				GCC_PREFIX_HEADER = "IntegrationTests/IntegrationTests-Prefix.pch";
+				INFOPLIST_FILE = "IntegrationTests/IntegrationTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -454,34 +486,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5EB33AD618EE0E110081B678 /* Build configuration list for PBXProject "Demo" */ = {
+		5E57110018F2EEF500553EBD /* Build configuration list for PBXProject "Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5EB33B0518EE0E110081B678 /* Debug */,
-				5EB33B0618EE0E110081B678 /* Release */,
+				5E57112F18F2EEF500553EBD /* Debug */,
+				5E57113018F2EEF500553EBD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5EB33B0718EE0E110081B678 /* Build configuration list for PBXNativeTarget "Demo" */ = {
+		5E57113118F2EEF500553EBD /* Build configuration list for PBXNativeTarget "Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5EB33B0818EE0E110081B678 /* Debug */,
-				5EB33B0918EE0E110081B678 /* Release */,
+				5E57113218F2EEF500553EBD /* Debug */,
+				5E57113318F2EEF500553EBD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5EB33B0A18EE0E110081B678 /* Build configuration list for PBXNativeTarget "ARCollectionViewMasonryLayoutTests" */ = {
+		5E57115B18F2F27B00553EBD /* Build configuration list for PBXNativeTarget "IntegrationTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5EB33B0B18EE0E110081B678 /* Debug */,
-				5EB33B0C18EE0E110081B678 /* Release */,
+				5E57115918F2F27B00553EBD /* Debug */,
+				5E57115A18F2F27B00553EBD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 5EB33AD318EE0E110081B678 /* Project object */;
+	rootObject = 5E5710FD18F2EEF500553EBD /* Project object */;
 }

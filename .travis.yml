@@ -8,5 +8,5 @@ before_install:
   - gem i cocoapods --no-ri --no-rdoc
   - pod install
 xcode_workspace: ARCollectionViewMasonryLayout.xcworkspace
-xcode_scheme: Tests
+xcode_scheme: Demo
 xcode_sdk: iphonesimulator

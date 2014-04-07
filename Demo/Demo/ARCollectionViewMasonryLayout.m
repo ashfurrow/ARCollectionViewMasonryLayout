@@ -364,7 +364,7 @@
 
 - (CGFloat)mainItemMargin
 {
-    return (self.isHorizontal) ? self.itemMargins.height : self.itemMargins.height;
+    return (self.isHorizontal) ? self.itemMargins.height : self.itemMargins.width;
 }
 
 /// The opposite of above, the space vertically when in vertical mode

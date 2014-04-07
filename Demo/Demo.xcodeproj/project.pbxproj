@@ -122,12 +122,12 @@
 		5EB33AE418EE0E110081B678 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				5EB33B1618EE0E5B0081B678 /* ARCollectionViewMasonryLayout.h */,
 				5EB33B1718EE0E5B0081B678 /* ARCollectionViewMasonryLayout.m */,
+				5EB33B1618EE0E5B0081B678 /* ARCollectionViewMasonryLayout.h */,
 				5EB33AED18EE0E110081B678 /* ARAppDelegate.h */,
 				5EB33AEE18EE0E110081B678 /* ARAppDelegate.m */,
-				5EB33B0D18EE0E2D0081B678 /* ARCollectionViewController.m */,
 				5EB33B0E18EE0E2D0081B678 /* ARCollectionViewController.h */,
+				5EB33B0D18EE0E2D0081B678 /* ARCollectionViewController.m */,
 				5EB33B0F18EE0E2D0081B678 /* ARModel.h */,
 				5EB33B1018EE0E2D0081B678 /* ARModel.m */,
 				5EB33AF018EE0E110081B678 /* Images.xcassets */,

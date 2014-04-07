@@ -1,0 +1,21 @@
+PODS:
+  - Expecta (0.2.4)
+  - EXPMatchers+FBSnapshotTest (1.0):
+    - Expecta
+    - FBSnapshotTestCase
+  - FBSnapshotTestCase (1.1)
+  - Specta (0.2.1)
+
+DEPENDENCIES:
+  - Expecta (~> 0.2.3)
+  - EXPMatchers+FBSnapshotTest (~> 1.0)
+  - FBSnapshotTestCase (~> 1.1)
+  - Specta (~> 0.2.1)
+
+SPEC CHECKSUMS:
+  Expecta: 5c147dedfea5fbcf773995f7e65020abcc936ce5
+  EXPMatchers+FBSnapshotTest: 1b9506577e494191565ff51ffd5b1e76339d727b
+  FBSnapshotTestCase: 188c80bfcb72e744eb0b99d45989d12687c40cf8
+  Specta: 2d06220591110c6d9757d8be8ecf8e63aa40dc2a
+
+COCOAPODS: 0.29.0

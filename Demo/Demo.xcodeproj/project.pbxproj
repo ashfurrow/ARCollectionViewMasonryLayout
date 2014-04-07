@@ -48,7 +48,7 @@
 		5EB33AED18EE0E110081B678 /* ARAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARAppDelegate.h; sourceTree = "<group>"; };
 		5EB33AEE18EE0E110081B678 /* ARAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARAppDelegate.m; sourceTree = "<group>"; };
 		5EB33AF018EE0E110081B678 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		5EB33AF618EE0E110081B678 /* DemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = DemoTests.xctest; path = ARCollectionViewMasonryLayoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EB33AF618EE0E110081B678 /* ARCollectionViewMasonryLayoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARCollectionViewMasonryLayoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB33AF718EE0E110081B678 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		5EB33AFF18EE0E110081B678 /* DemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "DemoTests-Info.plist"; path = "../IntegrationTests/DemoTests-Info.plist"; sourceTree = "<group>"; };
 		5EB33B0118EE0E110081B678 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				5EB33ADB18EE0E110081B678 /* Demo.app */,
-				5EB33AF618EE0E110081B678 /* DemoTests.xctest */,
+				5EB33AF618EE0E110081B678 /* ARCollectionViewMasonryLayoutTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -202,7 +202,7 @@
 			);
 			name = ARCollectionViewMasonryLayoutTests;
 			productName = DemoTests;
-			productReference = 5EB33AF618EE0E110081B678 /* DemoTests.xctest */;
+			productReference = 5EB33AF618EE0E110081B678 /* ARCollectionViewMasonryLayoutTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -452,6 +452,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Demo/Demo-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"FB_REFERENCE_IMAGE_DIR=\"\\\"$(SOURCE_ROOT)/IntegrationTests/ReferenceImages\\\"\"",
 					"DEBUG=1",
 					"$(inherited)",
 				);

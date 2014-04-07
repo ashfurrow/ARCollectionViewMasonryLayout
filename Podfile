@@ -1,4 +1,5 @@
 workspace 'ARCollectionViewMasonryLayout'
+xcodeproj 'Demo/Demo.xcodeproj'
 
 target "ARCollectionViewMasonryLayoutTests" do
   pod 'Specta', '~> 0.2.1'

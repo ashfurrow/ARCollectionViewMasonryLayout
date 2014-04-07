@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E57108F18F2E64800553EBD /* libPods-ARCollectionViewMasonryLayoutTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E57108E18F2E64800553EBD /* libPods-ARCollectionViewMasonryLayoutTests.a */; };
+		5E57109018F2E6F700553EBD /* ARCollectionViewMasonryLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E57108818F2E35000553EBD /* ARCollectionViewMasonryLayoutTests.m */; };
 		5EB33ADF18EE0E110081B678 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB33ADE18EE0E110081B678 /* Foundation.framework */; };
 		5EB33AE118EE0E110081B678 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB33AE018EE0E110081B678 /* CoreGraphics.framework */; };
 		5EB33AE318EE0E110081B678 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB33AE218EE0E110081B678 /* UIKit.framework */; };
@@ -18,15 +20,13 @@
 		5EB33AF918EE0E110081B678 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB33ADE18EE0E110081B678 /* Foundation.framework */; };
 		5EB33AFA18EE0E110081B678 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EB33AE218EE0E110081B678 /* UIKit.framework */; };
 		5EB33B0218EE0E110081B678 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5EB33B0018EE0E110081B678 /* InfoPlist.strings */; };
-		5EB33B0418EE0E110081B678 /* ARCollectionViewMasonryLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB33B0318EE0E110081B678 /* ARCollectionViewMasonryLayoutTests.m */; };
 		5EB33B1118EE0E2D0081B678 /* ARCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB33B0D18EE0E2D0081B678 /* ARCollectionViewController.m */; };
 		5EB33B1218EE0E2D0081B678 /* ARModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB33B1018EE0E2D0081B678 /* ARModel.m */; };
 		5EB33B1818EE0E5B0081B678 /* ARCollectionViewMasonryLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EB33B1718EE0E5B0081B678 /* ARCollectionViewMasonryLayout.m */; };
-		C7D70D79F8BC44C2B4029748 /* libPods-ARCollectionViewMasonryLayoutTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 06B2B0EAE5534EED9208E560 /* libPods-ARCollectionViewMasonryLayoutTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5EB33AFB18EE0E110081B678 /* PBXContainerItemProxy */ = {
+		5E57109118F2E75000553EBD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5EB33AD318EE0E110081B678 /* Project object */;
 			proxyType = 1;
@@ -37,6 +37,9 @@
 
 /* Begin PBXFileReference section */
 		06B2B0EAE5534EED9208E560 /* libPods-ARCollectionViewMasonryLayoutTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ARCollectionViewMasonryLayoutTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E57108818F2E35000553EBD /* ARCollectionViewMasonryLayoutTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCollectionViewMasonryLayoutTests.m; sourceTree = "<group>"; };
+		5E57108C18F2E64300553EBD /* libPods-ARCollectionViewMasonryLayoutTests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-ARCollectionViewMasonryLayoutTests.a"; path = "../Pods/build/Debug-iphoneos/libPods-ARCollectionViewMasonryLayoutTests.a"; sourceTree = "<group>"; };
+		5E57108E18F2E64800553EBD /* libPods-ARCollectionViewMasonryLayoutTests.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-ARCollectionViewMasonryLayoutTests.a"; path = "../Pods/build/Debug-iphoneos/libPods-ARCollectionViewMasonryLayoutTests.a"; sourceTree = "<group>"; };
 		5EB33ADB18EE0E110081B678 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB33ADE18EE0E110081B678 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5EB33AE018EE0E110081B678 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -50,16 +53,15 @@
 		5EB33AF018EE0E110081B678 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5EB33AF618EE0E110081B678 /* ARCollectionViewMasonryLayoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARCollectionViewMasonryLayoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EB33AF718EE0E110081B678 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		5EB33AFF18EE0E110081B678 /* DemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "DemoTests-Info.plist"; path = "../IntegrationTests/DemoTests-Info.plist"; sourceTree = "<group>"; };
+		5EB33AFF18EE0E110081B678 /* DemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DemoTests-Info.plist"; sourceTree = "<group>"; };
 		5EB33B0118EE0E110081B678 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		5EB33B0318EE0E110081B678 /* ARCollectionViewMasonryLayoutTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ARCollectionViewMasonryLayoutTests.m; path = ../IntegrationTests/ARCollectionViewMasonryLayoutTests.m; sourceTree = "<group>"; };
 		5EB33B0D18EE0E2D0081B678 /* ARCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCollectionViewController.m; sourceTree = "<group>"; };
 		5EB33B0E18EE0E2D0081B678 /* ARCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCollectionViewController.h; sourceTree = "<group>"; };
 		5EB33B0F18EE0E2D0081B678 /* ARModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARModel.h; sourceTree = "<group>"; };
 		5EB33B1018EE0E2D0081B678 /* ARModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARModel.m; sourceTree = "<group>"; };
 		5EB33B1618EE0E5B0081B678 /* ARCollectionViewMasonryLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCollectionViewMasonryLayout.h; sourceTree = "<group>"; };
 		5EB33B1718EE0E5B0081B678 /* ARCollectionViewMasonryLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCollectionViewMasonryLayout.m; sourceTree = "<group>"; };
-		E561165407DC4FE59DFFF73C /* Pods-ARCollectionViewMasonryLayoutTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARCollectionViewMasonryLayoutTests.xcconfig"; path = "Pods/Pods-ARCollectionViewMasonryLayoutTests.xcconfig"; sourceTree = "<group>"; };
+		E561165407DC4FE59DFFF73C /* Pods-ARCollectionViewMasonryLayoutTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ARCollectionViewMasonryLayoutTests.xcconfig"; path = "../Pods/Pods-ARCollectionViewMasonryLayoutTests.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +82,7 @@
 				5EB33AF818EE0E110081B678 /* XCTest.framework in Frameworks */,
 				5EB33AFA18EE0E110081B678 /* UIKit.framework in Frameworks */,
 				5EB33AF918EE0E110081B678 /* Foundation.framework in Frameworks */,
-				C7D70D79F8BC44C2B4029748 /* libPods-ARCollectionViewMasonryLayoutTests.a in Frameworks */,
+				5E57108F18F2E64800553EBD /* libPods-ARCollectionViewMasonryLayoutTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,6 +112,8 @@
 		5EB33ADD18EE0E110081B678 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5E57108E18F2E64800553EBD /* libPods-ARCollectionViewMasonryLayoutTests.a */,
+				5E57108C18F2E64300553EBD /* libPods-ARCollectionViewMasonryLayoutTests.a */,
 				5EB33ADE18EE0E110081B678 /* Foundation.framework */,
 				5EB33AE018EE0E110081B678 /* CoreGraphics.framework */,
 				5EB33AE218EE0E110081B678 /* UIKit.framework */,
@@ -150,10 +154,11 @@
 		5EB33AFD18EE0E110081B678 /* DemoTests */ = {
 			isa = PBXGroup;
 			children = (
-				5EB33B0318EE0E110081B678 /* ARCollectionViewMasonryLayoutTests.m */,
+				5E57108818F2E35000553EBD /* ARCollectionViewMasonryLayoutTests.m */,
 				5EB33AFE18EE0E110081B678 /* Supporting Files */,
 			);
-			path = DemoTests;
+			name = DemoTests;
+			path = IntegrationTests;
 			sourceTree = "<group>";
 		};
 		5EB33AFE18EE0E110081B678 /* Supporting Files */ = {
@@ -189,16 +194,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5EB33B0A18EE0E110081B678 /* Build configuration list for PBXNativeTarget "ARCollectionViewMasonryLayoutTests" */;
 			buildPhases = (
-				871CAD6FF5CF45C69FDF7F5B /* Check Pods Manifest.lock */,
 				5EB33AF218EE0E110081B678 /* Sources */,
 				5EB33AF318EE0E110081B678 /* Frameworks */,
 				5EB33AF418EE0E110081B678 /* Resources */,
-				FDAF325F48E24BAAA2281EBF /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				5EB33AFC18EE0E110081B678 /* PBXTargetDependency */,
+				5E57109218F2E75000553EBD /* PBXTargetDependency */,
 			);
 			name = ARCollectionViewMasonryLayoutTests;
 			productName = DemoTests;
@@ -258,39 +261,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		871CAD6FF5CF45C69FDF7F5B /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		FDAF325F48E24BAAA2281EBF /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-ARCollectionViewMasonryLayoutTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		5EB33AD718EE0E110081B678 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -308,17 +278,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EB33B0418EE0E110081B678 /* ARCollectionViewMasonryLayoutTests.m in Sources */,
+				5E57109018F2E6F700553EBD /* ARCollectionViewMasonryLayoutTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		5EB33AFC18EE0E110081B678 /* PBXTargetDependency */ = {
+		5E57109218F2E75000553EBD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5EB33ADA18EE0E110081B678 /* Demo */;
-			targetProxy = 5EB33AFB18EE0E110081B678 /* PBXContainerItemProxy */;
+			targetProxy = 5E57109118F2E75000553EBD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -337,7 +307,6 @@
 				5EB33B0118EE0E110081B678 /* en */,
 			);
 			name = InfoPlist.strings;
-			path = ../IntegrationTests;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -415,6 +384,7 @@
 		};
 		5EB33B0818EE0E110081B678 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E561165407DC4FE59DFFF73C /* Pods-ARCollectionViewMasonryLayoutTests.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -441,7 +411,6 @@
 		};
 		5EB33B0B18EE0E110081B678 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E561165407DC4FE59DFFF73C /* Pods-ARCollectionViewMasonryLayoutTests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Demo.app/Demo";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -456,7 +425,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "DemoTests/DemoTests-Info.plist";
+				INFOPLIST_FILE = "IntegrationTests/DemoTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -475,7 +444,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Demo/Demo-Prefix.pch";
-				INFOPLIST_FILE = "DemoTests/DemoTests-Info.plist";
+				INFOPLIST_FILE = "IntegrationTests/DemoTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

@@ -179,9 +179,9 @@
 			productReference = 5EB33ADB18EE0E110081B678 /* Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5EB33AF518EE0E110081B678 /* DemoTests */ = {
+		5EB33AF518EE0E110081B678 /* ARCollectionViewMasonryLayoutTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5EB33B0A18EE0E110081B678 /* Build configuration list for PBXNativeTarget "DemoTests" */;
+			buildConfigurationList = 5EB33B0A18EE0E110081B678 /* Build configuration list for PBXNativeTarget "ARCollectionViewMasonryLayoutTests" */;
 			buildPhases = (
 				5EB33AF218EE0E110081B678 /* Sources */,
 				5EB33AF318EE0E110081B678 /* Frameworks */,
@@ -192,7 +192,7 @@
 			dependencies = (
 				5EB33AFC18EE0E110081B678 /* PBXTargetDependency */,
 			);
-			name = DemoTests;
+			name = ARCollectionViewMasonryLayoutTests;
 			productName = DemoTests;
 			productReference = 5EB33AF618EE0E110081B678 /* DemoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -225,7 +225,7 @@
 			projectRoot = "";
 			targets = (
 				5EB33ADA18EE0E110081B678 /* Demo */,
-				5EB33AF518EE0E110081B678 /* DemoTests */,
+				5EB33AF518EE0E110081B678 /* ARCollectionViewMasonryLayoutTests */,
 			);
 		};
 /* End PBXProject section */
@@ -456,14 +456,16 @@
 				5EB33B0918EE0E110081B678 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		5EB33B0A18EE0E110081B678 /* Build configuration list for PBXNativeTarget "DemoTests" */ = {
+		5EB33B0A18EE0E110081B678 /* Build configuration list for PBXNativeTarget "ARCollectionViewMasonryLayoutTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5EB33B0B18EE0E110081B678 /* Debug */,
 				5EB33B0C18EE0E110081B678 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -19,6 +19,27 @@ SpecBegin(ARCollectionViewMasonryLayoutTests)
 
 describe(@"ARCollectionViewMasonryLayout", ^{
     
+    describe(@"unit tests", ^{
+        it(@"should have default values when initialized", ^{
+            ARCollectionViewMasonryLayout *layout = [[ARCollectionViewMasonryLayout alloc] initWithDirection:ARCollectionViewMasonryLayoutDirectionHorizontal];
+            
+            expect(layout.rank).to.equal(2);
+            expect(layout.dimensionLength).to.equal(120);
+            expect(layout.contentInset).to.equal(UIEdgeInsetsZero);
+            expect(layout.itemMargins).to.equal(CGSizeZero);
+        });
+        
+        it (@"should have correct direction when initialized", ^{
+            ARCollectionViewMasonryLayout *horizontalLayout = [[ARCollectionViewMasonryLayout alloc] initWithDirection:ARCollectionViewMasonryLayoutDirectionHorizontal];
+            
+            expect(horizontalLayout.direction).to.equal(ARCollectionViewMasonryLayoutDirectionHorizontal);
+            
+            ARCollectionViewMasonryLayout *verticalLayout = [[ARCollectionViewMasonryLayout alloc] initWithDirection:ARCollectionViewMasonryLayoutDirectionVertical];
+            
+            expect(verticalLayout.direction).to.equal(ARCollectionViewMasonryLayoutDirectionVertical);
+        });
+    });
+    
     describe(@"screenshots", ^{
         beforeAll(^{
             setGlobalReferenceImageDir(FB_REFERENCE_IMAGE_DIR);

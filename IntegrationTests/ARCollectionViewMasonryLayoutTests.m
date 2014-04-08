@@ -19,27 +19,29 @@ SpecBegin(ARCollectionViewMasonryLayoutTests)
 
 describe(@"ARCollectionViewMasonryLayout", ^{
     
-    beforeAll(^{
-        setGlobalReferenceImageDir(FB_REFERENCE_IMAGE_DIR);
-    });
-    
-    describe(@"horiztonal", ^{
-        pending(@"displays", ^{
-            ARCollectionViewMasonryLayout *layout = [[ARCollectionViewMasonryLayout alloc] initWithDirection:ARCollectionViewMasonryLayoutDirectionHorizontal];
-            ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
-            
-            expect(viewController.view).willNot.beNil();
-            expect(viewController.view).to.haveValidSnapshotNamed(@"horizontal");
+    describe(@"screenshots", ^{
+        beforeAll(^{
+            setGlobalReferenceImageDir(FB_REFERENCE_IMAGE_DIR);
         });
-    });
-    
-    describe(@"vertical", ^{
-        pending(@"displays", ^{
-            ARCollectionViewMasonryLayout *layout = [[ARCollectionViewMasonryLayout alloc] initWithDirection:ARCollectionViewMasonryLayoutDirectionVertical];
-            ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
-            
-            expect(viewController.view).willNot.beNil();
-            expect(viewController.view).to.haveValidSnapshotNamed(@"vertical");
+        
+        describe(@"horiztonal", ^{
+            pending(@"displays", ^{
+                ARCollectionViewMasonryLayout *layout = [[ARCollectionViewMasonryLayout alloc] initWithDirection:ARCollectionViewMasonryLayoutDirectionHorizontal];
+                ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
+                
+                expect(viewController.view).willNot.beNil();
+                expect(viewController.view).to.haveValidSnapshotNamed(@"horizontal");
+            });
+        });
+        
+        describe(@"vertical", ^{
+            pending(@"displays", ^{
+                ARCollectionViewMasonryLayout *layout = [[ARCollectionViewMasonryLayout alloc] initWithDirection:ARCollectionViewMasonryLayoutDirectionVertical];
+                ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
+                
+                expect(viewController.view).willNot.beNil();
+                expect(viewController.view).to.haveValidSnapshotNamed(@"vertical");
+            });
         });
     });
 });

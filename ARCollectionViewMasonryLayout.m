@@ -236,8 +236,8 @@
         CGFloat yOffset = [self.internalDimensions[columnIndex] floatValue];
 
         CGPoint itemCenter = (CGPoint){
-            floorf(xOffset + (self.dimensionLength / 2)),
-            floorf(yOffset + (itemAlternateDimension/2))
+            xOffset + (self.dimensionLength / 2),
+            yOffset + (itemAlternateDimension/2)
         };
 
         UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
@@ -251,6 +251,7 @@
         }
 
         attributes.center = itemCenter;
+        attributes.frame = CGRectIntegral(attributes.frame);
         [self.itemAttributes addObject:attributes];
 
         // Ensure an extra margin is not applied

@@ -1,10 +1,15 @@
+0.0.3
+----------------
+
+- Fixes antialiasing on non-retina iPads
+
 0.0.2
 ----------------
 
-- Added integration and unit tests. 
+- Added integration and unit tests.
 - [Fixes margin bug](https://github.com/AshFurrow/ARCollectionViewMasonryLayout/issues/5).
 
 0.0.1
 ----------------
 
-- First version. 
+- First version.

@@ -1,6 +1,8 @@
 workspace 'ARCollectionViewMasonryLayout'
 xcodeproj 'Demo/Demo.xcodeproj'
 
+pod 'ARCollectionViewMasonryLayout', :path => 'ARCollectionViewMasonryLayout.podspec'
+
 target "IntegrationTests" do
   pod 'Specta', '~> 0.2.1'
   pod 'Expecta', '~> 0.2.3'

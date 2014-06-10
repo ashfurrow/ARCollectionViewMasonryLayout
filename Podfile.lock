@@ -1,4 +1,5 @@
 PODS:
+  - ARCollectionViewMasonryLayout (0.0.3)
   - Expecta (0.2.4)
   - EXPMatchers+FBSnapshotTest (1.0):
     - Expecta
@@ -7,15 +8,21 @@ PODS:
   - Specta (0.2.1)
 
 DEPENDENCIES:
+  - ARCollectionViewMasonryLayout (from `ARCollectionViewMasonryLayout.podspec`)
   - Expecta (~> 0.2.3)
   - EXPMatchers+FBSnapshotTest (~> 1.0)
   - FBSnapshotTestCase (~> 1.1)
   - Specta (~> 0.2.1)
 
-SPEC CHECKSUMS:
-  Expecta: 5c147dedfea5fbcf773995f7e65020abcc936ce5
-  EXPMatchers+FBSnapshotTest: 1b9506577e494191565ff51ffd5b1e76339d727b
-  FBSnapshotTestCase: 188c80bfcb72e744eb0b99d45989d12687c40cf8
-  Specta: 2d06220591110c6d9757d8be8ecf8e63aa40dc2a
+EXTERNAL SOURCES:
+  ARCollectionViewMasonryLayout:
+    :path: ARCollectionViewMasonryLayout.podspec
 
-COCOAPODS: 0.29.0
+SPEC CHECKSUMS:
+  ARCollectionViewMasonryLayout: cae3a4bbec3a26fa4a7d8d98c531cec07b033242
+  Expecta: 112bcafa2304ee0f3c5e586505f24555a47b25d5
+  EXPMatchers+FBSnapshotTest: 7caf515641ff88ea2bc2f1b1ab0754a510ab6e24
+  FBSnapshotTestCase: 9053afee1d66b4c7c313fcb0ae582a5e47bea9d0
+  Specta: 9141310f46b1f68b676650ff2854e1ed0b74163a
+
+COCOAPODS: 0.33.1

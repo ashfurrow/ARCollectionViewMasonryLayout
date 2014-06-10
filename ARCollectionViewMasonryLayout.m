@@ -269,15 +269,23 @@
     }
 
     [self updateLongestAndShortestDimensions];
+    [self setupFooter];
+}
 
+- (void)setupFooter
+{
+    if (!self.footerViewClass) {
+        return;
+    }
+    
     self.footerAttributes = [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:UICollectionElementKindSectionFooter withIndexPath:[NSIndexPath indexPathWithIndex:0]];
-
+    
     if ([self isHorizontal]) {
         self.footerAttributes.frame = CGRectMake(self.longestDimensionLength, 0, self.footerHeight, CGRectGetHeight(self.collectionView.bounds));
     } else {
         self.footerAttributes.frame = CGRectMake(0, self.longestDimensionLength, CGRectGetWidth(self.collectionView.bounds), self.footerHeight);
     }
-
+    
     [self.itemAttributes addObject:self.footerAttributes];
 }
 

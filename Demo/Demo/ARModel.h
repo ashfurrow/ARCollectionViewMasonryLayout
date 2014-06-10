@@ -10,9 +10,9 @@
 
 @interface ARModel : NSObject
 
-- (instancetype)initWithColour:(UIColor *)colour dimension:(CGFloat)dimension;
+- (instancetype)initWithColor:(UIColor *)color dimension:(CGFloat)dimension;
 
-@property (nonatomic, strong, readonly) UIColor *colour;
+@property (nonatomic, strong, readonly) UIColor *color;
 @property (nonatomic, assign, readonly) CGFloat dimension;
 
 @end

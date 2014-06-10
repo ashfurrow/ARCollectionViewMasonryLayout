@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ARCollectionViewController : UICollectionViewController
-
+@property(assign) NSInteger colorCount;
 @end

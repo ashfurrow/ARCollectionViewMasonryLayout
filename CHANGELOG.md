@@ -2,6 +2,7 @@ Next
 ----------------
 
 - [#9](https://github.com/AshFurrow/ARCollectionViewMasonryLayout/pull/9): Moved ARCollectionViewMasonryLayout.podspec and screenshots into the project - [@dblock](https://github.com/dblock).
+- [#11](https://github.com/AshFurrow/ARCollectionViewMasonryLayout/issues/11): Fixed crash in layout without footer on iOS8 - [@dblock](https://github.com/dblock).
 
 0.0.2
 ----------------

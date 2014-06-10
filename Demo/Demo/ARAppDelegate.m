@@ -9,6 +9,7 @@
 #import "ARAppDelegate.h"
 #import "ARCollectionViewController.h"
 #import "ARCollectionViewMasonryLayout.h"
+#import "ARCollectionViewReusableView.h"
 
 @implementation ARAppDelegate
 
@@ -19,6 +20,9 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     ARCollectionViewMasonryLayout *layout = [[ARCollectionViewMasonryLayout alloc] initWithDirection:ARCollectionViewMasonryLayoutDirectionVertical];
+    layout.footerViewClass = [ARCollectionViewReusableView class];
+    layout.footerHeight = 44;
+
     ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
     self.window.rootViewController = viewController;
     

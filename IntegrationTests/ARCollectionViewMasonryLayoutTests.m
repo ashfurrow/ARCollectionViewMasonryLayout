@@ -8,62 +8,59 @@
 
 #import "ARCollectionViewMasonryLayout.h"
 #import "ARCollectionViewController.h"
-
-#define EXP_SHORTHAND
-#import <Specta/Specta.h>
-#import <Specta/Specta.h>
-#import <Expecta/Expecta.h>
-#import <EXPMatchers+FBSnapshotTest/EXPMatchers+FBSnapshotTest.h>
+#import "ARCollectionViewReusableView.h"
 
 SpecBegin(ARCollectionViewMasonryLayoutTests)
 
-describe(@"ARCollectionViewMasonryLayout", ^{
-    
-    describe(@"unit tests", ^{
-        it(@"should have default values when initialized", ^{
-            ARCollectionViewMasonryLayout *layout = [[ARCollectionViewMasonryLayout alloc] initWithDirection:ARCollectionViewMasonryLayoutDirectionHorizontal];
-            
-            expect(layout.rank).to.equal(2);
-            expect(layout.dimensionLength).to.equal(120);
-            expect(layout.contentInset).to.equal(UIEdgeInsetsZero);
-            expect(layout.itemMargins).to.equal(CGSizeZero);
-        });
-        
-        it (@"should have correct direction when initialized", ^{
-            ARCollectionViewMasonryLayout *horizontalLayout = [[ARCollectionViewMasonryLayout alloc] initWithDirection:ARCollectionViewMasonryLayoutDirectionHorizontal];
-            
-            expect(horizontalLayout.direction).to.equal(ARCollectionViewMasonryLayoutDirectionHorizontal);
-            
-            ARCollectionViewMasonryLayout *verticalLayout = [[ARCollectionViewMasonryLayout alloc] initWithDirection:ARCollectionViewMasonryLayoutDirectionVertical];
-            
-            expect(verticalLayout.direction).to.equal(ARCollectionViewMasonryLayoutDirectionVertical);
-        });
+__block ARCollectionViewMasonryLayout *layout = nil;
+
+describe(@"horizontal layout", ^{
+    beforeEach(^{
+        layout = [[ARCollectionViewMasonryLayout alloc] initWithDirection:ARCollectionViewMasonryLayoutDirectionHorizontal];
     });
     
-    describe(@"screenshots", ^{
-        beforeAll(^{
-            setGlobalReferenceImageDir(FB_REFERENCE_IMAGE_DIR);
-        });
-        
-        describe(@"horiztonal", ^{
-            pending(@"displays", ^{
-                ARCollectionViewMasonryLayout *layout = [[ARCollectionViewMasonryLayout alloc] initWithDirection:ARCollectionViewMasonryLayoutDirectionHorizontal];
-                ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
-                
-                expect(viewController.view).willNot.beNil();
-                expect(viewController.view).to.haveValidSnapshotNamed(@"horizontal");
-            });
-        });
-        
-        describe(@"vertical", ^{
-            pending(@"displays", ^{
-                ARCollectionViewMasonryLayout *layout = [[ARCollectionViewMasonryLayout alloc] initWithDirection:ARCollectionViewMasonryLayoutDirectionVertical];
-                ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
-                
-                expect(viewController.view).willNot.beNil();
-                expect(viewController.view).to.haveValidSnapshotNamed(@"vertical");
-            });
-        });
+    it(@"has default values when initialized", ^{
+        expect(layout.rank).to.equal(2);
+        expect(layout.dimensionLength).to.equal(120);
+        expect(layout.contentInset).to.equal(UIEdgeInsetsZero);
+        expect(layout.itemMargins).to.equal(CGSizeZero);
+    });
+    
+    it (@"has the correct horizontal direction", ^{
+        expect(layout.direction).to.equal(ARCollectionViewMasonryLayoutDirectionHorizontal);
+    });
+    
+    it(@"displays", ^{
+        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
+        viewController.colorCount = 5;
+        expect(viewController.view).willNot.beNil();
+        expect(viewController.view).will.haveValidSnapshotNamed(@"horizontal");
+    });
+});
+
+describe(@"vertical layout", ^{
+    beforeEach(^{
+        layout = [[ARCollectionViewMasonryLayout alloc] initWithDirection:ARCollectionViewMasonryLayoutDirectionVertical];
+    });
+    
+    it(@"has the correct vertical direction", ^{
+        expect(layout.direction).to.equal(ARCollectionViewMasonryLayoutDirectionVertical);
+    });
+    
+    it(@"displays cells", ^{
+        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
+        viewController.colorCount = 7;
+        expect(viewController.view).willNot.beNil();
+        expect(viewController.view).will.haveValidSnapshotNamed(@"vertical");
+    });
+
+    it(@"displays footer", ^{
+        layout.footerHeight = 20;
+        layout.footerViewClass = [ARCollectionViewReusableView class];
+        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
+        viewController.colorCount = 7;
+        expect(viewController.view).willNot.beNil();
+        expect(viewController.view).will.haveValidSnapshotNamed(@"verticalWithFooter");
     });
 });
 

@@ -10,11 +10,11 @@
 
 @implementation ARModel
 
-- (instancetype)initWithColour:(UIColor *)colour dimension:(CGFloat)dimension {
+- (instancetype)initWithColor:(UIColor *)color dimension:(CGFloat)dimension {
     self = [super init];
     
     if (self != nil) {
-        _colour = colour;
+        _color = color;
         _dimension = dimension;
     }
     

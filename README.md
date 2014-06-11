@@ -66,37 +66,27 @@ Create a collection view. Its delegate *must* conform to the `ARCollectionViewMa
 Headers and Footers
 -------------------
 
-The masonry layout supports a fixed height header and footer that scroll along with the contents of the view. These can be added via a reusable view.
+The masonry layout supports a fixed height header and footer that scroll along with the contents of the view. These can be added by implementing the following delegate methods on the `UIViewController`.
 
 ```objc
-@interface ARCollectionViewReusableView : UICollectionReusableView
-
-@end
-```
-
-```objc
-@implementation ARCollectionViewReusableView
-
-- (id)initWithFrame:(CGRect)frame
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    self = [super initWithFrame:frame];
-    if (!self) return nil;
-    self.backgroundColor = [UIColor whiteColor];
-    return self;
+    // return a header and/or footer view, must be a UICollectionReusableView
+    // kind is one of UICollectionElementKindSectionHeader or UICollectionElementKindSectionFooter
+    UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:kind forIndexPath:indexPath];
+    view.backgroundColor = [UIColor whiteColor];
+    return view;
 }
 
-@end
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout dimensionForHeaderAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 20; // header length
+}
 
-```objc
-ARCollectionViewMasonryLayout *layout = [[ARCollectionViewMasonryLayout alloc] initWithDirection:ARCollectionViewMasonryLayoutDirectionVertical];
-
-// header class and height
-layout.headerViewClass = [ARCollectionViewReusableView class];
-layout.headerHeight = 10;
-
-// footer class and height
-layout.footerViewClass = [ARCollectionViewReusableView class];
-layout.footerHeight = 44;
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout dimensionForFooterAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 10; // footer length
+}
 ```
 
 Demo Project

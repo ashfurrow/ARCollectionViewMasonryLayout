@@ -46,9 +46,7 @@ static NSString *CellIdentifier = @"Cell";
 - (void)generateModelArray
 {
     NSMutableArray *mutableArray = [NSMutableArray array];
-    NSInteger colorCount = self.colorCount ?: 100;
-    
-    for(NSInteger i = 0; i < colorCount; i++) {
+    for(NSInteger i = 0; i < self.colorCount; i++) {
         CGFloat dimension = (CGFloat)(i*10 % 30) + 40;
         UIColor *color = [UIColor iOS7Colors][i % [UIColor iOS7Colors].count];
         ARModel *model = [[ARModel alloc] initWithColor:color dimension:dimension];
@@ -65,10 +63,32 @@ static NSString *CellIdentifier = @"Cell";
     return self.modelArray.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
     ARCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.model = self.modelArray[indexPath.item];
     return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader] || [kind isEqualToString:UICollectionElementKindSectionFooter]) {
+        UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:kind forIndexPath:indexPath];
+        view.backgroundColor = [UIColor whiteColor];
+        return view;
+    } else {
+        return nil;
+    }
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout dimensionForHeaderAtIndexPath:(NSIndexPath *)indexPath
+{
+    return self.headerHeight ?: NSNotFound;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout dimensionForFooterAtIndexPath:(NSIndexPath *)indexPath
+{
+    return self.footerHeight ?: NSNotFound;
 }
 
 #pragma mark - ARCollectionViewMasonryLayoutDelegate Methods

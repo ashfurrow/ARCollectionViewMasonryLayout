@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		31E8E642B561420DAA8491B7 /* libPods-IntegrationTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B96BB336034F9D8EA9350E /* libPods-IntegrationTests.a */; };
 		39E2475CE6B84FCE9A27C3CD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18EB58AA599540D8887C1FFD /* libPods.a */; };
-		3C6568881947958700B1EB50 /* ARCollectionViewReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6568871947958700B1EB50 /* ARCollectionViewReusableView.m */; };
 		3C65688B194797CE00B1EB50 /* ARCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C65688A194797CE00B1EB50 /* ARCollectionViewCell.m */; };
 		3C7FF8E81947A16400BBB82B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3C7FF8E71947A16400BBB82B /* README.md */; };
 		3C7FF8EA1947A16A00BBB82B /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 3C7FF8E91947A16A00BBB82B /* CHANGELOG.md */; };
@@ -41,8 +40,6 @@
 
 /* Begin PBXFileReference section */
 		18EB58AA599540D8887C1FFD /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		3C6568861947958700B1EB50 /* ARCollectionViewReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCollectionViewReusableView.h; sourceTree = "<group>"; };
-		3C6568871947958700B1EB50 /* ARCollectionViewReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCollectionViewReusableView.m; sourceTree = "<group>"; };
 		3C656889194797CE00B1EB50 /* ARCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCollectionViewCell.h; sourceTree = "<group>"; };
 		3C65688A194797CE00B1EB50 /* ARCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCollectionViewCell.m; sourceTree = "<group>"; };
 		3C7FF8E71947A16400BBB82B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -146,8 +143,6 @@
 				5E57113E18F2EF1B00553EBD /* ARModel.m */,
 				5E57111A18F2EEF500553EBD /* Images.xcassets */,
 				5E57110F18F2EEF500553EBD /* Supporting Files */,
-				3C6568861947958700B1EB50 /* ARCollectionViewReusableView.h */,
-				3C6568871947958700B1EB50 /* ARCollectionViewReusableView.m */,
 				3C656889194797CE00B1EB50 /* ARCollectionViewCell.h */,
 				3C65688A194797CE00B1EB50 /* ARCollectionViewCell.m */,
 			);
@@ -349,7 +344,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C6568881947958700B1EB50 /* ARCollectionViewReusableView.m in Sources */,
 				5E57114218F2EF1B00553EBD /* ARModel.m in Sources */,
 				5E57111518F2EEF500553EBD /* main.m in Sources */,
 				5E57114018F2EF1B00553EBD /* ARCollectionViewController.m in Sources */,

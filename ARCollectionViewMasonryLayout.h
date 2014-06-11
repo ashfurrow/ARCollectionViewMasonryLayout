@@ -17,6 +17,11 @@
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout variableDimensionForItemAtIndexPath:(NSIndexPath *)indexPath;
 
+@optional
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout dimensionForHeaderAtIndexPath:(NSIndexPath *)indexPath;
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout dimensionForFooterAtIndexPath:(NSIndexPath *)indexPath;
+
 @end
 
 typedef NS_ENUM(NSInteger, ARCollectionViewMasonryLayoutDirection){
@@ -51,15 +56,6 @@ typedef NS_ENUM(NSInteger, ARCollectionViewMasonryLayoutDirection){
 
 /// The margins between items and between lines of items
 @property (nonatomic, assign) CGSize itemMargins;
-
-/// The leading view will be at the start of the view masonry cells
-@property (nonatomic, strong) UIView *leadingView;
-
-/// The trailing view will be at the end of the view masonry cells
-@property (nonatomic, strong) UIView *trailingView;
-
-@property (nonatomic, assign) CGFloat footerHeight;
-@property (nonatomic, strong) Class footerViewClass;
 
 /// Use this function to use the same layouting engine but
 /// without needing to have a collectionview. Useful for

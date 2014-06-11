@@ -52,12 +52,11 @@ typedef NS_ENUM(NSInteger, ARCollectionViewMasonryLayoutDirection){
 /// The margins between items and between lines of items
 @property (nonatomic, assign) CGSize itemMargins;
 
-/// The leading view will be at the start of the view masonry cells
-@property (nonatomic, strong) UIView *leadingView;
+/// An optional header.
+@property (nonatomic, assign) CGFloat headerHeight;
+@property (nonatomic, strong) Class headerViewClass;
 
-/// The trailing view will be at the end of the view masonry cells
-@property (nonatomic, strong) UIView *trailingView;
-
+/// An optional footer.
 @property (nonatomic, assign) CGFloat footerHeight;
 @property (nonatomic, strong) Class footerViewClass;
 

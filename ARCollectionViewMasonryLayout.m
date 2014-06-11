@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSMutableArray *internalDimensions;
 
 @property (nonatomic, strong) NSMutableArray *itemAttributes;
+@property (nonatomic, strong) UICollectionViewLayoutAttributes *headerAttributes;
 @property (nonatomic, strong) UICollectionViewLayoutAttributes *footerAttributes;
 
 // Provide quick lookups for heights
@@ -92,15 +93,15 @@
     }
 }
 
-- (void)setTrailingView:(UIView *)trailingView
+- (void)setHeaderViewClass:(Class)headerViewClass
 {
-    _trailingView = trailingView;
-    [self invalidateLayout];
+    _headerViewClass = headerViewClass;
+    [self registerClass:[headerViewClass class] forDecorationViewOfKind:UICollectionElementKindSectionHeader];
 }
 
-- (void)setLeadingView:(UIView *)leadingView
+- (void)setHeaderHeight:(CGFloat)headerHeight
 {
-    _leadingView = leadingView;
+    _headerHeight = headerHeight;
     [self invalidateLayout];
 }
 
@@ -166,6 +167,7 @@
 
 - (void)setupLayoutWithWidth:(CGFloat)width andHeights:(NSArray *)lengths {
     NSAssert(_rank > 0, @"Rank for ARCollectionViewMasonryLayout should be greater than 0.");
+    
     self.dimensionLength = ceilf(self.dimensionLength);
     self.itemCount = lengths.count;
     self.itemAttributes = [NSMutableArray array];
@@ -174,6 +176,7 @@
 
     BOOL isHorizontal = [self isHorizontal];
     BOOL hasContentInset = !UIEdgeInsetsEqualToEdgeInsets(self.contentInset, UIEdgeInsetsZero);
+    
     CGFloat leadingInset = 0;
     CGFloat orthogonalInset = 0;
     CGFloat trailingInset = 0;
@@ -188,7 +191,6 @@
             trailingInset = leadingInset;
             orthogonalInset = self.itemMargins.height;
         }
-
     } else {
         if (hasContentInset) {
             leadingInset = self.contentInset.top;
@@ -201,19 +203,15 @@
         }
     }
 
-    // If theres a leading view take it's height / width into account.
-    if (self.leadingView) {
-        if ([self isHorizontal]) {
-            leadingInset += CGRectGetHeight(self.leadingView.bounds);
-        } else {
-            leadingInset += CGRectGetWidth(self.leadingView.bounds);
-        }
-    }
+    // Adjust for header height.
+    leadingInset += self.headerHeight;
 
-    // Start all the dimensions with the content inset
+    // Start all the dimensions with the content inset.
     for (NSInteger index = 0; index < self.rank; index++) {
         [self.internalDimensions addObject:@(leadingInset)];
     }
+   
+    [self setupHeader];
 
     // Simple rule of thumb, find the shortest column and throw
     // the current object into that.
@@ -245,7 +243,6 @@
         if (isHorizontal) {
             attributes.size = CGSizeMake(itemAlternateDimension, self.dimensionLength);
             itemCenter = (CGPoint){ itemCenter.y, itemCenter.x };
-
         } else {
             attributes.size = CGSizeMake(self.dimensionLength, itemAlternateDimension);
         }
@@ -269,7 +266,25 @@
     }
 
     [self updateLongestAndShortestDimensions];
+    
     [self setupFooter];
+}
+
+- (void)setupHeader
+{
+    if (!self.headerViewClass) {
+        return;
+    }
+    
+    self.headerAttributes = [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:UICollectionElementKindSectionHeader withIndexPath:[NSIndexPath indexPathWithIndex:0]];
+    
+    if ([self isHorizontal]) {
+        self.headerAttributes.frame = CGRectMake(0, 0, self.headerHeight, CGRectGetHeight(self.collectionView.bounds));
+    } else {
+        self.headerAttributes.frame = CGRectMake(0, 0, CGRectGetWidth(self.collectionView.bounds), self.headerHeight);
+    }
+    
+    [self.itemAttributes addObject:self.headerAttributes];
 }
 
 - (void)setupFooter
@@ -297,7 +312,9 @@
 
     CGSize contentSize = self.collectionView.frame.size;
     NSUInteger longestColumnIndex = self.longestDimensionIndex;
+
     CGFloat alternateDimension = [self.internalDimensions[longestColumnIndex] floatValue];
+    alternateDimension += self.headerHeight;
     alternateDimension += self.footerHeight;
 
     if ([self isHorizontal]) {
@@ -322,11 +339,6 @@
     return [self.itemAttributes filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         return CGRectIntersectsRect(rect, [evaluatedObject frame]);
     }]];
-}
-
-- (UICollectionViewLayoutAttributes *)layoutAttributesForDecorationViewOfKind:(NSString *)decorationViewKind atIndexPath:(NSIndexPath *)indexPath
-{
-    return self.footerAttributes;
 }
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds

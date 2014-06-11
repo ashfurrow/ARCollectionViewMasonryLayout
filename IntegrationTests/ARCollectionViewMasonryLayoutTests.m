@@ -30,11 +30,40 @@ describe(@"horizontal layout", ^{
         expect(layout.direction).to.equal(ARCollectionViewMasonryLayoutDirectionHorizontal);
     });
     
-    it(@"displays", ^{
+    it(@"displays cells", ^{
         ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
         viewController.colorCount = 5;
         expect(viewController.view).willNot.beNil();
         expect(viewController.view).will.haveValidSnapshotNamed(@"horizontal");
+    });
+    
+    it(@"displays footer", ^{
+        layout.footerHeight = 20;
+        layout.footerViewClass = [ARCollectionViewReusableView class];
+        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
+        viewController.colorCount = 7;
+        expect(viewController.view).willNot.beNil();
+        expect(viewController.view).will.haveValidSnapshotNamed(@"horizontalWithFooter");
+    });
+    
+    it(@"displays header", ^{
+        layout.headerHeight = 10;
+        layout.headerViewClass = [ARCollectionViewReusableView class];
+        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
+        viewController.colorCount = 4;
+        expect(viewController.view).willNot.beNil();
+        expect(viewController.view).will.haveValidSnapshotNamed(@"horizontalWithHeader");
+    });
+
+    it(@"displays header and footer", ^{
+        layout.headerHeight = 3;
+        layout.footerHeight = 5;
+        layout.headerViewClass = [ARCollectionViewReusableView class];
+        layout.footerViewClass = [ARCollectionViewReusableView class];
+        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
+        viewController.colorCount = 4;
+        expect(viewController.view).willNot.beNil();
+        expect(viewController.view).will.haveValidSnapshotNamed(@"horizontalWithHeaderAndFooter");
     });
 });
 
@@ -61,6 +90,26 @@ describe(@"vertical layout", ^{
         viewController.colorCount = 7;
         expect(viewController.view).willNot.beNil();
         expect(viewController.view).will.haveValidSnapshotNamed(@"verticalWithFooter");
+    });
+
+    it(@"displays header", ^{
+        layout.headerHeight = 10;
+        layout.headerViewClass = [ARCollectionViewReusableView class];
+        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
+        viewController.colorCount = 4;
+        expect(viewController.view).willNot.beNil();
+        expect(viewController.view).will.haveValidSnapshotNamed(@"verticalWithHeader");
+    });
+    
+    it(@"displays header and footer", ^{
+        layout.headerHeight = 30;
+        layout.footerHeight = 5;
+        layout.headerViewClass = [ARCollectionViewReusableView class];
+        layout.footerViewClass = [ARCollectionViewReusableView class];
+        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
+        viewController.colorCount = 4;
+        expect(viewController.view).willNot.beNil();
+        expect(viewController.view).will.haveValidSnapshotNamed(@"verticalWithHeaderAndFooter");
     });
 });
 

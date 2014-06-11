@@ -27,7 +27,7 @@ static NSString *CellIdentifier = @"Cell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     // Configure our collection view;
     [self.collectionView registerClass:[ARCollectionViewCell class] forCellWithReuseIdentifier:CellIdentifier];
 

@@ -10,17 +10,12 @@
 
 @class ARCollectionViewMasonryLayout;
 
-@protocol ARCollectionViewMasonryLayoutDelegate <UICollectionViewDelegate>
+@protocol ARCollectionViewMasonryLayoutDelegate <UICollectionViewDelegateFlowLayout>
 
 /// If you have a vertical direction then this is the height
 /// and width for horizontal.
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout variableDimensionForItemAtIndexPath:(NSIndexPath *)indexPath;
-
-@optional
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout dimensionForHeaderAtIndexPath:(NSIndexPath *)indexPath;
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout dimensionForFooterAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 

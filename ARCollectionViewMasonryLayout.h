@@ -60,6 +60,6 @@ typedef NS_ENUM(NSInteger, ARCollectionViewMasonryLayoutDirection){
 /// Use this function to use the same layouting engine but
 /// without needing to have a collectionview. Useful for
 /// getting dimensions in advance for tableview cells.
-- (CGFloat)longestDimensionWithLengths:(NSArray *)lengths withOppositeDimension:(CGFloat)height;
+- (CGFloat)longestDimensionWithLengths:(NSArray *)variableDimensions withOppositeDimension:(CGFloat)staticDimension;
 
 @end

@@ -98,27 +98,27 @@
     [super prepareLayout];
 
     if ([self collectionView]) {
-        
+
         NSAssert(self.delegate != nil, @"Delegate is nil, most likely because the collection view's delegate does not conform to ARCollectionViewMasonryLayoutDelegate.");
-        
+
         // We need to pre-load the heights and the widths from the collectionview
         // and our delegate in order to pass these through to setupLayoutWithWidth
 
         NSInteger itemCount = [self.collectionView.dataSource collectionView:self.collectionView numberOfItemsInSection:0];
 
-        NSMutableArray *heights = [NSMutableArray arrayWithCapacity:itemCount];
-        CGFloat dimension = [self isHorizontal]? self.collectionView.frame.size.height : self.collectionView.frame.size.width;
+        NSMutableArray *variableDimensions = [NSMutableArray arrayWithCapacity:itemCount];
+        CGFloat staticDimension = [self isHorizontal]? self.collectionView.frame.size.height : self.collectionView.frame.size.width;
 
         // Ask delegates for all the dimensions
         for (int i = 0; i < itemCount; i++) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
 
-            CGFloat length = [self.delegate collectionView:self.collectionView layout:self variableDimensionForItemAtIndexPath:indexPath];
+            CGFloat variableDimension = [self.delegate collectionView:self.collectionView layout:self variableDimensionForItemAtIndexPath:indexPath];
 
-            [heights addObject:@(length)];
+            [variableDimensions addObject:@(variableDimension)];
         }
 
-        [self setupLayoutWithWidth:dimension andHeights:heights];
+        [self setupLayoutWithStaticDimsion:staticDimension andVaribleDimensions:variableDimensions];
     }
 }
 
@@ -131,10 +131,9 @@
     return delegate;
 }
 
-- (CGFloat)longestDimensionWithLengths:(NSArray *)lengths withOppositeDimension:(CGFloat)oppositeDimension
+- (CGFloat)longestDimensionWithLengths:(NSArray *)variableDimensions withOppositeDimension:(CGFloat)staticDimension;
 {
-    [self setupLayoutWithWidth:oppositeDimension andHeights:lengths];
-
+    [self setupLayoutWithStaticDimsion:staticDimension andVaribleDimensions:variableDimensions];
     if ([self isHorizontal]) {
         return  [self collectionViewContentSize].width;
     } else {
@@ -142,14 +141,14 @@
     }
 }
 
-- (void)setupLayoutWithWidth:(CGFloat)width andHeights:(NSArray *)lengths {
+- (void)setupLayoutWithStaticDimsion:(CGFloat)staticDimension andVaribleDimensions:(NSArray *)variableDimensions {
     NSAssert(_rank > 0, @"Rank for ARCollectionViewMasonryLayout should be greater than 0.");
     
     self.dimensionLength = ceilf(self.dimensionLength);
-    self.itemCount = lengths.count;
+    self.itemCount = variableDimensions.count;
     self.itemAttributes = [NSMutableArray array];
     self.internalDimensions = [NSMutableArray array];
-    self.centeringOffset = [self generateCenteringOffsetWithMainDimension:width];
+    self.centeringOffset = [self generateCenteringOffsetWithMainDimension:staticDimension];
 
     BOOL isHorizontal = [self isHorizontal];
     BOOL hasContentInset = !UIEdgeInsetsEqualToEdgeInsets(self.contentInset, UIEdgeInsetsZero);
@@ -196,7 +195,7 @@
     // Simple rule of thumb, find the shortest column and throw
     // the current object into that.
 
-    [lengths enumerateObjectsUsingBlock:^(NSNumber *length, NSUInteger index, BOOL *stop) {
+    [variableDimensions enumerateObjectsUsingBlock:^(NSNumber *dimension, NSUInteger index, BOOL *stop) {
 
         // Generate the new shortest & longest
         // after changes from adding the last object
@@ -205,7 +204,7 @@
         [self updateLongestAndShortestDimensions];
 
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
-        CGFloat itemAlternateDimension = ceilf([length floatValue]);
+        CGFloat itemAlternateDimension = ceilf([dimension floatValue]);
         NSUInteger columnIndex = self.shortestDimensionIndex;
 
         // Where would it be without any manipulation
@@ -235,7 +234,7 @@
 
         // Ensure an extra margin is not applied
         CGFloat totalDimension = yOffset + itemAlternateDimension;
-        if (index != lengths.count - 1) {
+        if (index != variableDimensions.count - 1) {
             totalDimension += [self alternateItemMargin];
         }
 
@@ -395,7 +394,7 @@
 
 - (CGFloat)mainItemMargin
 {
-    return (self.isHorizontal) ? self.itemMargins.height : self.itemMargins.height;
+    return (self.isHorizontal) ? self.itemMargins.height : self.itemMargins.width;
 }
 
 /// The opposite of above, the space vertically when in vertical mode

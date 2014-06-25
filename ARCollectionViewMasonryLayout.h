@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, ARCollectionViewMasonryLayoutDirection){
 /// lay out items in a horizontal or vertical layout in a way that flows all
 /// the content edge to edge in lines
 
-@interface ARCollectionViewMasonryLayout : UICollectionViewLayout
+@interface ARCollectionViewMasonryLayout : UICollectionViewFlowLayout
 
 /// Create a layout with a direction
 - (instancetype)initWithDirection:(enum ARCollectionViewMasonryLayoutDirection)direction;

@@ -10,6 +10,6 @@
 
 @interface ARCollectionViewController : UICollectionViewController
 @property(assign) NSInteger colorCount;
-@property(assign) NSInteger headerHeight;
-@property(assign) NSInteger footerHeight;
+@property(assign) CGSize headerSize;
+@property(assign) CGSize footerSize;
 @end

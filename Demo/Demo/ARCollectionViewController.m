@@ -81,14 +81,14 @@ static NSString *CellIdentifier = @"Cell";
     }
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout dimensionForHeaderAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return self.headerHeight ?: NSNotFound;
+    return self.headerSize;
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout dimensionForFooterAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
-    return self.footerHeight ?: NSNotFound;
+    return self.footerSize;
 }
 
 #pragma mark - ARCollectionViewMasonryLayoutDelegate Methods

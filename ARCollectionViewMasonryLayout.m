@@ -181,7 +181,7 @@
 
     // Add an optional header.
     NSIndexPath *indexPathZero = [NSIndexPath indexPathForItem:0 inSection:0];
-    CGFloat headerLength = [self headerDimensionWithIndexPath:indexPathZero];
+    CGFloat headerLength = [self headerDimensionAtIndexPath:indexPathZero];
     if (headerLength != NSNotFound) {
         [self setupHeaderWithIndexPath:indexPathZero length:headerLength];
         leadingInset += headerLength;
@@ -249,30 +249,58 @@
     [self updateLongestAndShortestDimensions];
 
     // Add an optional footer.
-    CGFloat footerLength = [self footerDimensionWithIndexPath:indexPathZero];
+    CGFloat footerLength = [self footerDimensionAtIndexPath:indexPathZero];
     if (footerLength != NSNotFound) {
         [self setupFooterWithIndexPath:indexPathZero length:footerLength];
     }
 }
 
-- (CGFloat)headerDimensionWithIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)headerDimensionAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<ARCollectionViewMasonryLayoutDelegate> delegate = self.delegate;
-    if (delegate && [delegate respondsToSelector:@selector(collectionView:layout:dimensionForHeaderAtIndexPath:)]) {
-        return [delegate collectionView:self.collectionView layout:self dimensionForHeaderAtIndexPath:indexPath];
+    CGSize size = [self headerSizeAtIndexPath:indexPath];
+    if (CGSizeEqualToSize(size, CGSizeZero)) { return NSNotFound; }
+
+    if ([self isHorizontal]) {
+        return size.width;
     } else {
-        return NSNotFound;
+        return size.height;
     }
 }
 
-- (CGFloat)footerDimensionWithIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)footerDimensionAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<ARCollectionViewMasonryLayoutDelegate> delegate = self.delegate;
-    if (delegate && [delegate respondsToSelector:@selector(collectionView:layout:dimensionForFooterAtIndexPath:)]) {
-        return [delegate collectionView:self.collectionView layout:self dimensionForFooterAtIndexPath:indexPath];
+    CGSize size = [self footerSizeAtIndexPath:indexPath];
+    if (CGSizeEqualToSize(size, CGSizeZero)) { return NSNotFound; }
+
+    if ([self isHorizontal]) {
+        return size.width;
     } else {
-        return NSNotFound;
+        return size.height;
     }
+}
+
+- (CGSize)headerSizeAtIndexPath:(NSIndexPath *)indexPath
+{
+    id<UICollectionViewDelegateFlowLayout> delegate = self.delegate;
+    CGSize size = CGSizeZero;
+
+    if (delegate && [delegate respondsToSelector:@selector(collectionView:layout:referenceSizeForHeaderInSection:)]) {
+        size = [delegate collectionView:self.collectionView layout:self referenceSizeForHeaderInSection:indexPath.section];
+    }
+
+    return size;
+}
+
+- (CGSize)footerSizeAtIndexPath:(NSIndexPath *)indexPath
+{
+    id<UICollectionViewDelegateFlowLayout> delegate = self.delegate;
+    CGSize size = CGSizeZero;
+
+    if (delegate && [delegate respondsToSelector:@selector(collectionView:layout:referenceSizeForFooterInSection:)]) {
+        size = [delegate collectionView:self.collectionView layout:self referenceSizeForFooterInSection:indexPath.section];
+    }
+
+    return size;
 }
 
 - (void)setupHeaderWithIndexPath:(NSIndexPath *)indexPath length:(CGFloat)headerLength
@@ -314,14 +342,14 @@
         alternateDimension = [self.internalDimensions[longestColumnIndex] floatValue];
     } else {
         // Only the header.
-        CGFloat headerHeight = [self headerDimensionWithIndexPath:indexPathZero];
+        CGFloat headerHeight = [self headerDimensionAtIndexPath:indexPathZero];
         if (headerHeight != NSNotFound) {
             alternateDimension += headerHeight;
         }
     }
 
     // Always include the footer.
-    CGFloat footerHeight = [self footerDimensionWithIndexPath:indexPathZero];
+    CGFloat footerHeight = [self footerDimensionAtIndexPath:indexPathZero];
     if (footerHeight != NSNotFound) {
         alternateDimension += footerHeight;
     }

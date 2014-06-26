@@ -10,17 +10,12 @@
 
 @class ARCollectionViewMasonryLayout;
 
-@protocol ARCollectionViewMasonryLayoutDelegate <UICollectionViewDelegate>
+@protocol ARCollectionViewMasonryLayoutDelegate <UICollectionViewDelegateFlowLayout>
 
 /// If you have a vertical direction then this is the height
 /// and width for horizontal.
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout variableDimensionForItemAtIndexPath:(NSIndexPath *)indexPath;
-
-@optional
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout dimensionForHeaderAtIndexPath:(NSIndexPath *)indexPath;
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout dimensionForFooterAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -33,7 +28,7 @@ typedef NS_ENUM(NSInteger, ARCollectionViewMasonryLayoutDirection){
 /// lay out items in a horizontal or vertical layout in a way that flows all
 /// the content edge to edge in lines
 
-@interface ARCollectionViewMasonryLayout : UICollectionViewLayout
+@interface ARCollectionViewMasonryLayout : UICollectionViewFlowLayout
 
 /// Create a layout with a direction
 - (instancetype)initWithDirection:(enum ARCollectionViewMasonryLayoutDirection)direction;

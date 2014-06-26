@@ -16,6 +16,8 @@
 @property (nonatomic, strong) NSMutableArray *internalDimensions;
 
 @property (nonatomic, strong) NSMutableArray *itemAttributes;
+@property (nonatomic, strong) UICollectionViewLayoutAttributes *headerAttributes;
+@property (nonatomic, strong) UICollectionViewLayoutAttributes *footerAttributes;
 
 // Provide quick lookups for heights
 @property (nonatomic, assign) NSInteger shortestDimensionIndex;
@@ -143,7 +145,7 @@
 
 - (void)setupLayoutWithStaticDimsion:(CGFloat)staticDimension andVaribleDimensions:(NSArray *)variableDimensions {
     NSAssert(_rank > 0, @"Rank for ARCollectionViewMasonryLayout should be greater than 0.");
-    
+    NSAssert(self.collectionView.numberOfSections == 1, @"ARCollectionViewmMasonry doesn't support multiple sections.");
     self.dimensionLength = ceilf(self.dimensionLength);
     self.itemCount = variableDimensions.count;
     self.itemAttributes = [NSMutableArray array];
@@ -181,10 +183,10 @@
 
     // Add an optional header.
     NSIndexPath *indexPathZero = [NSIndexPath indexPathForItem:0 inSection:0];
-    CGFloat headerLength = [self headerDimensionAtIndexPath:indexPathZero];
-    if (headerLength != NSNotFound) {
-        [self setupHeaderWithIndexPath:indexPathZero length:headerLength];
-        leadingInset += headerLength;
+    CGFloat headerDimension = [self headerDimensionAtIndexPath:indexPathZero];
+    if (headerDimension != NSNotFound) {
+        [self setupHeaderAtIndexPath:indexPathZero];
+        leadingInset += headerDimension;
     }
     
     // Start all the dimensions with the content inset.
@@ -251,7 +253,7 @@
     // Add an optional footer.
     CGFloat footerLength = [self footerDimensionAtIndexPath:indexPathZero];
     if (footerLength != NSNotFound) {
-        [self setupFooterWithIndexPath:indexPathZero length:footerLength];
+        [self setupFooterAtIndexPath:indexPathZero];
     }
 }
 
@@ -303,32 +305,35 @@
     return size;
 }
 
-- (void)setupHeaderWithIndexPath:(NSIndexPath *)indexPath length:(CGFloat)headerLength
+- (void)setupHeaderAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader withIndexPath:indexPath];
-    [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UICollectionElementKindSectionHeader];
-    
+;
+    CGSize size = [self headerSizeAtIndexPath:indexPath];
     if ([self isHorizontal]) {
-        attributes.frame = CGRectMake(0, 0, headerLength, CGRectGetHeight(self.collectionView.bounds));
+        attributes.frame = CGRectMake(0, 0, size.width, CGRectGetHeight(self.collectionView.bounds));
     } else {
-        attributes.frame = CGRectMake(0, 0, CGRectGetWidth(self.collectionView.bounds), headerLength);
+        attributes.frame = CGRectMake(0, 0, CGRectGetWidth(self.collectionView.bounds), size.height);
     }
-    
-    [self.itemAttributes addObject:attributes];
+
+    [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UICollectionElementKindSectionHeader];
+    self.headerAttributes = attributes;
 }
 
-- (void)setupFooterWithIndexPath:(NSIndexPath *)indexPath length:(CGFloat)footerLength
+- (void)setupFooterAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter withIndexPath:indexPath];
-    [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:UICollectionElementKindSectionFooter];
-    
+
+    CGSize size = [self headerSizeAtIndexPath:indexPath];
+    CGFloat longestDimension = [self.internalDimensions[self.longestDimensionIndex] floatValue];
     if ([self isHorizontal]) {
-        attributes.frame = CGRectMake(self.longestDimensionLength, 0, footerLength, CGRectGetHeight(self.collectionView.bounds));
+        attributes.frame = CGRectMake(longestDimension, 0, size.width, CGRectGetHeight(self.collectionView.bounds));
     } else {
-        attributes.frame = CGRectMake(0, self.longestDimensionLength, CGRectGetWidth(self.collectionView.bounds), footerLength);
+        attributes.frame = CGRectMake(0, longestDimension, CGRectGetWidth(self.collectionView.bounds), size.height);
     }
-    
-    [self.itemAttributes addObject:attributes];
+
+    [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:UICollectionElementKindSectionFooter];
+    self.footerAttributes = attributes;
 }
 
 - (CGSize)collectionViewContentSize
@@ -373,9 +378,26 @@
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
-    return [self.itemAttributes filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+    NSMutableArray *attributes = [self.itemAttributes mutableCopy];
+    if (self.headerAttributes) {
+        [attributes addObject:self.headerAttributes];
+    }
+    if (self.footerAttributes) {
+        [attributes addObject:self.footerAttributes];
+    }
+    return [attributes filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         return CGRectIntersectsRect(rect, [evaluatedObject frame]);
     }]];
+}
+
+- (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    if (kind == UICollectionElementKindSectionHeader) {
+        return self.headerAttributes;
+    }
+    if (kind == UICollectionElementKindSectionFooter) {
+        return self.footerAttributes;
+    }
 }
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds

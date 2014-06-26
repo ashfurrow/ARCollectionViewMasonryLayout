@@ -378,13 +378,14 @@
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
-    NSMutableArray *attributes = [self.itemAttributes mutableCopy];
+    NSArray *attributes = self.itemAttributes;
     if (self.headerAttributes) {
-        [attributes addObject:self.headerAttributes];
+        attributes = [attributes arrayByAddingObject:self.headerAttributes];
     }
     if (self.footerAttributes) {
-        [attributes addObject:self.footerAttributes];
+        attributes = [attributes arrayByAddingObject:self.footerAttributes];
     }
+
     return [attributes filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         return CGRectIntersectsRect(rect, [evaluatedObject frame]);
     }]];

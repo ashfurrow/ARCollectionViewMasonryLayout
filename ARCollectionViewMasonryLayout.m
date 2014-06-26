@@ -324,7 +324,7 @@
 {
     UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter withIndexPath:indexPath];
 
-    CGSize size = [self headerSizeAtIndexPath:indexPath];
+    CGSize size = [self footerSizeAtIndexPath:indexPath];
     CGFloat longestDimension = [self.internalDimensions[self.longestDimensionIndex] floatValue];
     if ([self isHorizontal]) {
         attributes.frame = CGRectMake(longestDimension, 0, size.width, CGRectGetHeight(self.collectionView.bounds));
@@ -394,9 +394,10 @@
 {
     if (kind == UICollectionElementKindSectionHeader) {
         return self.headerAttributes;
-    }
-    if (kind == UICollectionElementKindSectionFooter) {
+    } else if (kind == UICollectionElementKindSectionFooter) {
         return self.footerAttributes;
+    } else {
+        return nil;
     }
 }
 

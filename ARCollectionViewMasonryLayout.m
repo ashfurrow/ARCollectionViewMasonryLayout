@@ -120,7 +120,7 @@
             [variableDimensions addObject:@(variableDimension)];
         }
 
-        [self setupLayoutWithStaticDimsion:staticDimension andVaribleDimensions:variableDimensions];
+        [self setupLayoutWithStaticDimension:staticDimension andVariableDimensions:variableDimensions];
     }
 }
 
@@ -135,7 +135,7 @@
 
 - (CGFloat)longestDimensionWithLengths:(NSArray *)variableDimensions withOppositeDimension:(CGFloat)staticDimension;
 {
-    [self setupLayoutWithStaticDimsion:staticDimension andVaribleDimensions:variableDimensions];
+    [self setupLayoutWithStaticDimension:staticDimension andVariableDimensions:variableDimensions];
     if ([self isHorizontal]) {
         return  [self collectionViewContentSize].width;
     } else {
@@ -143,7 +143,7 @@
     }
 }
 
-- (void)setupLayoutWithStaticDimsion:(CGFloat)staticDimension andVaribleDimensions:(NSArray *)variableDimensions {
+- (void)setupLayoutWithStaticDimension:(CGFloat)staticDimension andVariableDimensions:(NSArray *)variableDimensions {
     NSAssert(_rank > 0, @"Rank for ARCollectionViewMasonryLayout should be greater than 0.");
     NSAssert(self.collectionView.numberOfSections == 1, @"ARCollectionViewmMasonry doesn't support multiple sections.");
     self.dimensionLength = ceilf(self.dimensionLength);

@@ -143,7 +143,8 @@
     }
 }
 
-- (void)setupLayoutWithStaticDimension:(CGFloat)staticDimension andVariableDimensions:(NSArray *)variableDimensions {
+- (void)setupLayoutWithStaticDimension:(CGFloat)staticDimension andVariableDimensions:(NSArray *)variableDimensions
+{
     NSAssert(_rank > 0, @"Rank for ARCollectionViewMasonryLayout should be greater than 0.");
     NSAssert(self.collectionView.numberOfSections == 1, @"ARCollectionViewmMasonry doesn't support multiple sections.");
     self.dimensionLength = ceilf(self.dimensionLength);

@@ -135,7 +135,10 @@
 
 - (CGFloat)longestDimensionWithLengths:(NSArray *)variableDimensions withOppositeDimension:(CGFloat)staticDimension;
 {
-    [self setupLayoutWithStaticDimension:staticDimension andVariableDimensions:variableDimensions];
+    if ([self collectionView]) {
+        [self setupLayoutWithStaticDimension:staticDimension andVariableDimensions:variableDimensions];
+    }
+    
     if ([self isHorizontal]) {
         return  [self collectionViewContentSize].width;
     } else {

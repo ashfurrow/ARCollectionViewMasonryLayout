@@ -26,7 +26,7 @@ describe(@"horizontal layout", ^{
         expect(layout.collectionViewContentSize.width).to.equal(0);
     });
     
-    it (@"has the correct horizontal direction", ^{
+    it(@"has the correct horizontal direction", ^{
         expect(layout.direction).to.equal(ARCollectionViewMasonryLayoutDirectionHorizontal);
     });
     
@@ -146,6 +146,16 @@ describe(@"vertical layout", ^{
         expect(viewController.view).willNot.beNil();
         expect(viewController.view).will.haveValidSnapshotNamed(@"verticalWithHeaderAndFooter");
         expect(layout.collectionViewContentSize.height).to.equal(135);
+    });
+});
+
+describe(@"longestDimensionWithLengths", ^{
+    beforeEach(^{
+        layout = [[ARCollectionViewMasonryLayout alloc] initWithDirection:ARCollectionViewMasonryLayoutDirectionHorizontal];
+    });
+    
+    it(@"returns zero without a view", ^{
+        expect([layout longestDimensionWithLengths:@[] withOppositeDimension:0]).to.equal(0);
     });
 });
 

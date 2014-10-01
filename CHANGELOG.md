@@ -1,4 +1,4 @@
-1.0.1
+2.0.0
 ----
 
 - [#16](https://github.com/AshFurrow/ARCollectionViewMasonryLayout/pull/16): Changed ARCollectionViewMasonryLayout to use UICollectionViewFlowLayout's API and support for headers and footers - [@laurabrown](https://github.com/1aurabrown).

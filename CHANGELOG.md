@@ -1,4 +1,4 @@
-Next
+1.0.1
 ----
 
 - [#9](https://github.com/AshFurrow/ARCollectionViewMasonryLayout/pull/9): Moved ARCollectionViewMasonryLayout.podspec and screenshots into the project - [@dblock](https://github.com/dblock).

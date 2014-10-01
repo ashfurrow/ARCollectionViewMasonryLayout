@@ -10,17 +10,12 @@
 
 @class ARCollectionViewMasonryLayout;
 
-@protocol ARCollectionViewMasonryLayoutDelegate <UICollectionViewDelegate>
+@protocol ARCollectionViewMasonryLayoutDelegate <UICollectionViewDelegateFlowLayout>
 
 /// If you have a vertical direction then this is the height
 /// and width for horizontal.
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout variableDimensionForItemAtIndexPath:(NSIndexPath *)indexPath;
-
-@optional
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout dimensionForHeaderAtIndexPath:(NSIndexPath *)indexPath;
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout dimensionForFooterAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -33,7 +28,7 @@ typedef NS_ENUM(NSInteger, ARCollectionViewMasonryLayoutDirection){
 /// lay out items in a horizontal or vertical layout in a way that flows all
 /// the content edge to edge in lines
 
-@interface ARCollectionViewMasonryLayout : UICollectionViewLayout
+@interface ARCollectionViewMasonryLayout : UICollectionViewFlowLayout
 
 /// Create a layout with a direction
 - (instancetype)initWithDirection:(enum ARCollectionViewMasonryLayoutDirection)direction;
@@ -60,6 +55,6 @@ typedef NS_ENUM(NSInteger, ARCollectionViewMasonryLayoutDirection){
 /// Use this function to use the same layouting engine but
 /// without needing to have a collectionview. Useful for
 /// getting dimensions in advance for tableview cells.
-- (CGFloat)longestDimensionWithLengths:(NSArray *)lengths withOppositeDimension:(CGFloat)height;
+- (CGFloat)longestDimensionWithLengths:(NSArray *)variableDimensions withOppositeDimension:(CGFloat)staticDimension;
 
 @end

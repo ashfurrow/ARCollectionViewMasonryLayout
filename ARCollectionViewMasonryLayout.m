@@ -16,6 +16,8 @@
 @property (nonatomic, strong) NSMutableArray *internalDimensions;
 
 @property (nonatomic, strong) NSMutableArray *itemAttributes;
+@property (nonatomic, strong) UICollectionViewLayoutAttributes *headerAttributes;
+@property (nonatomic, strong) UICollectionViewLayoutAttributes *footerAttributes;
 
 // Provide quick lookups for heights
 @property (nonatomic, assign) NSInteger shortestDimensionIndex;
@@ -98,27 +100,27 @@
     [super prepareLayout];
 
     if ([self collectionView]) {
-        
+
         NSAssert(self.delegate != nil, @"Delegate is nil, most likely because the collection view's delegate does not conform to ARCollectionViewMasonryLayoutDelegate.");
-        
+
         // We need to pre-load the heights and the widths from the collectionview
         // and our delegate in order to pass these through to setupLayoutWithWidth
 
         NSInteger itemCount = [self.collectionView.dataSource collectionView:self.collectionView numberOfItemsInSection:0];
 
-        NSMutableArray *heights = [NSMutableArray arrayWithCapacity:itemCount];
-        CGFloat dimension = [self isHorizontal]? self.collectionView.frame.size.height : self.collectionView.frame.size.width;
+        NSMutableArray *variableDimensions = [NSMutableArray arrayWithCapacity:itemCount];
+        CGFloat staticDimension = [self isHorizontal]? self.collectionView.frame.size.height : self.collectionView.frame.size.width;
 
         // Ask delegates for all the dimensions
         for (int i = 0; i < itemCount; i++) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
 
-            CGFloat length = [self.delegate collectionView:self.collectionView layout:self variableDimensionForItemAtIndexPath:indexPath];
+            CGFloat variableDimension = [self.delegate collectionView:self.collectionView layout:self variableDimensionForItemAtIndexPath:indexPath];
 
-            [heights addObject:@(length)];
+            [variableDimensions addObject:@(variableDimension)];
         }
 
-        [self setupLayoutWithWidth:dimension andHeights:heights];
+        [self setupLayoutWithStaticDimension:staticDimension andVariableDimensions:variableDimensions];
     }
 }
 
@@ -131,10 +133,12 @@
     return delegate;
 }
 
-- (CGFloat)longestDimensionWithLengths:(NSArray *)lengths withOppositeDimension:(CGFloat)oppositeDimension
+- (CGFloat)longestDimensionWithLengths:(NSArray *)variableDimensions withOppositeDimension:(CGFloat)staticDimension;
 {
-    [self setupLayoutWithWidth:oppositeDimension andHeights:lengths];
-
+    if ([self collectionView]) {
+        [self setupLayoutWithStaticDimension:staticDimension andVariableDimensions:variableDimensions];
+    }
+    
     if ([self isHorizontal]) {
         return  [self collectionViewContentSize].width;
     } else {
@@ -142,14 +146,15 @@
     }
 }
 
-- (void)setupLayoutWithWidth:(CGFloat)width andHeights:(NSArray *)lengths {
+- (void)setupLayoutWithStaticDimension:(CGFloat)staticDimension andVariableDimensions:(NSArray *)variableDimensions
+{
     NSAssert(_rank > 0, @"Rank for ARCollectionViewMasonryLayout should be greater than 0.");
-    
+    NSAssert(self.collectionView.numberOfSections == 1, @"ARCollectionViewmMasonry doesn't support multiple sections.");
     self.dimensionLength = ceilf(self.dimensionLength);
-    self.itemCount = lengths.count;
+    self.itemCount = variableDimensions.count;
     self.itemAttributes = [NSMutableArray array];
     self.internalDimensions = [NSMutableArray array];
-    self.centeringOffset = [self generateCenteringOffsetWithMainDimension:width];
+    self.centeringOffset = [self generateCenteringOffsetWithMainDimension:staticDimension];
 
     BOOL isHorizontal = [self isHorizontal];
     BOOL hasContentInset = !UIEdgeInsetsEqualToEdgeInsets(self.contentInset, UIEdgeInsetsZero);
@@ -182,10 +187,10 @@
 
     // Add an optional header.
     NSIndexPath *indexPathZero = [NSIndexPath indexPathForItem:0 inSection:0];
-    CGFloat headerLength = [self headerDimensionWithIndexPath:indexPathZero];
-    if (headerLength != NSNotFound) {
-        [self setupHeaderWithIndexPath:indexPathZero length:headerLength];
-        leadingInset += headerLength;
+    CGFloat headerDimension = [self headerDimensionAtIndexPath:indexPathZero];
+    if (headerDimension != NSNotFound) {
+        [self setupHeaderAtIndexPath:indexPathZero];
+        leadingInset += headerDimension;
     }
     
     // Start all the dimensions with the content inset.
@@ -196,7 +201,7 @@
     // Simple rule of thumb, find the shortest column and throw
     // the current object into that.
 
-    [lengths enumerateObjectsUsingBlock:^(NSNumber *length, NSUInteger index, BOOL *stop) {
+    [variableDimensions enumerateObjectsUsingBlock:^(NSNumber *dimension, NSUInteger index, BOOL *stop) {
 
         // Generate the new shortest & longest
         // after changes from adding the last object
@@ -205,7 +210,7 @@
         [self updateLongestAndShortestDimensions];
 
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
-        CGFloat itemAlternateDimension = ceilf([length floatValue]);
+        CGFloat itemAlternateDimension = ceilf([dimension floatValue]);
         NSUInteger columnIndex = self.shortestDimensionIndex;
 
         // Where would it be without any manipulation
@@ -235,7 +240,7 @@
 
         // Ensure an extra margin is not applied
         CGFloat totalDimension = yOffset + itemAlternateDimension;
-        if (index != lengths.count - 1) {
+        if (index != variableDimensions.count - 1) {
             totalDimension += [self alternateItemMargin];
         }
 
@@ -250,58 +255,89 @@
     [self updateLongestAndShortestDimensions];
 
     // Add an optional footer.
-    CGFloat footerLength = [self footerDimensionWithIndexPath:indexPathZero];
+    CGFloat footerLength = [self footerDimensionAtIndexPath:indexPathZero];
     if (footerLength != NSNotFound) {
-        [self setupFooterWithIndexPath:indexPathZero length:footerLength];
+        [self setupFooterAtIndexPath:indexPathZero];
     }
 }
 
-- (CGFloat)headerDimensionWithIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)headerDimensionAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<ARCollectionViewMasonryLayoutDelegate> delegate = self.delegate;
-    if (delegate && [delegate respondsToSelector:@selector(collectionView:layout:dimensionForHeaderAtIndexPath:)]) {
-        return [delegate collectionView:self.collectionView layout:self dimensionForHeaderAtIndexPath:indexPath];
+    CGSize size = [self headerSizeAtIndexPath:indexPath];
+    if (CGSizeEqualToSize(size, CGSizeZero)) { return NSNotFound; }
+
+    if ([self isHorizontal]) {
+        return size.width;
     } else {
-        return NSNotFound;
+        return size.height;
     }
 }
 
-- (CGFloat)footerDimensionWithIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)footerDimensionAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<ARCollectionViewMasonryLayoutDelegate> delegate = self.delegate;
-    if (delegate && [delegate respondsToSelector:@selector(collectionView:layout:dimensionForFooterAtIndexPath:)]) {
-        return [delegate collectionView:self.collectionView layout:self dimensionForFooterAtIndexPath:indexPath];
+    CGSize size = [self footerSizeAtIndexPath:indexPath];
+    if (CGSizeEqualToSize(size, CGSizeZero)) { return NSNotFound; }
+
+    if ([self isHorizontal]) {
+        return size.width;
     } else {
-        return NSNotFound;
+        return size.height;
     }
 }
 
-- (void)setupHeaderWithIndexPath:(NSIndexPath *)indexPath length:(CGFloat)headerLength
+- (CGSize)headerSizeAtIndexPath:(NSIndexPath *)indexPath
+{
+    id<UICollectionViewDelegateFlowLayout> delegate = self.delegate;
+    CGSize size = CGSizeZero;
+
+    if (delegate && [delegate respondsToSelector:@selector(collectionView:layout:referenceSizeForHeaderInSection:)]) {
+        size = [delegate collectionView:self.collectionView layout:self referenceSizeForHeaderInSection:indexPath.section];
+    }
+
+    return size;
+}
+
+- (CGSize)footerSizeAtIndexPath:(NSIndexPath *)indexPath
+{
+    id<UICollectionViewDelegateFlowLayout> delegate = self.delegate;
+    CGSize size = CGSizeZero;
+
+    if (delegate && [delegate respondsToSelector:@selector(collectionView:layout:referenceSizeForFooterInSection:)]) {
+        size = [delegate collectionView:self.collectionView layout:self referenceSizeForFooterInSection:indexPath.section];
+    }
+
+    return size;
+}
+
+- (void)setupHeaderAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader withIndexPath:indexPath];
-    [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UICollectionElementKindSectionHeader];
-    
+;
+    CGSize size = [self headerSizeAtIndexPath:indexPath];
     if ([self isHorizontal]) {
-        attributes.frame = CGRectMake(0, 0, headerLength, CGRectGetHeight(self.collectionView.bounds));
+        attributes.frame = CGRectMake(0, 0, size.width, CGRectGetHeight(self.collectionView.bounds));
     } else {
-        attributes.frame = CGRectMake(0, 0, CGRectGetWidth(self.collectionView.bounds), headerLength);
+        attributes.frame = CGRectMake(0, 0, CGRectGetWidth(self.collectionView.bounds), size.height);
     }
-    
-    [self.itemAttributes addObject:attributes];
+
+    [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:UICollectionElementKindSectionHeader];
+    self.headerAttributes = attributes;
 }
 
-- (void)setupFooterWithIndexPath:(NSIndexPath *)indexPath length:(CGFloat)footerLength
+- (void)setupFooterAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter withIndexPath:indexPath];
-    [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:UICollectionElementKindSectionFooter];
-    
+
+    CGSize size = [self footerSizeAtIndexPath:indexPath];
+    CGFloat longestDimension = [self.internalDimensions[self.longestDimensionIndex] floatValue];
     if ([self isHorizontal]) {
-        attributes.frame = CGRectMake(self.longestDimensionLength, 0, footerLength, CGRectGetHeight(self.collectionView.bounds));
+        attributes.frame = CGRectMake(longestDimension, 0, size.width, CGRectGetHeight(self.collectionView.bounds));
     } else {
-        attributes.frame = CGRectMake(0, self.longestDimensionLength, CGRectGetWidth(self.collectionView.bounds), footerLength);
+        attributes.frame = CGRectMake(0, longestDimension, CGRectGetWidth(self.collectionView.bounds), size.height);
     }
-    
-    [self.itemAttributes addObject:attributes];
+
+    [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:UICollectionElementKindSectionFooter];
+    self.footerAttributes = attributes;
 }
 
 - (CGSize)collectionViewContentSize
@@ -315,14 +351,14 @@
         alternateDimension = [self.internalDimensions[longestColumnIndex] floatValue];
     } else {
         // Only the header.
-        CGFloat headerHeight = [self headerDimensionWithIndexPath:indexPathZero];
+        CGFloat headerHeight = [self headerDimensionAtIndexPath:indexPathZero];
         if (headerHeight != NSNotFound) {
             alternateDimension += headerHeight;
         }
     }
 
     // Always include the footer.
-    CGFloat footerHeight = [self footerDimensionWithIndexPath:indexPathZero];
+    CGFloat footerHeight = [self footerDimensionAtIndexPath:indexPathZero];
     if (footerHeight != NSNotFound) {
         alternateDimension += footerHeight;
     }
@@ -346,9 +382,28 @@
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
-    return [self.itemAttributes filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+    NSArray *attributes = self.itemAttributes;
+    if (self.headerAttributes) {
+        attributes = [attributes arrayByAddingObject:self.headerAttributes];
+    }
+    if (self.footerAttributes) {
+        attributes = [attributes arrayByAddingObject:self.footerAttributes];
+    }
+
+    return [attributes filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         return CGRectIntersectsRect(rect, [evaluatedObject frame]);
     }]];
+}
+
+- (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    if (kind == UICollectionElementKindSectionHeader) {
+        return self.headerAttributes;
+    } else if (kind == UICollectionElementKindSectionFooter) {
+        return self.footerAttributes;
+    } else {
+        return nil;
+    }
 }
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
@@ -395,7 +450,7 @@
 
 - (CGFloat)mainItemMargin
 {
-    return (self.isHorizontal) ? self.itemMargins.height : self.itemMargins.height;
+    return (self.isHorizontal) ? self.itemMargins.height : self.itemMargins.width;
 }
 
 /// The opposite of above, the space vertically when in vertical mode

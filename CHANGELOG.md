@@ -1,6 +1,12 @@
 1.0.1
 ----
 
+- [#16](https://github.com/AshFurrow/ARCollectionViewMasonryLayout/pull/16): Changed ARCollectionViewMasonryLayout to use UICollectionViewFlowLayout's API and support for headers and footers - [@laurabrown](https://github.com/1aurabrown).
+- [#20](https://github.com/AshFurrow/ARCollectionViewMasonryLayout/pull/20): Fixed multiple sections false positive assert in `longestDimensionWithLengths` when invoked without a collection view - [@dblock](https://github.com/dblock).
+
+1.0.0
+----
+
 - [#9](https://github.com/AshFurrow/ARCollectionViewMasonryLayout/pull/9): Moved ARCollectionViewMasonryLayout.podspec and screenshots into the project - [@dblock](https://github.com/dblock).
 - [#8](https://github.com/AshFurrow/ARCollectionViewMasonryLayout/issues/8): Added support for header and footer views via `ARCollectionViewMasonryLayoutDelegate` - [@dblock](https://github.com/dblock).
 - [#11](https://github.com/AshFurrow/ARCollectionViewMasonryLayout/issues/11): Fixed crash in layout without footer on iOS8 - [@dblock](https://github.com/dblock).

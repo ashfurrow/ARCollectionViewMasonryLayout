@@ -1,19 +1,19 @@
 PODS:
   - ARCollectionViewMasonryLayout (2.0.0)
   - EDColor (0.4.0)
-  - Expecta (0.2.3)
-  - EXPMatchers+FBSnapshotTest (1.1.0):
+  - Expecta (0.3.0)
+  - Expecta+Snapshots (1.2.0):
     - Expecta
     - FBSnapshotTestCase
-  - FBSnapshotTestCase (1.1)
+  - FBSnapshotTestCase (1.4)
   - Specta (0.2.1)
 
 DEPENDENCIES:
   - ARCollectionViewMasonryLayout (from `ARCollectionViewMasonryLayout.podspec`)
   - EDColor (= 0.4.0)
-  - Expecta (= 0.2.3)
-  - EXPMatchers+FBSnapshotTest (= 1.1)
-  - FBSnapshotTestCase (= 1.1)
+  - Expecta (= 0.3.0)
+  - Expecta+Snapshots (= 1.2)
+  - FBSnapshotTestCase (= 1.4)
   - Specta (= 0.2.1)
 
 EXTERNAL SOURCES:
@@ -23,9 +23,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   ARCollectionViewMasonryLayout: c766b2b8965791b89d71627c7f75cd4f841d25bf
   EDColor: bcdb8600b7a456f4408ce1d7e7fc001588919254
-  Expecta: 578e0c29df79a96a159187599e2def686ef6a66c
-  EXPMatchers+FBSnapshotTest: 3c48e8a29a445476fe2d72d7da45dfdd765b5f55
-  FBSnapshotTestCase: 9053afee1d66b4c7c313fcb0ae582a5e47bea9d0
+  Expecta: ce8a51b9fad15a2cd573b291cb2909aaed865350
+  Expecta+Snapshots: eed172512cd9a8d659f6c02dc0fe774043b399af
+  FBSnapshotTestCase: f9f225b5ba11c8d8c09075590490df16314e4d62
   Specta: 9141310f46b1f68b676650ff2854e1ed0b74163a
 
 COCOAPODS: 0.35.0

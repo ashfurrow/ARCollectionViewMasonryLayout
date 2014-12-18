@@ -1,12 +1,11 @@
-language: objective-c
+# reference: http://www.objc.io/issue-6/travis-ci.html
 
-before_install:
-  - brew update
-  - brew uninstall xctool
-  - brew install xctool
-  - export LANG=en_US.UTF-8
-  - gem i cocoapods --no-ri --no-rdoc
-  - pod install
-xcode_workspace: ARCollectionViewMasonryLayout.xcworkspace
-xcode_scheme: Demo
-xcode_sdk: iphonesimulator
+language: objective-c
+cache: bundler
+
+before_script:
+    - export LANG=en_US.UTF-8
+    - make ci
+
+script:
+    - make test

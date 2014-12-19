@@ -44,7 +44,7 @@
     _dimensionLength = 120;
     _contentInset = UIEdgeInsetsZero;
     _itemMargins = CGSizeZero;
-    
+
     return self;
 }
 
@@ -138,7 +138,7 @@
     if ([self collectionView]) {
         [self setupLayoutWithStaticDimension:staticDimension andVariableDimensions:variableDimensions];
     }
-    
+
     if ([self isHorizontal]) {
         return  [self collectionViewContentSize].width;
     } else {
@@ -158,7 +158,7 @@
 
     BOOL isHorizontal = [self isHorizontal];
     BOOL hasContentInset = !UIEdgeInsetsEqualToEdgeInsets(self.contentInset, UIEdgeInsetsZero);
-    
+
     CGFloat leadingInset = 0;
     CGFloat orthogonalInset = 0;
     CGFloat trailingInset = 0;
@@ -191,13 +191,15 @@
     if (headerDimension != NSNotFound) {
         [self setupHeaderAtIndexPath:indexPathZero];
         leadingInset += headerDimension;
+    } else {
+        self.headerAttributes = nil;
     }
-    
+
     // Start all the dimensions with the content inset.
     for (NSInteger index = 0; index < self.rank; index++) {
         [self.internalDimensions addObject:@(leadingInset)];
     }
-   
+
     // Simple rule of thumb, find the shortest column and throw
     // the current object into that.
 
@@ -205,7 +207,7 @@
 
         // Generate the new shortest & longest
         // after changes from adding the last object
-        
+
         // TODO: this should be incremental in the loop
         [self updateLongestAndShortestDimensions];
 
@@ -258,6 +260,8 @@
     CGFloat footerLength = [self footerDimensionAtIndexPath:indexPathZero];
     if (footerLength != NSNotFound) {
         [self setupFooterAtIndexPath:indexPathZero];
+    } else {
+        self.footerAttributes = nil;
     }
 }
 
@@ -312,7 +316,7 @@
 - (void)setupHeaderAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionHeader withIndexPath:indexPath];
-;
+
     CGSize size = [self headerSizeAtIndexPath:indexPath];
     if ([self isHorizontal]) {
         attributes.frame = CGRectMake(0, 0, size.width, CGRectGetHeight(self.collectionView.bounds));

@@ -11,11 +11,14 @@
 
 #import "ARCollectionViewController.h"
 
-static UICollectionViewLayoutAttributes *
-LayoutAttributes(CGRect frame) {
+static void
+AddLayoutAttributesToSectionWithHeight(_ARCollectionViewMasonryAttributesGrid *grid,
+                                       NSUInteger sectionIndex,
+                                       CGFloat height) {
+    static CGFloat width = 100;
     UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes new];
-    attributes.frame = frame;
-    return attributes;
+    attributes.frame = CGRectMake(width * sectionIndex, [grid dimensionForSection:sectionIndex], width, height);
+    [grid addAttributes:attributes toSection:sectionIndex];
 }
 
 SpecBegin(ARCollectionViewMasonryLayoutTests)
@@ -46,12 +49,12 @@ describe(@"_ARCollectionViewMasonryAttributesGrid", ^{
 
     describe(@"with items in each section", ^{
         beforeEach(^{
-            [grid addAttributes:LayoutAttributes(CGRectMake(  0,  0, 100, 10)) toSection:0];
-            [grid addAttributes:LayoutAttributes(CGRectMake(  0, 10, 100, 10)) toSection:0];
-            [grid addAttributes:LayoutAttributes(CGRectMake(100,  0, 100, 20)) toSection:1];
-            [grid addAttributes:LayoutAttributes(CGRectMake(100, 20, 100, 20)) toSection:1];
-            [grid addAttributes:LayoutAttributes(CGRectMake(200,  0, 100, 30)) toSection:2];
-            [grid addAttributes:LayoutAttributes(CGRectMake(200, 30, 100, 30)) toSection:2];
+            AddLayoutAttributesToSectionWithHeight(grid, 0, 10);
+            AddLayoutAttributesToSectionWithHeight(grid, 0, 10);
+            AddLayoutAttributesToSectionWithHeight(grid, 1, 20);
+            AddLayoutAttributesToSectionWithHeight(grid, 1, 20);
+            AddLayoutAttributesToSectionWithHeight(grid, 2, 30);
+            AddLayoutAttributesToSectionWithHeight(grid, 2, 30);
         });
 
         it(@"returns the total dimension for a section (in the configured direction)", ^{
@@ -62,18 +65,18 @@ describe(@"_ARCollectionViewMasonryAttributesGrid", ^{
 
         it(@"returns what the shortest section is", ^{
             expect(grid.shortestSection).to.equal(0);
-            [grid addAttributes:LayoutAttributes(CGRectMake(0, 20, 100, 100)) toSection:0];
+            AddLayoutAttributesToSectionWithHeight(grid, 0, 100);
             expect(grid.shortestSection).to.equal(1);
-            [grid addAttributes:LayoutAttributes(CGRectMake(0, 40, 100, 100)) toSection:1];
+            AddLayoutAttributesToSectionWithHeight(grid, 1, 100);
             expect(grid.shortestSection).to.equal(2);
         });
 
         it(@"returns the longest section's dimension", ^{
-            expect(grid.longestSectionDimension).to.equal(60);
-            [grid addAttributes:LayoutAttributes(CGRectMake(0, 20, 100, 100)) toSection:0];
-            expect(grid.longestSectionDimension).to.equal(120);
-            [grid addAttributes:LayoutAttributes(CGRectMake(0, 40, 100, 100)) toSection:1];
-            expect(grid.longestSectionDimension).to.equal(140);
+            expect(grid.longestSectionDimension).to.equal(60);  // section 2
+            AddLayoutAttributesToSectionWithHeight(grid, 0, 100);
+            expect(grid.longestSectionDimension).to.equal(120); // section 0
+            AddLayoutAttributesToSectionWithHeight(grid, 1, 100);
+            expect(grid.longestSectionDimension).to.equal(140); // section 1
         });
     });
 });

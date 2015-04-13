@@ -21,7 +21,7 @@ EXTERNAL SOURCES:
     :path: ARCollectionViewMasonryLayout.podspec
 
 SPEC CHECKSUMS:
-  ARCollectionViewMasonryLayout: 164b82010cf8ec99bc7a38cffe59a179d7e5a116
+  ARCollectionViewMasonryLayout: bbe7d09e6ad7573a3a49112a6f5e697c69c9a299
   EDColor: 89d19a013279a5604d61650721c15f20fefaaf00
   Expecta: 917bda2935b63ca7175741b8cf1b26796db6205f
   Expecta+Snapshots: 9149e6c41878b4f5d603bc18a15716018dee51cd

@@ -7,9 +7,76 @@
 //
 
 #import "ARCollectionViewMasonryLayout.h"
+#import "_ARCollectionViewMasonryAttributesGrid.h"
+
 #import "ARCollectionViewController.h"
 
+static UICollectionViewLayoutAttributes *
+LayoutAttributes(CGRect frame) {
+    UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes new];
+    attributes.frame = frame;
+    return attributes;
+}
+
 SpecBegin(ARCollectionViewMasonryLayoutTests)
+
+describe(@"_ARCollectionViewMasonryAttributesGrid", ^{
+    __block _ARCollectionViewMasonryAttributesGrid *grid = nil;
+
+    beforeEach(^{
+        grid = [[_ARCollectionViewMasonryAttributesGrid alloc] initWithSectionCount:3
+                                                                          direction:ARCollectionViewMasonryLayoutDirectionVertical];
+    });
+
+    it(@"creates a list of empty sections", ^{
+        expect([grid isSectionEmpty:0]).to.equal(YES);
+        expect([grid isSectionEmpty:1]).to.equal(YES);
+        expect([grid isSectionEmpty:2]).to.equal(YES);
+    });
+
+    it(@"adds item attributes to the grid", ^{
+        UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes new];
+        [grid addAttributes:attributes toSection:0];
+        expect([grid attributesAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]]).to.equal(attributes);
+
+        expect([grid isSectionEmpty:0]).to.equal(NO);
+        expect([grid isSectionEmpty:1]).to.equal(YES);
+        expect([grid isSectionEmpty:2]).to.equal(YES);
+    });
+
+    describe(@"with items in each section", ^{
+        beforeEach(^{
+            [grid addAttributes:LayoutAttributes(CGRectMake(  0,  0, 100, 10)) toSection:0];
+            [grid addAttributes:LayoutAttributes(CGRectMake(  0, 10, 100, 10)) toSection:0];
+            [grid addAttributes:LayoutAttributes(CGRectMake(100,  0, 100, 20)) toSection:1];
+            [grid addAttributes:LayoutAttributes(CGRectMake(100, 20, 100, 20)) toSection:1];
+            [grid addAttributes:LayoutAttributes(CGRectMake(200,  0, 100, 30)) toSection:2];
+            [grid addAttributes:LayoutAttributes(CGRectMake(200, 30, 100, 30)) toSection:2];
+        });
+
+        it(@"returns the total dimension for a section (in the configured direction)", ^{
+            expect([grid dimensionForSection:0]).to.equal(20);
+            expect([grid dimensionForSection:1]).to.equal(40);
+            expect([grid dimensionForSection:2]).to.equal(60);
+        });
+
+        it(@"returns what the shortest section is", ^{
+            expect(grid.shortestSection).to.equal(0);
+            [grid addAttributes:LayoutAttributes(CGRectMake(0, 20, 100, 100)) toSection:0];
+            expect(grid.shortestSection).to.equal(1);
+            [grid addAttributes:LayoutAttributes(CGRectMake(0, 40, 100, 100)) toSection:1];
+            expect(grid.shortestSection).to.equal(2);
+        });
+
+        it(@"returns the longest section's dimension", ^{
+            expect(grid.longestSectionDimension).to.equal(60);
+            [grid addAttributes:LayoutAttributes(CGRectMake(0, 20, 100, 100)) toSection:0];
+            expect(grid.longestSectionDimension).to.equal(120);
+            [grid addAttributes:LayoutAttributes(CGRectMake(0, 40, 100, 100)) toSection:1];
+            expect(grid.longestSectionDimension).to.equal(140);
+        });
+    });
+});
 
 __block ARCollectionViewMasonryLayout *layout = nil;
 

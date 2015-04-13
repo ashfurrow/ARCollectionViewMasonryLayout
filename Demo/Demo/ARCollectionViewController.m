@@ -45,9 +45,18 @@ static NSString *CellIdentifier = @"Cell";
 // Model array needs to be reproducible on each launch instead of random, for the integration tests.
 - (void)generateModelArray
 {
+    if (self.heightPerEntry) {
+        NSAssert(self.heightPerEntry.count == self.colorCount, @"Need as many heights as there are colors.");
+    }
+
     NSMutableArray *mutableArray = [NSMutableArray array];
     for(NSInteger i = 0; i < self.colorCount; i++) {
-        CGFloat dimension = (CGFloat)(i*10 % 30) + 40;
+        CGFloat dimension = 0;
+        if (self.heightPerEntry) {
+            dimension += [self.heightPerEntry[i] doubleValue];
+        } else {
+            dimension += (CGFloat)(i*10 % 30) + 40;
+        }
         UIColor *color = [UIColor iOS7Colors][i % [UIColor iOS7Colors].count];
         ARModel *model = [[ARModel alloc] initWithColor:color dimension:dimension];
         [mutableArray addObject:model];

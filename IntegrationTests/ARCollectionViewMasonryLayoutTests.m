@@ -146,7 +146,7 @@ describe(@"horizontal layout", ^{
         viewController.colorCount = 5;
         expect(viewController.view).willNot.beNil();
         expect(viewController.view).will.haveValidSnapshotNamed(@"horizontal");
-        expect(layout.collectionViewContentSize.width).to.equal(140);
+        expect(layout.collectionViewContentSize.width).to.equal(150);
     });
     
     it(@"displays footer", ^{
@@ -275,10 +275,10 @@ describe(@"trailing layout", ^{
         expect(viewController.view).will.haveValidSnapshotNamed(@"trailingStickingOut");
     });
 
-    xit(@"moves an entry to the left if it would normally be at the right and stick out from the rest by more than 50% of its height", ^{
+    it(@"moves an entry to the left if it would normally be at the right and stick out from the rest by more than 50% of its height", ^{
         viewController.heightPerEntry = @[@(100), @(151), @(100), @(100)];
         expect(viewController.view).willNot.beNil();
-        expect(viewController.view).recordSnapshotNamed(@"trailingMoveToLeft");
+        expect(viewController.view).will.haveValidSnapshotNamed(@"trailingMoveToLeft");
     });
 });
 

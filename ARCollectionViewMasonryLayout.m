@@ -189,6 +189,8 @@
         [self.attributesGrid addAttributes:attributes];
     }];
 
+    [self.attributesGrid ensureTrailingItemsDoNotStickOut];
+
     // Add an optional footer.
     CGFloat footerLength = [self footerDimensionAtIndexPath:indexPathZero];
     if (footerLength != NSNotFound) {

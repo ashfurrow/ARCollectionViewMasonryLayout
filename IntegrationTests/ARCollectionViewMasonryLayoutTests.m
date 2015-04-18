@@ -11,13 +11,17 @@
 
 #import "ARCollectionViewController.h"
 
+@interface _ARCollectionViewMasonryAttributesGrid (Private)
+@property (nonatomic, readonly, strong) NSArray *sections;
+@end
+
 static void
 AddLayoutAttributesToSectionWithHeight(_ARCollectionViewMasonryAttributesGrid *grid,
                                        NSUInteger sectionIndex,
                                        CGFloat height) {
     static CGFloat width = 100;
     UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes new];
-    attributes.frame = CGRectMake(width * sectionIndex, [grid dimensionForSection:sectionIndex], width, height);
+    attributes.size = CGSizeMake(width, height);
     [grid addAttributes:attributes toSection:sectionIndex];
 }
 
@@ -37,19 +41,21 @@ describe(@"_ARCollectionViewMasonryAttributesGrid", ^{
     });
 
     it(@"creates a list of empty sections", ^{
-        expect([grid isSectionEmpty:0]).to.equal(YES);
-        expect([grid isSectionEmpty:1]).to.equal(YES);
-        expect([grid isSectionEmpty:2]).to.equal(YES);
+        expect(grid.sections.count).to.equal(3);
+        expect([grid.sections[0] count]).to.equal(0);
+        expect([grid.sections[1] count]).to.equal(0);
+        expect([grid.sections[2] count]).to.equal(0);
     });
 
     it(@"adds item attributes to the grid", ^{
         UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes new];
+        attributes.size = CGSizeMake(100, 100);
         [grid addAttributes:attributes toSection:0];
         expect([grid attributesAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]]).to.equal(attributes);
 
-        expect([grid isSectionEmpty:0]).to.equal(NO);
-        expect([grid isSectionEmpty:1]).to.equal(YES);
-        expect([grid isSectionEmpty:2]).to.equal(YES);
+        expect([grid.sections[0] count]).to.equal(1);
+        expect([grid.sections[1] count]).to.equal(0);
+        expect([grid.sections[2] count]).to.equal(0);
     });
 
     describe(@"with items in each section", ^{

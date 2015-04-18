@@ -35,7 +35,7 @@ typedef NS_ENUM(NSInteger, ARCollectionViewMasonryLayoutDirection){
 
 - (instancetype)init __attribute__((unavailable("Invoke the designated initializer initWithDirection: instead.")));
 
-/// Direction of the collection view layout. Set in the initializer. 
+/// Direction of the collection view layout. Set in the initializer.
 @property (nonatomic, readonly) enum ARCollectionViewMasonryLayoutDirection direction;
 
 /// How many columns when vertical or rows when horizontal.

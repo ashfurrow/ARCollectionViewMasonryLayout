@@ -36,6 +36,5 @@
 
 - (CGFloat)dimensionForSection:(NSUInteger)sectionIndex;
 
-- (BOOL)isSectionEmpty:(NSUInteger)sectionIndex;
 
 @end

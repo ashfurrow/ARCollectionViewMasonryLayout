@@ -38,11 +38,6 @@
     return self;
 }
 
-- (BOOL)isSectionEmpty:(NSUInteger)sectionIndex;
-{
-    return [self.sections[sectionIndex] count] == 0;
-}
-
 - (NSArray *)allItemAttributes;
 {
     NSMutableArray *attributes = [NSMutableArray new];
@@ -91,23 +86,29 @@
 
 - (void)addAttributes:(UICollectionViewLayoutAttributes *)attributes;
 {
-    NSUInteger columnIndex = self.shortestSection;
-    // self.dimensionLength
+    [self addAttributes:attributes toSection:self.shortestSection];
+}
+
+- (void)addAttributes:(UICollectionViewLayoutAttributes *)attributes toSection:(NSUInteger)sectionIndex;
+{
+    NSAssert(!CGSizeEqualToSize(attributes.size, CGSizeZero), @"Attributes are expected to specify a size.");
+
     CGFloat fixedDimension = [self fixedDimensionForAttributes:attributes];
-    // itemAlternateDimension
     CGFloat dimension = [self dimensionForAttributes:attributes];
 
-    // Where would it be without any manipulation
-    CGFloat edgeX = (fixedDimension + self.mainItemMargin) * columnIndex;
+    CGFloat edgeX = (fixedDimension + self.mainItemMargin) * sectionIndex;
 
-    // Apply centering
     CGFloat xOffset = self.orthogonalInset + self.centeringOffset + edgeX;
-    CGFloat yOffset = [self dimensionForSection:columnIndex] + self.alternateItemMargin;
+    CGFloat yOffset = [self dimensionForSection:sectionIndex] + self.alternateItemMargin;
+
+    NSMutableArray *section = self.sections[sectionIndex];
+
     // Start all the sections with the content inset, specifically to offset for the header.
-    if ([self isSectionEmpty:columnIndex]) {
+    if (section.count == 0) {
       yOffset += self.leadingInset;
     }
 
+    // Calculate center
     CGPoint itemCenter = (CGPoint) {
         xOffset + (fixedDimension / 2),
         yOffset + (dimension / 2)
@@ -116,28 +117,16 @@
         itemCenter = (CGPoint){ itemCenter.y, itemCenter.x };
     }
 
+    // Set rounded frame
     attributes.center = itemCenter;
-    // Round calculated frame
     attributes.frame = CGRectIntegral(attributes.frame);
-
-    [self addAttributes:attributes toSection:columnIndex];
-}
-
-- (void)addAttributes:(UICollectionViewLayoutAttributes *)attributes toSection:(NSUInteger)sectionIndex;
-{
-    NSMutableArray *section = self.sections[sectionIndex];
-
-    // This is mainly to ensure no incorrect frames are used in the tests.
-    NSAssert(section.count == 0 ||
-                 !CGRectIntersectsRect([self lastAttributesOfSection:sectionIndex].frame, attributes.frame),
-             @"Expect layout attribute frames to not intersect.");
 
     [section addObject:attributes];
 
     // Update longestSectionDimension if this section is now longer.
-    CGFloat dimension = [self maxEdgeForAttributes:attributes];
-    if (dimension > self.longestSectionDimension) {
-        self.longestSectionDimension = dimension;
+    CGFloat sectionDimension = [self maxEdgeForAttributes:attributes];
+    if (sectionDimension > self.longestSectionDimension) {
+        self.longestSectionDimension = sectionDimension;
     }
 
     // Find the new shortestSection if this section used to be it.

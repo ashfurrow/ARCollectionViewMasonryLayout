@@ -42,7 +42,7 @@ typedef NS_ENUM(NSInteger, ARCollectionViewMasonryLayoutDirection){
 /// defaults to 2.
 @property (nonatomic, assign) NSUInteger rank;
 
-/// Width for every column when horizontal, or row when vertical,
+/// Width for every column when horizontal, or row when vertical.
 @property (nonatomic, assign) CGFloat dimensionLength;
 
 /// The margins used that can be used of offset content

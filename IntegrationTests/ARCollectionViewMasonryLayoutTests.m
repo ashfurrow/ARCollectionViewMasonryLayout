@@ -28,7 +28,12 @@ describe(@"_ARCollectionViewMasonryAttributesGrid", ^{
 
     beforeEach(^{
         grid = [[_ARCollectionViewMasonryAttributesGrid alloc] initWithSectionCount:3
-                                                                          direction:ARCollectionViewMasonryLayoutDirectionVertical];
+                                                                          direction:ARCollectionViewMasonryLayoutDirectionVertical
+                                                                       leadingInset:0
+                                                                    orthogonalInset:0
+                                                                     mainItemMargin:0
+                                                                alternateItemMargin:0
+                                                                    centeringOffset:0];
     });
 
     it(@"creates a list of empty sections", ^{

@@ -20,9 +20,6 @@
 
 @property (nonatomic, strong) _ARCollectionViewMasonryAttributesGrid *attributesGrid;
 
-// The offset used on the non-main direction to ensure centering
-@property (nonatomic, assign) CGFloat centeringOffset;
-
 @end
 
 @implementation ARCollectionViewMasonryLayout
@@ -130,37 +127,32 @@
 
 - (void)setupLayoutWithStaticDimension:(CGFloat)staticDimension andVariableDimensions:(NSArray *)variableDimensions
 {
-    NSAssert(_rank > 0, @"Rank for ARCollectionViewMasonryLayout should be greater than 0.");
+    NSAssert(self.rank > 0, @"Rank for ARCollectionViewMasonryLayout should be greater than 0.");
     NSAssert(self.collectionView.numberOfSections == 1, @"ARCollectionViewmMasonry doesn't support multiple sections.");
     self.dimensionLength = ceilf(self.dimensionLength);
     self.itemCount = variableDimensions.count;
-    self.centeringOffset = [self generateCenteringOffsetWithMainDimension:staticDimension];
+    CGFloat centeringOffset = [self generateCenteringOffsetWithMainDimension:staticDimension];
 
     BOOL isHorizontal = [self isHorizontal];
     BOOL hasContentInset = !UIEdgeInsetsEqualToEdgeInsets(self.contentInset, UIEdgeInsetsZero);
 
     CGFloat leadingInset = 0;
     CGFloat orthogonalInset = 0;
-    CGFloat trailingInset = 0;
 
-    if ([self isHorizontal]) {
+    if (isHorizontal) {
         if (hasContentInset) {
             leadingInset = self.contentInset.left;
-            trailingInset = self.contentInset.right;
             orthogonalInset = self.contentInset.top;
         } else {
             leadingInset = self.itemMargins.width;
-            trailingInset = leadingInset;
             orthogonalInset = self.itemMargins.height;
         }
     } else {
         if (hasContentInset) {
             leadingInset = self.contentInset.top;
             orthogonalInset = self.contentInset.left;
-            trailingInset = self.contentInset.bottom;
         } else {
             leadingInset = self.itemMargins.height;
-            trailingInset = leadingInset;
             orthogonalInset = self.itemMargins.width;
         }
     }
@@ -175,46 +167,26 @@
         self.headerAttributes = nil;
     }
 
-    self.attributesGrid = [[_ARCollectionViewMasonryAttributesGrid alloc] initWithSectionCount:self.rank direction:self.direction];
+    self.attributesGrid = [[_ARCollectionViewMasonryAttributesGrid alloc] initWithSectionCount:self.rank
+                                                                                     direction:self.direction
+                                                                                  leadingInset:leadingInset
+                                                                               orthogonalInset:orthogonalInset
+                                                                                mainItemMargin:self.mainItemMargin
+                                                                           alternateItemMargin:self.alternateItemMargin
+                                                                               centeringOffset:centeringOffset];
 
-    // Simple rule of thumb, find the shortest column and throw
-    // the current object into that.
-    //
-    // Afterwards, update the list to the find new shortest column and repeat.
-    //
     [variableDimensions enumerateObjectsUsingBlock:^(NSNumber *dimension, NSUInteger index, BOOL *stop) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
-        CGFloat itemAlternateDimension = ceilf([dimension floatValue]);
-        NSUInteger columnIndex = self.attributesGrid.shortestSection;
-
-        // Where would it be without any manipulation
-        CGFloat edgeX = (self.dimensionLength + [self mainItemMargin]) * columnIndex;
-
-        // Apply centering
-        CGFloat xOffset = orthogonalInset + self.centeringOffset + edgeX;
-        CGFloat yOffset = [self.attributesGrid dimensionForSection:columnIndex] + self.alternateItemMargin;
-        // Start all the sections with the content inset, specifically to offset for the header.
-        if ([self.attributesGrid isSectionEmpty:columnIndex]) {
-          yOffset += leadingInset;
-        }
-
-        CGPoint itemCenter = (CGPoint) {
-            xOffset + (self.dimensionLength / 2),
-            yOffset + (itemAlternateDimension / 2)
-        };
-
         UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
 
+        CGFloat variableDimension = ceilf([dimension floatValue]);
         if (isHorizontal) {
-            attributes.size = CGSizeMake(itemAlternateDimension, self.dimensionLength);
-            itemCenter = (CGPoint){ itemCenter.y, itemCenter.x };
+            attributes.size = CGSizeMake(variableDimension, self.dimensionLength);
         } else {
-            attributes.size = CGSizeMake(self.dimensionLength, itemAlternateDimension);
+            attributes.size = CGSizeMake(self.dimensionLength, variableDimension);
         }
 
-        attributes.center = itemCenter;
-        attributes.frame = CGRectIntegral(attributes.frame);
-        [self.attributesGrid addAttributes:attributes toSection:columnIndex];
+        [self.attributesGrid addAttributes:attributes];
     }];
 
     // Add an optional footer.

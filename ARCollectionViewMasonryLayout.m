@@ -1,12 +1,3 @@
-//
-//  ARCollectionViewMasonryLayout.m
-//  Artsy
-//
-//  Created by Orta on 11/07/2013.
-//  Copyright (c) 2013 Art.sy. All rights reserved.
-//
-//  A Forked re-write from UICollectionViewWaterfallLayout
-
 #import "ARCollectionViewMasonryLayout.h"
 #import "_ARCollectionViewMasonryAttributesGrid.h"
 

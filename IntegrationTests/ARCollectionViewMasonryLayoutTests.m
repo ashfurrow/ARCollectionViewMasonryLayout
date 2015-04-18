@@ -90,6 +90,36 @@ describe(@"_ARCollectionViewMasonryAttributesGrid", ^{
             expect(grid.longestSectionDimension).to.equal(140); // section 1
         });
     });
+
+    describe(@"concerning trailing items", ^{
+        it(@"allows an entry to stick out if it sticks out <= 50% of its height compared to the shortest section in front of it", ^{
+            AddLayoutAttributesToSectionWithHeight(grid, 0, 100);
+            AddLayoutAttributesToSectionWithHeight(grid, 0, 100);
+            AddLayoutAttributesToSectionWithHeight(grid, 1, 105);
+            AddLayoutAttributesToSectionWithHeight(grid, 1, 100);
+            AddLayoutAttributesToSectionWithHeight(grid, 2, 150);
+            AddLayoutAttributesToSectionWithHeight(grid, 2, 100);
+
+            [grid ensureTrailingItemsDoNotStickOut];
+            expect([grid dimensionForSection:0]).to.equal(200);
+            expect([grid dimensionForSection:1]).to.equal(205);
+            expect([grid dimensionForSection:2]).to.equal(250);
+        });
+
+        it(@"moves an entry to the front if it would stick out by more than 50% of its height compared to the shortest section in front of it", ^{
+            AddLayoutAttributesToSectionWithHeight(grid, 0, 100);
+            AddLayoutAttributesToSectionWithHeight(grid, 0, 100);
+            AddLayoutAttributesToSectionWithHeight(grid, 1, 105);
+            AddLayoutAttributesToSectionWithHeight(grid, 1, 100);
+            AddLayoutAttributesToSectionWithHeight(grid, 2, 151);
+            AddLayoutAttributesToSectionWithHeight(grid, 2, 100);
+
+            [grid ensureTrailingItemsDoNotStickOut];
+            expect([grid dimensionForSection:0]).to.equal(300);
+            expect([grid dimensionForSection:1]).to.equal(205);
+            expect([grid dimensionForSection:2]).to.equal(151);
+        });
+    });
 });
 
 __block ARCollectionViewMasonryLayout *layout = nil;

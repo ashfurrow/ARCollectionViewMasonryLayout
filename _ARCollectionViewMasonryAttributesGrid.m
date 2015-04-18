@@ -135,24 +135,75 @@
     }
 }
 
+- (NSUInteger)shortestSectionUpTo:(NSUInteger)upToSectionIndex dimension:(CGFloat *)dimension;
+{
+    NSUInteger shortestSection;
+    CGFloat shortestSectionDimension = CGFLOAT_MAX;
+    for (NSUInteger i = 0; i < upToSectionIndex; i++) {
+        CGFloat sectionDimension = [self dimensionForSection:i];
+        if (sectionDimension < shortestSectionDimension) {
+            shortestSection = i;
+            shortestSectionDimension = sectionDimension;
+        }
+    }
+    if (dimension != NULL) {
+        *dimension = shortestSectionDimension;
+    }
+    return shortestSection;
+}
+
 - (void)updateShortestSection;
 {
-        NSUInteger shortestSection;
-    CGFloat shortestSectionDimension = CGFLOAT_MAX;
-        for (NSUInteger i = 0; i < self.sectionCount; i++) {
-            CGFloat dimension = [self dimensionForSection:i];
-        if (dimension < shortestSectionDimension) {
-                shortestSection = i;
-            shortestSectionDimension = dimension;
-            }
-        }
-        self.shortestSection = shortestSection;
+    CGFloat shortestSectionDimension = 0;
+    self.shortestSection = [self shortestSectionUpTo:self.sectionCount dimension:&shortestSectionDimension];
     self.shortestSectionDimension = shortestSectionDimension;
 }
 
 - (UICollectionViewLayoutAttributes *)attributesAtIndexPath:(NSIndexPath *)indexPath;
 {
     return self.sections[indexPath.section][indexPath.item];
+}
+
+- (void)ensureTrailingItemsDoNotStickOut;
+{
+    // If the shortest section is the last section, than that’s a-ok.
+    if (self.shortestSection == self.sectionCount - 1) {
+        return;
+    }
+
+    BOOL updated = NO;
+
+    // The item in the first section is never moved.
+    for (NSUInteger sectionIndex = 1; sectionIndex < self.sectionCount; sectionIndex++) {
+        if (sectionIndex == self.shortestSection) {
+            continue;
+        }
+
+        CGFloat shortestSectionDimensionUpToCurrent = 0;
+        NSUInteger shortestSectionUpToCurrent = [self shortestSectionUpTo:sectionIndex
+                                                                dimension:&shortestSectionDimensionUpToCurrent];
+
+        UICollectionViewLayoutAttributes *attributes = [self lastAttributesOfSection:sectionIndex];
+        CGFloat lastItemDimension = [self dimensionForAttributes:attributes];
+        CGFloat sectionMaxEdge = [self maxEdgeForAttributes:attributes];
+
+        // Check if the item sticks out more than 50% compared to the shortest section in front of it.
+        if (sectionMaxEdge > shortestSectionDimensionUpToCurrent + (lastItemDimension / 2)) {
+            // Remove the item that sticks out from its current section.
+            [self.sections[sectionIndex] removeLastObject];
+            // Move the item to the shortest section to the front.
+            [self addAttributes:attributes toSection:shortestSectionUpToCurrent];
+
+            updated = YES;
+            break;
+        }
+    }
+
+    // Repeat till there's no more changes.
+    if (updated) {
+        [self updateShortestSection];
+        [self ensureTrailingItemsDoNotStickOut];
+    }
 }
 
 @end

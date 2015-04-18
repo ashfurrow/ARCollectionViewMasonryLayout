@@ -36,5 +36,6 @@
 
 - (CGFloat)dimensionForSection:(NSUInteger)sectionIndex;
 
+- (void)ensureTrailingItemsDoNotStickOut;
 
 @end

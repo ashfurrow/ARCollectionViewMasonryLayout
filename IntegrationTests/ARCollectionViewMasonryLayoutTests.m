@@ -13,6 +13,10 @@
 
 @interface _ARCollectionViewMasonryAttributesGrid (Private)
 @property (nonatomic, readonly, strong) NSArray *sections;
+@property (nonatomic, readonly) NSUInteger shortestSection;
+@property (nonatomic, readonly) CGFloat longestSectionDimension;
+- (void)addAttributes:(UICollectionViewLayoutAttributes *)attributes toSection:(NSUInteger)sectionIndex;
+- (CGFloat)dimensionForSection:(NSUInteger)sectionIndex;
 @end
 
 static void
@@ -32,7 +36,7 @@ describe(@"_ARCollectionViewMasonryAttributesGrid", ^{
 
     beforeEach(^{
         grid = [[_ARCollectionViewMasonryAttributesGrid alloc] initWithSectionCount:3
-                                                                          direction:ARCollectionViewMasonryLayoutDirectionVertical
+                                                                       isHorizontal:NO
                                                                        leadingInset:0
                                                                     orthogonalInset:0
                                                                      mainItemMargin:0
@@ -51,8 +55,7 @@ describe(@"_ARCollectionViewMasonryAttributesGrid", ^{
         UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes new];
         attributes.size = CGSizeMake(100, 100);
         [grid addAttributes:attributes toSection:0];
-        expect([grid attributesAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]]).to.equal(attributes);
-
+        expect(grid.sections[0][0]).to.equal(attributes);
         expect([grid.sections[0] count]).to.equal(1);
         expect([grid.sections[1] count]).to.equal(0);
         expect([grid.sections[2] count]).to.equal(0);

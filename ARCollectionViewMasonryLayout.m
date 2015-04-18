@@ -168,7 +168,7 @@
     }
 
     self.attributesGrid = [[_ARCollectionViewMasonryAttributesGrid alloc] initWithSectionCount:self.rank
-                                                                                     direction:self.direction
+                                                                                  isHorizontal:self.isHorizontal
                                                                                   leadingInset:leadingInset
                                                                                orthogonalInset:orthogonalInset
                                                                                 mainItemMargin:self.mainItemMargin
@@ -349,6 +349,7 @@
     return YES;
 }
 
+// The offset used on the non-main direction to ensure centering
 - (CGFloat)generateCenteringOffsetWithMainDimension:(CGFloat)dimension
 {
     NSInteger numberOfLines = self.rank;

@@ -1,23 +1,13 @@
 #import <UIKit/UIKit.h>
-#import "ARCollectionViewMasonryLayout.h"
 
 /// This class uses ‘sections’ to indicate ‘columns’ in a vertical layout and ‘rows’ in a horizontal layout.
 @interface _ARCollectionViewMasonryAttributesGrid : NSObject
 
-@property (nonatomic, readonly) ARCollectionViewMasonryLayoutDirection direction;
-@property (nonatomic, readonly) CGFloat leadingInset;
-@property (nonatomic, readonly) CGFloat orthogonalInset;
-@property (nonatomic, readonly) CGFloat mainItemMargin;
-@property (nonatomic, readonly) CGFloat alternateItemMargin;
-// The offset used on the non-main direction to ensure centering
-@property (nonatomic, readonly) CGFloat centeringOffset;
-@property (nonatomic, readonly) NSUInteger sectionCount;
-@property (nonatomic, readonly) NSUInteger shortestSection;
-@property (nonatomic, readonly) CGFloat longestSectionDimension;
 @property (nonatomic, readonly) NSArray *allItemAttributes;
+@property (nonatomic, readonly) CGFloat longestSectionDimension;
 
 - (instancetype)initWithSectionCount:(NSUInteger)sectionCount
-                           direction:(ARCollectionViewMasonryLayoutDirection)direction
+                        isHorizontal:(BOOL)isHorizontal
                         leadingInset:(CGFloat)leadingInset
                      orthogonalInset:(CGFloat)orthogonalInset
                       mainItemMargin:(CGFloat)mainItemMargin
@@ -29,13 +19,9 @@
 ///
 - (void)addAttributes:(UICollectionViewLayoutAttributes *)attributes;
 
-- (void)addAttributes:(UICollectionViewLayoutAttributes *)attributes
-            toSection:(NSUInteger)sectionIndex;
-
-- (UICollectionViewLayoutAttributes *)attributesAtIndexPath:(NSIndexPath *)indexPath;
-
-- (CGFloat)dimensionForSection:(NSUInteger)sectionIndex;
-
+/// Ensures that no item sticks out more than 50% compared to the shortest section in front of it. When it does, the
+/// item is moved to that shortest section. This is repeated until there are no more offending items.
+///
 - (void)ensureTrailingItemsDoNotStickOut;
 
 @end

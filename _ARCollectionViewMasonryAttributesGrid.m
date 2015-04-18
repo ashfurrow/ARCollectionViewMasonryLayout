@@ -1,16 +1,23 @@
 #import "_ARCollectionViewMasonryAttributesGrid.h"
 
 @interface _ARCollectionViewMasonryAttributesGrid ()
-@property (nonatomic, readonly, strong) NSArray *sections;
+@property (nonatomic, strong, readonly) NSArray *sections;
 @property (nonatomic, assign) NSUInteger shortestSection;
 @property (nonatomic, assign) CGFloat shortestSectionDimension;
 @property (nonatomic, assign) CGFloat longestSectionDimension;
+@property (nonatomic, assign, readonly) BOOL isHorizontal;
+@property (nonatomic, assign, readonly) CGFloat leadingInset;
+@property (nonatomic, assign, readonly) CGFloat orthogonalInset;
+@property (nonatomic, assign, readonly) CGFloat mainItemMargin;
+@property (nonatomic, assign, readonly) CGFloat alternateItemMargin;
+@property (nonatomic, assign, readonly) CGFloat centeringOffset;
+@property (nonatomic, assign, readonly) NSUInteger sectionCount;
 @end
 
 @implementation _ARCollectionViewMasonryAttributesGrid
 
 - (instancetype)initWithSectionCount:(NSUInteger)sectionCount
-                           direction:(ARCollectionViewMasonryLayoutDirection)direction
+                        isHorizontal:(BOOL)isHorizontal
                         leadingInset:(CGFloat)leadingInset
                      orthogonalInset:(CGFloat)orthogonalInset
                       mainItemMargin:(CGFloat)mainItemMargin
@@ -18,7 +25,7 @@
                      centeringOffset:(CGFloat)centeringOffset;
 {
     if ((self = [super init])) {
-        _direction = direction;
+        _isHorizontal = isHorizontal;
         _leadingInset = leadingInset;
         _orthogonalInset = orthogonalInset;
         _mainItemMargin = mainItemMargin;
@@ -38,6 +45,30 @@
     return self;
 }
 
+#pragma mark - Geometry access
+
+- (CGFloat)dimensionForAttributes:(UICollectionViewLayoutAttributes *)attributes;
+{
+    return self.isHorizontal ? attributes.size.width : attributes.size.height;
+}
+
+- (CGFloat)fixedDimensionForAttributes:(UICollectionViewLayoutAttributes *)attributes;
+{
+    return self.isHorizontal ? attributes.size.height : attributes.size.width;
+}
+
+- (CGFloat)maxEdgeForAttributes:(UICollectionViewLayoutAttributes *)attributes;
+{
+    return self.isHorizontal ? CGRectGetMaxX(attributes.frame) : CGRectGetMaxY(attributes.frame);
+}
+
+- (CGFloat)dimensionForSection:(NSUInteger)sectionIndex;
+{
+    return [self maxEdgeForAttributes:[self lastAttributesOfSection:sectionIndex]];
+}
+
+#pragma mark - Layout Attributes access
+
 - (NSArray *)allItemAttributes;
 {
     NSMutableArray *attributes = [NSMutableArray new];
@@ -52,38 +83,6 @@
     return [self.sections[sectionIndex] lastObject];
 }
 
-- (CGFloat)dimensionForAttributes:(UICollectionViewLayoutAttributes *)attributes;
-{
-    if (self.direction == ARCollectionViewMasonryLayoutDirectionVertical) {
-      return attributes.size.height;
-    } else {
-      return attributes.size.width;
-    }
-}
-
-- (CGFloat)fixedDimensionForAttributes:(UICollectionViewLayoutAttributes *)attributes;
-{
-    if (self.direction == ARCollectionViewMasonryLayoutDirectionHorizontal) {
-      return attributes.size.height;
-    } else {
-      return attributes.size.width;
-    }
-}
-
-- (CGFloat)maxEdgeForAttributes:(UICollectionViewLayoutAttributes *)attributes;
-{
-    if (self.direction == ARCollectionViewMasonryLayoutDirectionVertical) {
-      return CGRectGetMaxY(attributes.frame);
-    } else {
-      return CGRectGetMaxX(attributes.frame);
-    }
-}
-
-- (CGFloat)dimensionForSection:(NSUInteger)sectionIndex;
-{
-    return [self maxEdgeForAttributes:[self lastAttributesOfSection:sectionIndex]];
-}
-
 - (void)addAttributes:(UICollectionViewLayoutAttributes *)attributes;
 {
     [self addAttributes:attributes toSection:self.shortestSection];
@@ -91,38 +90,16 @@
 
 - (void)addAttributes:(UICollectionViewLayoutAttributes *)attributes toSection:(NSUInteger)sectionIndex;
 {
-    NSAssert(!CGSizeEqualToSize(attributes.size, CGSizeZero), @"Attributes are expected to specify a size.");
+    [self calculateAttributesFrame:attributes inSection:sectionIndex];
+    [self.sections[sectionIndex] addObject:attributes];
+    [self updateLongestAndShortestDataWithAttributes:attributes inSection:(NSUInteger)sectionIndex];
+}
 
-    CGFloat fixedDimension = [self fixedDimensionForAttributes:attributes];
-    CGFloat dimension = [self dimensionForAttributes:attributes];
+#pragma mark - Longest and Shortest calculations
 
-    CGFloat edgeX = (fixedDimension + self.mainItemMargin) * sectionIndex;
-
-    CGFloat xOffset = self.orthogonalInset + self.centeringOffset + edgeX;
-    CGFloat yOffset = [self dimensionForSection:sectionIndex] + self.alternateItemMargin;
-
-    NSMutableArray *section = self.sections[sectionIndex];
-
-    // Start all the sections with the content inset, specifically to offset for the header.
-    if (section.count == 0) {
-      yOffset += self.leadingInset;
-    }
-
-    // Calculate center
-    CGPoint itemCenter = (CGPoint) {
-        xOffset + (fixedDimension / 2),
-        yOffset + (dimension / 2)
-    };
-    if (self.direction == ARCollectionViewMasonryLayoutDirectionHorizontal) {
-        itemCenter = (CGPoint){ itemCenter.y, itemCenter.x };
-    }
-
-    // Set rounded frame
-    attributes.center = itemCenter;
-    attributes.frame = CGRectIntegral(attributes.frame);
-
-    [section addObject:attributes];
-
+- (void)updateLongestAndShortestDataWithAttributes:(UICollectionViewLayoutAttributes *)attributes
+                                         inSection:(NSUInteger)sectionIndex;
+{
     // Update longestSectionDimension if this section is now longer.
     CGFloat sectionDimension = [self maxEdgeForAttributes:attributes];
     if (sectionDimension > self.longestSectionDimension) {
@@ -137,7 +114,7 @@
 
 - (NSUInteger)shortestSectionUpTo:(NSUInteger)upToSectionIndex dimension:(CGFloat *)dimension;
 {
-    NSUInteger shortestSection;
+    NSUInteger shortestSection = 0;
     CGFloat shortestSectionDimension = CGFLOAT_MAX;
     for (NSUInteger i = 0; i < upToSectionIndex; i++) {
         CGFloat sectionDimension = [self dimensionForSection:i];
@@ -159,9 +136,37 @@
     self.shortestSectionDimension = shortestSectionDimension;
 }
 
-- (UICollectionViewLayoutAttributes *)attributesAtIndexPath:(NSIndexPath *)indexPath;
+#pragma mark - Layout calculations
+
+- (void)calculateAttributesFrame:(UICollectionViewLayoutAttributes *)attributes inSection:(NSUInteger)sectionIndex;
 {
-    return self.sections[indexPath.section][indexPath.item];
+    NSAssert(!CGSizeEqualToSize(attributes.size, CGSizeZero), @"Attributes are expected to specify a size.");
+
+    CGFloat fixedDimension = [self fixedDimensionForAttributes:attributes];
+    CGFloat dimension = [self dimensionForAttributes:attributes];
+
+    CGFloat edgeX = (fixedDimension + self.mainItemMargin) * sectionIndex;
+
+    CGFloat xOffset = self.orthogonalInset + self.centeringOffset + edgeX;
+    CGFloat yOffset = [self dimensionForSection:sectionIndex] + self.alternateItemMargin;
+
+    // Start all the sections with the content inset, specifically to offset for the header.
+    if ([self.sections[sectionIndex] count] == 0) {
+      yOffset += self.leadingInset;
+    }
+
+    // Calculate center
+    CGPoint itemCenter = (CGPoint) {
+        xOffset + (fixedDimension / 2),
+        yOffset + (dimension / 2)
+    };
+    if (self.isHorizontal) {
+        itemCenter = (CGPoint){ itemCenter.y, itemCenter.x };
+    }
+
+    // Set rounded frame
+    attributes.center = itemCenter;
+    attributes.frame = CGRectIntegral(attributes.frame);
 }
 
 - (void)ensureTrailingItemsDoNotStickOut;

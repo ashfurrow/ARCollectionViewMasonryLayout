@@ -1,7 +1,7 @@
 ARCollectionViewMasonryLayout
 =============================
 
-[![Build Status](https://travis-ci.org/AshFurrow/ARCollectionViewMasonryLayout.svg)](https://travis-ci.org/AshFurrow/ARCollectionViewMasonryLayout)
+[![Build Status](https://travis-ci.org/ashfurrow/ARCollectionViewMasonryLayout.svg)](https://travis-ci.org/ashfurrow/ARCollectionViewMasonryLayout)
 
 ARCollectionViewMasonryLayout is a `UICollectionViewLayout` subclass for creating flow-like layouts with dynamic widths or heights.
 

@@ -3,6 +3,9 @@
 language: objective-c
 cache: bundler
 
+before_install:
+    - gem update cocoapods
+
 before_script:
     - export LANG=en_US.UTF-8
     - make ci

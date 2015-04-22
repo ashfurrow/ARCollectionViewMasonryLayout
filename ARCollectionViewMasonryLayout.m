@@ -79,7 +79,7 @@
         NSInteger itemCount = [self.collectionView.dataSource collectionView:self.collectionView numberOfItemsInSection:0];
 
         NSMutableArray *variableDimensions = [NSMutableArray arrayWithCapacity:itemCount];
-        CGFloat staticDimension = [self isHorizontal]? self.collectionView.frame.size.height : self.collectionView.frame.size.width;
+        CGFloat staticDimension = self.isHorizontal ? self.collectionView.frame.size.height : self.collectionView.frame.size.width;
 
         // Ask delegates for all the dimensions
         for (int i = 0; i < itemCount; i++) {
@@ -109,7 +109,7 @@
         [self setupLayoutWithStaticDimension:staticDimension andVariableDimensions:variableDimensions];
     }
 
-    if ([self isHorizontal]) {
+    if (self.isHorizontal) {
         return  [self collectionViewContentSize].width;
     } else {
         return  [self collectionViewContentSize].height;
@@ -124,8 +124,8 @@
     self.itemCount = variableDimensions.count;
     CGFloat centeringOffset = [self generateCenteringOffsetWithMainDimension:staticDimension];
 
-    BOOL isHorizontal = [self isHorizontal];
-    BOOL hasContentInset = !UIEdgeInsetsEqualToEdgeInsets(self.contentInset, UIEdgeInsetsZero);
+    BOOL isHorizontal = self.isHorizontal;
+    BOOL hasContentInset = self.hasContentInset;
 
     CGFloat leadingInset = 0;
     CGFloat orthogonalInset = 0;
@@ -159,7 +159,7 @@
     }
 
     self.attributesGrid = [[_ARCollectionViewMasonryAttributesGrid alloc] initWithSectionCount:self.rank
-                                                                                  isHorizontal:self.isHorizontal
+                                                                                  isHorizontal:isHorizontal
                                                                                   leadingInset:leadingInset
                                                                                orthogonalInset:orthogonalInset
                                                                                 mainItemMargin:self.mainItemMargin
@@ -291,8 +291,18 @@
         alternateDimension += footerHeight;
     }
 
+    BOOL isHorizontal = self.isHorizontal;
+    BOOL hasContentInset = self.hasContentInset;
+
+    // Add trailing inset
+    if (isHorizontal) {
+        alternateDimension += (hasContentInset ? self.contentInset.right : self.itemMargins.width);
+    } else {
+        alternateDimension += (hasContentInset ? self.contentInset.bottom : self.itemMargins.height);
+    }
+
     CGSize contentSize = self.collectionView.frame.size;
-    if ([self isHorizontal]) {
+    if (isHorizontal) {
         contentSize.width = alternateDimension;
     } else {
         contentSize.height = alternateDimension;
@@ -350,6 +360,11 @@
     contentWidth += (numberOfLines - 1) * contentMargin;
 
     return (dimension / 2) - (contentWidth / 2);
+}
+
+- (BOOL)hasContentInset
+{
+    return !UIEdgeInsetsEqualToEdgeInsets(self.contentInset, UIEdgeInsetsZero);
 }
 
 - (BOOL)isHorizontal

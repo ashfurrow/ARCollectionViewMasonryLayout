@@ -189,6 +189,16 @@ describe(@"horizontal layout", ^{
         expect(viewController.view).will.haveValidSnapshotNamed(@"horizontalWithHeaderAndFooter");
         expect(layout.collectionViewContentSize.width).to.equal(108);
     });
+
+    it(@"applies correct margins and insets", ^{
+        layout.itemMargins = CGSizeMake(10, 20);
+        layout.contentInset = UIEdgeInsetsMake(10, 20, 10, 20);
+        layout.sectionInset = UIEdgeInsetsMake(10, 20, 10, 20);
+        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
+        viewController.colorCount = 4;
+        expect(viewController.view).willNot.beNil();
+        expect(viewController.view).will.haveValidSnapshotNamed(@"horizontalWithMarginsAndInsets");
+    });
 });
 
 describe(@"vertical layout", ^{
@@ -252,6 +262,16 @@ describe(@"vertical layout", ^{
         expect(viewController.view).willNot.beNil();
         expect(viewController.view).will.haveValidSnapshotNamed(@"verticalWithHeaderAndFooter");
         expect(layout.collectionViewContentSize.height).to.equal(135);
+    });
+
+    it(@"applies correct margins and insets", ^{
+        layout.itemMargins = CGSizeMake(10, 20);
+        layout.contentInset = UIEdgeInsetsMake(10, 20, 10, 20);
+        layout.sectionInset = UIEdgeInsetsMake(10, 20, 10, 20);
+        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
+        viewController.colorCount = 4;
+        expect(viewController.view).willNot.beNil();
+        expect(viewController.view).will.haveValidSnapshotNamed(@"verticalWithMarginsAndInsets");
     });
 });
 

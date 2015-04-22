@@ -148,11 +148,14 @@
     CGFloat edgeX = (fixedDimension + self.mainItemMargin) * sectionIndex;
 
     CGFloat xOffset = self.orthogonalInset + self.centeringOffset + edgeX;
-    CGFloat yOffset = [self dimensionForSection:sectionIndex] + self.alternateItemMargin;
+    CGFloat yOffset = [self dimensionForSection:sectionIndex];
 
-    // Start all the sections with the content inset, specifically to offset for the header.
     if ([self.sections[sectionIndex] count] == 0) {
-      yOffset += self.leadingInset;
+        // Start all the sections with the content inset, specifically to offset for the header.
+        yOffset += self.leadingInset;
+    } else {
+        // All other items get margin.
+        yOffset += self.alternateItemMargin;
     }
 
     // Calculate center

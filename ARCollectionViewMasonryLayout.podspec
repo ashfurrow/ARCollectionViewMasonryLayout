@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.social_media_url    = "http://twitter.com/orta"
   s.platform            = :ios
   s.platform            = :ios, '7.0'
-  s.source              = { :git => "https://github.com/AshFurrow/ARCollectionViewMasonryLayout.git", :tag => "#{s.version}" }
+  s.source              = { :git => "https://github.com/AshFurrow/ARCollectionViewMasonryLayout.git", :tag => s.version }
   s.source_files        = '*.{h,m}'
   s.public_header_files = 'ARCollectionViewMasonryLayout.h'
   s.framework           = 'UIKit'

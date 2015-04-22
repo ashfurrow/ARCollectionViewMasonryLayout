@@ -1,11 +1,3 @@
-//
-//  ARCollectionViewMasonryLayout.h
-//  Artsy
-//
-//  Created by Orta on 11/07/2013.
-//  Copyright (c) 2013 Art.sy. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 
 @class ARCollectionViewMasonryLayout;
@@ -35,14 +27,14 @@ typedef NS_ENUM(NSInteger, ARCollectionViewMasonryLayoutDirection){
 
 - (instancetype)init __attribute__((unavailable("Invoke the designated initializer initWithDirection: instead.")));
 
-/// Direction of the collection view layout. Set in the initializer. 
+/// Direction of the collection view layout. Set in the initializer.
 @property (nonatomic, readonly) enum ARCollectionViewMasonryLayoutDirection direction;
 
 /// How many columns when vertical or rows when horizontal.
 /// defaults to 2.
 @property (nonatomic, assign) NSUInteger rank;
 
-/// Width for every column when horizontal, or row when vertical,
+/// Width for every column when horizontal, or row when vertical.
 @property (nonatomic, assign) CGFloat dimensionLength;
 
 /// The margins used that can be used of offset content

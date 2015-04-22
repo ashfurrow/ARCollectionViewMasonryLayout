@@ -12,4 +12,5 @@
 @property(assign) NSInteger colorCount;
 @property(assign) CGSize headerSize;
 @property(assign) CGSize footerSize;
+@property(strong) NSArray *heightPerEntry;
 @end

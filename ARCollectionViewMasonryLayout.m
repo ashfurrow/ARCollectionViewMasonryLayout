@@ -1,34 +1,15 @@
-//
-//  ARCollectionViewMasonryLayout.m
-//  Artsy
-//
-//  Created by Orta on 11/07/2013.
-//  Copyright (c) 2013 Art.sy. All rights reserved.
-//
-//  A Forked re-write from UICollectionViewWaterfallLayout
-
 #import "ARCollectionViewMasonryLayout.h"
+#import "_ARCollectionViewMasonryAttributesGrid.h"
 
 @interface ARCollectionViewMasonryLayout()
 @property (nonatomic, assign) enum ARCollectionViewMasonryLayoutDirection direction;
 
 @property (nonatomic, assign) NSInteger itemCount;
-@property (nonatomic, strong) NSMutableArray *internalDimensions;
 
-@property (nonatomic, strong) NSMutableArray *itemAttributes;
 @property (nonatomic, strong) UICollectionViewLayoutAttributes *headerAttributes;
 @property (nonatomic, strong) UICollectionViewLayoutAttributes *footerAttributes;
 
-// Provide quick lookups for heights
-@property (nonatomic, assign) NSInteger shortestDimensionIndex;
-@property (nonatomic, assign) NSInteger longestDimensionIndex;
-
-// Provide quick lookups for min/max heights
-@property (nonatomic, assign) CGFloat shortestDimensionLength;
-@property (nonatomic, assign) CGFloat longestDimensionLength;
-
-// The offset used on the non-main direction to ensure centering
-@property (nonatomic, assign) CGFloat centeringOffset;
+@property (nonatomic, strong) _ARCollectionViewMasonryAttributesGrid *attributesGrid;
 
 @end
 
@@ -46,17 +27,6 @@
     _itemMargins = CGSizeZero;
 
     return self;
-}
-
-#pragma mark - Life cycle
-
-- (void)dealloc
-{
-    [_internalDimensions removeAllObjects];
-    _internalDimensions = nil;
-
-    [_itemAttributes removeAllObjects];
-    _itemAttributes = nil;
 }
 
 #pragma mark - Custom Accessors that Invalidate layout
@@ -109,7 +79,7 @@
         NSInteger itemCount = [self.collectionView.dataSource collectionView:self.collectionView numberOfItemsInSection:0];
 
         NSMutableArray *variableDimensions = [NSMutableArray arrayWithCapacity:itemCount];
-        CGFloat staticDimension = [self isHorizontal]? self.collectionView.frame.size.height : self.collectionView.frame.size.width;
+        CGFloat staticDimension = self.isHorizontal ? self.collectionView.frame.size.height : self.collectionView.frame.size.width;
 
         // Ask delegates for all the dimensions
         for (int i = 0; i < itemCount; i++) {
@@ -139,7 +109,7 @@
         [self setupLayoutWithStaticDimension:staticDimension andVariableDimensions:variableDimensions];
     }
 
-    if ([self isHorizontal]) {
+    if (self.isHorizontal) {
         return  [self collectionViewContentSize].width;
     } else {
         return  [self collectionViewContentSize].height;
@@ -148,39 +118,32 @@
 
 - (void)setupLayoutWithStaticDimension:(CGFloat)staticDimension andVariableDimensions:(NSArray *)variableDimensions
 {
-    NSAssert(_rank > 0, @"Rank for ARCollectionViewMasonryLayout should be greater than 0.");
+    NSAssert(self.rank > 0, @"Rank for ARCollectionViewMasonryLayout should be greater than 0.");
     NSAssert(self.collectionView.numberOfSections == 1, @"ARCollectionViewmMasonry doesn't support multiple sections.");
     self.dimensionLength = ceilf(self.dimensionLength);
     self.itemCount = variableDimensions.count;
-    self.itemAttributes = [NSMutableArray array];
-    self.internalDimensions = [NSMutableArray array];
-    self.centeringOffset = [self generateCenteringOffsetWithMainDimension:staticDimension];
+    CGFloat centeringOffset = [self generateCenteringOffsetWithMainDimension:staticDimension];
 
-    BOOL isHorizontal = [self isHorizontal];
-    BOOL hasContentInset = !UIEdgeInsetsEqualToEdgeInsets(self.contentInset, UIEdgeInsetsZero);
+    BOOL isHorizontal = self.isHorizontal;
+    BOOL hasContentInset = self.hasContentInset;
 
     CGFloat leadingInset = 0;
     CGFloat orthogonalInset = 0;
-    CGFloat trailingInset = 0;
 
-    if ([self isHorizontal]) {
+    if (isHorizontal) {
         if (hasContentInset) {
             leadingInset = self.contentInset.left;
-            trailingInset = self.contentInset.right;
             orthogonalInset = self.contentInset.top;
         } else {
             leadingInset = self.itemMargins.width;
-            trailingInset = leadingInset;
             orthogonalInset = self.itemMargins.height;
         }
     } else {
         if (hasContentInset) {
             leadingInset = self.contentInset.top;
             orthogonalInset = self.contentInset.left;
-            trailingInset = self.contentInset.bottom;
         } else {
             leadingInset = self.itemMargins.height;
-            trailingInset = leadingInset;
             orthogonalInset = self.itemMargins.width;
         }
     }
@@ -195,66 +158,29 @@
         self.headerAttributes = nil;
     }
 
-    // Start all the dimensions with the content inset.
-    for (NSInteger index = 0; index < self.rank; index++) {
-        [self.internalDimensions addObject:@(leadingInset)];
-    }
-
-    // Simple rule of thumb, find the shortest column and throw
-    // the current object into that.
+    self.attributesGrid = [[_ARCollectionViewMasonryAttributesGrid alloc] initWithSectionCount:self.rank
+                                                                                  isHorizontal:isHorizontal
+                                                                                  leadingInset:leadingInset
+                                                                               orthogonalInset:orthogonalInset
+                                                                                mainItemMargin:self.mainItemMargin
+                                                                           alternateItemMargin:self.alternateItemMargin
+                                                                               centeringOffset:centeringOffset];
 
     [variableDimensions enumerateObjectsUsingBlock:^(NSNumber *dimension, NSUInteger index, BOOL *stop) {
-
-        // Generate the new shortest & longest
-        // after changes from adding the last object
-
-        // TODO: this should be incremental in the loop
-        [self updateLongestAndShortestDimensions];
-
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
-        CGFloat itemAlternateDimension = ceilf([dimension floatValue]);
-        NSUInteger columnIndex = self.shortestDimensionIndex;
-
-        // Where would it be without any manipulation
-        CGFloat edgeX = (self.dimensionLength + [self mainItemMargin]) * columnIndex;
-
-        // Apply centering
-        CGFloat xOffset = orthogonalInset + self.centeringOffset + edgeX;
-        CGFloat yOffset = [self.internalDimensions[columnIndex] floatValue];
-
-        CGPoint itemCenter = (CGPoint) {
-            xOffset + (self.dimensionLength / 2),
-            yOffset + (itemAlternateDimension/2)
-        };
-
         UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
 
+        CGFloat variableDimension = ceilf([dimension floatValue]);
         if (isHorizontal) {
-            attributes.size = CGSizeMake(itemAlternateDimension, self.dimensionLength);
-            itemCenter = (CGPoint){ itemCenter.y, itemCenter.x };
+            attributes.size = CGSizeMake(variableDimension, self.dimensionLength);
         } else {
-            attributes.size = CGSizeMake(self.dimensionLength, itemAlternateDimension);
+            attributes.size = CGSizeMake(self.dimensionLength, variableDimension);
         }
 
-        attributes.center = itemCenter;
-        attributes.frame = CGRectIntegral(attributes.frame);
-        [self.itemAttributes addObject:attributes];
-
-        // Ensure an extra margin is not applied
-        CGFloat totalDimension = yOffset + itemAlternateDimension;
-        if (index != variableDimensions.count - 1) {
-            totalDimension += [self alternateItemMargin];
-        }
-
-        self.internalDimensions[columnIndex] = @( roundf (totalDimension) );
+        [self.attributesGrid addAttributes:attributes];
     }];
 
-    // add the Trailing offset to the dimensions
-    for (NSInteger index = 0; index < self.rank; index++) {
-        self.internalDimensions[index] = @( [self.internalDimensions[index] floatValue] + trailingInset );
-    }
-
-    [self updateLongestAndShortestDimensions];
+    [self.attributesGrid ensureTrailingItemsDoNotStickOut];
 
     // Add an optional footer.
     CGFloat footerLength = [self footerDimensionAtIndexPath:indexPathZero];
@@ -333,7 +259,7 @@
     UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter withIndexPath:indexPath];
 
     CGSize size = [self footerSizeAtIndexPath:indexPath];
-    CGFloat longestDimension = [self.internalDimensions[self.longestDimensionIndex] floatValue];
+    CGFloat longestDimension = self.attributesGrid.longestSectionDimension;
     if ([self isHorizontal]) {
         attributes.frame = CGRectMake(longestDimension, 0, size.width, CGRectGetHeight(self.collectionView.bounds));
     } else {
@@ -350,9 +276,7 @@
     CGFloat alternateDimension = 0;
 
     if (self.itemCount > 0) {
-        // Find the last item.
-        NSUInteger longestColumnIndex = self.longestDimensionIndex;
-        alternateDimension = [self.internalDimensions[longestColumnIndex] floatValue];
+        alternateDimension = self.attributesGrid.longestSectionDimension;
     } else {
         // Only the header.
         CGFloat headerHeight = [self headerDimensionAtIndexPath:indexPathZero];
@@ -367,8 +291,18 @@
         alternateDimension += footerHeight;
     }
 
+    BOOL isHorizontal = self.isHorizontal;
+    BOOL hasContentInset = self.hasContentInset;
+
+    // Add trailing inset
+    if (isHorizontal) {
+        alternateDimension += (hasContentInset ? self.contentInset.right : self.itemMargins.width);
+    } else {
+        alternateDimension += (hasContentInset ? self.contentInset.bottom : self.itemMargins.height);
+    }
+
     CGSize contentSize = self.collectionView.frame.size;
-    if ([self isHorizontal]) {
+    if (isHorizontal) {
         contentSize.width = alternateDimension;
     } else {
         contentSize.height = alternateDimension;
@@ -379,14 +313,15 @@
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)path
 {
+    NSArray *attributes = self.attributesGrid.allItemAttributes;
     // This can happen during a reload, returning nil is no problem.
-    if (path.row > self.itemAttributes.count - 1) return nil;
-    return self.itemAttributes[path.row];
+    if (path.row > attributes.count - 1) return nil;
+    return attributes[path.row];
 }
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
-    NSArray *attributes = self.itemAttributes;
+    NSArray *attributes = self.attributesGrid.allItemAttributes;
     if (self.headerAttributes) {
         attributes = [attributes arrayByAddingObject:self.headerAttributes];
     }
@@ -415,6 +350,7 @@
     return YES;
 }
 
+// The offset used on the non-main direction to ensure centering
 - (CGFloat)generateCenteringOffsetWithMainDimension:(CGFloat)dimension
 {
     NSInteger numberOfLines = self.rank;
@@ -426,22 +362,9 @@
     return (dimension / 2) - (contentWidth / 2);
 }
 
-- (void)updateLongestAndShortestDimensions
+- (BOOL)hasContentInset
 {
-    self.longestDimensionLength = 0;
-    self.shortestDimensionLength = CGFLOAT_MAX;
-
-    for (NSNumber *number in self.internalDimensions) {
-        if (number.floatValue < self.shortestDimensionLength) {
-            self.shortestDimensionLength = number.floatValue;
-            self.shortestDimensionIndex = [self.internalDimensions indexOfObject:number];
-        }
-
-        if (number.floatValue > self.longestDimensionLength) {
-            self.longestDimensionLength = number.floatValue;
-            self.longestDimensionIndex = [self.internalDimensions indexOfObject:number];
-        }
-    }
+    return !UIEdgeInsetsEqualToEdgeInsets(self.contentInset, UIEdgeInsetsZero);
 }
 
 - (BOOL)isHorizontal

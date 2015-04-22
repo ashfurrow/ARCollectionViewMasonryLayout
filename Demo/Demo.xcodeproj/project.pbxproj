@@ -517,6 +517,10 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Private/ARCollectionViewMasonryLayout\"",
+				);
 				INFOPLIST_FILE = "IntegrationTests/IntegrationTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -536,6 +540,10 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IntegrationTests/IntegrationTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Private/ARCollectionViewMasonryLayout\"",
+				);
 				INFOPLIST_FILE = "IntegrationTests/IntegrationTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";

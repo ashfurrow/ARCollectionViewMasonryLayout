@@ -85,7 +85,9 @@
         for (int i = 0; i < itemCount; i++) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
 
-            CGFloat variableDimension = [self.delegate collectionView:self.collectionView layout:self variableDimensionForItemAtIndexPath:indexPath];
+            CGFloat variableDimension = [self.delegate collectionView:self.collectionView
+                                                               layout:self
+                                  variableDimensionForItemAtIndexPath:indexPath];
 
             [variableDimensions addObject:@(variableDimension)];
         }
@@ -273,10 +275,17 @@
 - (CGSize)collectionViewContentSize
 {
     NSIndexPath *indexPathZero = [NSIndexPath indexPathForItem:0 inSection:0];
+    BOOL isHorizontal = self.isHorizontal;
     CGFloat alternateDimension = 0;
 
     if (self.itemCount > 0) {
         alternateDimension = self.attributesGrid.longestSectionDimension;
+        // Add trailing inset/margin
+        if (isHorizontal) {
+            alternateDimension += (self.hasContentInset ? self.contentInset.right : self.itemMargins.width);
+        } else {
+            alternateDimension += (self.hasContentInset ? self.contentInset.bottom : self.itemMargins.height);
+        }
     } else {
         // Only the header.
         CGFloat headerHeight = [self headerDimensionAtIndexPath:indexPathZero];
@@ -289,16 +298,6 @@
     CGFloat footerHeight = [self footerDimensionAtIndexPath:indexPathZero];
     if (footerHeight != NSNotFound) {
         alternateDimension += footerHeight;
-    }
-
-    BOOL isHorizontal = self.isHorizontal;
-    BOOL hasContentInset = self.hasContentInset;
-
-    // Add trailing inset
-    if (isHorizontal) {
-        alternateDimension += (hasContentInset ? self.contentInset.right : self.itemMargins.width);
-    } else {
-        alternateDimension += (hasContentInset ? self.contentInset.bottom : self.itemMargins.height);
     }
 
     CGSize contentSize = self.collectionView.frame.size;

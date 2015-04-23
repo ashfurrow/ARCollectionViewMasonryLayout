@@ -118,10 +118,12 @@ describe(@"_ARCollectionViewMasonryAttributesGrid", ^{
 });
 
 __block ARCollectionViewMasonryLayout *layout = nil;
+__block ARCollectionViewController *viewController = nil;
 
 describe(@"horizontal layout", ^{
     beforeEach(^{
         layout = [[ARCollectionViewMasonryLayout alloc] initWithDirection:ARCollectionViewMasonryLayoutDirectionHorizontal];
+        viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
     });
     
     it(@"has default values when initialized", ^{
@@ -137,7 +139,6 @@ describe(@"horizontal layout", ^{
     });
     
     it(@"displays cells", ^{
-        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
         viewController.colorCount = 5;
         expect(viewController.view).willNot.beNil();
         expect(viewController.view).will.haveValidSnapshotNamed(@"horizontal");
@@ -145,7 +146,6 @@ describe(@"horizontal layout", ^{
     });
     
     it(@"displays footer", ^{
-        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
         viewController.footerSize = CGSizeMake(20, 0);
         viewController.colorCount = 7;
         expect(viewController.view).willNot.beNil();
@@ -154,7 +154,6 @@ describe(@"horizontal layout", ^{
     });
 
     it(@"displays footer only", ^{
-        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
         viewController.footerSize = CGSizeMake(20, 0);
         viewController.colorCount = 0;
         expect(viewController.view).willNot.beNil();
@@ -163,7 +162,6 @@ describe(@"horizontal layout", ^{
     });
 
     it(@"displays header", ^{
-        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
         viewController.headerSize = CGSizeMake(10, 0);
         viewController.colorCount = 4;
         expect(viewController.view).willNot.beNil();
@@ -172,7 +170,6 @@ describe(@"horizontal layout", ^{
     });
 
     it(@"displays header only", ^{
-        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
         viewController.headerSize = CGSizeMake(10, 0);
         viewController.colorCount = 0;
         expect(viewController.view).willNot.beNil();
@@ -181,7 +178,6 @@ describe(@"horizontal layout", ^{
     });
 
     it(@"displays header and footer", ^{
-        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
         viewController.headerSize = CGSizeMake(3, 0);
         viewController.footerSize = CGSizeMake(5, 0);
         viewController.colorCount = 4;
@@ -190,20 +186,30 @@ describe(@"horizontal layout", ^{
         expect(layout.collectionViewContentSize.width).to.equal(108);
     });
 
-    it(@"applies correct margins and insets", ^{
-        layout.itemMargins = CGSizeMake(10, 20);
-        layout.contentInset = UIEdgeInsetsMake(10, 20, 10, 20);
-        layout.sectionInset = UIEdgeInsetsMake(10, 20, 10, 20);
-        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
-        viewController.colorCount = 4;
-        expect(viewController.view).willNot.beNil();
-        expect(viewController.view).will.haveValidSnapshotNamed(@"horizontalWithMarginsAndInsets");
+    describe(@"with margins and insets", ^{
+        beforeEach(^{
+            layout.itemMargins = CGSizeMake(10, 20);
+            layout.contentInset = UIEdgeInsetsMake(10, 20, 10, 20);
+            layout.sectionInset = UIEdgeInsetsMake(10, 20, 10, 20);
+        });
+
+        it(@"applies correct margins and insets", ^{
+            viewController.colorCount = 4;
+            expect(viewController.view).willNot.beNil();
+            expect(viewController.view).will.haveValidSnapshotNamed(@"horizontalWithMarginsAndInsets");
+        });
+
+        it(@"reports correct content size", ^{
+            viewController.colorCount = 0;
+            expect(layout.collectionViewContentSize).to.equal(CGSizeZero);
+        });
     });
 });
 
 describe(@"vertical layout", ^{
     beforeEach(^{
         layout = [[ARCollectionViewMasonryLayout alloc] initWithDirection:ARCollectionViewMasonryLayoutDirectionVertical];
+        viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
     });
     
     it(@"has the correct vertical direction", ^{
@@ -211,7 +217,6 @@ describe(@"vertical layout", ^{
     });
     
     it(@"displays cells", ^{
-        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
         viewController.colorCount = 7;
         expect(viewController.view).willNot.beNil();
         expect(viewController.view).will.haveValidSnapshotNamed(@"vertical");
@@ -219,7 +224,6 @@ describe(@"vertical layout", ^{
     });
 
     it(@"displays footer", ^{
-        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
         viewController.footerSize = CGSizeMake(0, 20);
         viewController.colorCount = 7;
         expect(viewController.view).willNot.beNil();
@@ -228,7 +232,6 @@ describe(@"vertical layout", ^{
     });
 
     it(@"displays footer only", ^{
-        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
         viewController.footerSize = CGSizeMake(0, 20);
         viewController.colorCount = 0;
         expect(viewController.view).willNot.beNil();
@@ -237,7 +240,6 @@ describe(@"vertical layout", ^{
     });
 
     it(@"displays header", ^{
-        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
         viewController.headerSize = CGSizeMake(0, 10);
         viewController.colorCount = 4;
         expect(viewController.view).willNot.beNil();
@@ -246,7 +248,6 @@ describe(@"vertical layout", ^{
     });
 
     it(@"displays header only", ^{
-        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
         viewController.headerSize = CGSizeMake(0, 10);
         viewController.colorCount = 0;
         expect(viewController.view).willNot.beNil();
@@ -255,7 +256,6 @@ describe(@"vertical layout", ^{
     });
 
     it(@"displays header and footer", ^{
-        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
         viewController.headerSize = CGSizeMake(0, 30);
         viewController.footerSize = CGSizeMake(0, 5);
         viewController.colorCount = 4;
@@ -264,14 +264,23 @@ describe(@"vertical layout", ^{
         expect(layout.collectionViewContentSize.height).to.equal(135);
     });
 
-    it(@"applies correct margins and insets", ^{
-        layout.itemMargins = CGSizeMake(10, 20);
-        layout.contentInset = UIEdgeInsetsMake(10, 20, 10, 20);
-        layout.sectionInset = UIEdgeInsetsMake(10, 20, 10, 20);
-        ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
-        viewController.colorCount = 4;
-        expect(viewController.view).willNot.beNil();
-        expect(viewController.view).will.haveValidSnapshotNamed(@"verticalWithMarginsAndInsets");
+    describe(@"with margins and insets", ^{
+        beforeEach(^{
+            layout.itemMargins = CGSizeMake(10, 20);
+            layout.contentInset = UIEdgeInsetsMake(10, 20, 10, 20);
+            layout.sectionInset = UIEdgeInsetsMake(10, 20, 10, 20);
+        });
+
+        it(@"applies correct margins and insets", ^{
+            viewController.colorCount = 4;
+            expect(viewController.view).willNot.beNil();
+            expect(viewController.view).will.haveValidSnapshotNamed(@"verticalWithMarginsAndInsets");
+        });
+
+        it(@"reports correct content size", ^{
+            viewController.colorCount = 0;
+            expect(layout.collectionViewContentSize).to.equal(CGSizeZero);
+        });
     });
 });
 

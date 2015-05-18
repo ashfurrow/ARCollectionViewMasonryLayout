@@ -278,19 +278,15 @@
     BOOL isHorizontal = self.isHorizontal;
     CGFloat alternateDimension = 0;
 
+    // This includes the header height even if there are no items.
+    alternateDimension = self.attributesGrid.longestSectionDimension;
+
     if (self.itemCount > 0) {
-        alternateDimension = self.attributesGrid.longestSectionDimension;
         // Add trailing inset/margin
         if (isHorizontal) {
             alternateDimension += (self.hasContentInset ? self.contentInset.right : self.itemMargins.width);
         } else {
             alternateDimension += (self.hasContentInset ? self.contentInset.bottom : self.itemMargins.height);
-        }
-    } else {
-        // Only the header.
-        CGFloat headerHeight = [self headerDimensionAtIndexPath:indexPathZero];
-        if (headerHeight != NSNotFound) {
-            alternateDimension += headerHeight;
         }
     }
 

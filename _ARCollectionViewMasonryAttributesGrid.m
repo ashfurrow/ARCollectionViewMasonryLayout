@@ -33,8 +33,8 @@
         _centeringOffset = centeringOffset;
         _sectionCount = sectionCount;
         _shortestSection = 0;
-        _longestSectionDimension = 0;
-        _shortestSectionDimension = 0;
+        _longestSectionDimension = leadingInset;
+        _shortestSectionDimension = leadingInset;
 
         NSMutableArray *sections = [NSMutableArray arrayWithCapacity:_sectionCount];
         for (NSUInteger i = 0; i < _sectionCount; i++) {
@@ -59,7 +59,8 @@
 
 - (CGFloat)maxEdgeForAttributes:(UICollectionViewLayoutAttributes *)attributes;
 {
-    return self.isHorizontal ? CGRectGetMaxX(attributes.frame) : CGRectGetMaxY(attributes.frame);
+    CGFloat attributeMax = self.isHorizontal ? CGRectGetMaxX(attributes.frame) : CGRectGetMaxY(attributes.frame);
+    return MAX(attributeMax, self.leadingInset);
 }
 
 - (CGFloat)dimensionForSection:(NSUInteger)sectionIndex;
@@ -131,7 +132,7 @@
 
 - (void)updateShortestSection;
 {
-    CGFloat shortestSectionDimension = 0;
+    CGFloat shortestSectionDimension = self.leadingInset;
     self.shortestSection = [self shortestSectionUpTo:self.sectionCount dimension:&shortestSectionDimension];
     self.shortestSectionDimension = shortestSectionDimension;
 }
@@ -150,10 +151,7 @@
     CGFloat xOffset = self.orthogonalInset + self.centeringOffset + edgeX;
     CGFloat yOffset = [self dimensionForSection:sectionIndex];
 
-    if ([self.sections[sectionIndex] count] == 0) {
-        // Start all the sections with the content inset, specifically to offset for the header.
-        yOffset += self.leadingInset;
-    } else {
+    if ([self.sections[sectionIndex] count] != 0){
         // All other items get margin.
         yOffset += self.alternateItemMargin;
     }

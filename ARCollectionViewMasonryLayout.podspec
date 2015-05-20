@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                = "ARCollectionViewMasonryLayout"
-  s.version             = "2.1.1"
+  s.version             = "2.1.2"
   s.summary             = "ARCollectionViewMasonryLayout is a UICollectionViewLayout subclass for creating flow-like layouts with dynamic widths or heights."
   s.homepage            = "https://github.com/AshFurrow/ARCollectionViewMasonryLayout"
   s.screenshots         = "https://raw.githubusercontent.com/AshFurrow/ARCollectionViewMasonryLayout/master/Screenshots/ARCollectionViewMasonryLayout.png"

@@ -6,7 +6,9 @@
 @interface _ARCollectionViewMasonryAttributesGrid (Private)
 @property (nonatomic, readonly, strong) NSArray *sections;
 @property (nonatomic, readonly) NSUInteger shortestSection;
+@property (nonatomic, readonly) CGFloat leadingInset;
 @property (nonatomic, readonly) CGFloat longestSectionDimension;
+@property (nonatomic, readonly) CGFloat shortestSectionDimension;
 - (void)addAttributes:(UICollectionViewLayoutAttributes *)attributes toSection:(NSUInteger)sectionIndex;
 - (CGFloat)dimensionForSection:(NSUInteger)sectionIndex;
 @end
@@ -83,6 +85,35 @@ describe(@"_ARCollectionViewMasonryAttributesGrid", ^{
             expect(grid.longestSectionDimension).to.equal(120); // section 0
             AddLayoutAttributesToSectionWithHeight(grid, 1, 100);
             expect(grid.longestSectionDimension).to.equal(140); // section 1
+        });
+    });
+
+    describe(@"with a leading inset", ^{
+        __block CGFloat headerHeight = 20;
+        before(^{
+            grid = [[_ARCollectionViewMasonryAttributesGrid alloc] initWithSectionCount:3
+                                                                           isHorizontal:NO
+                                                                           leadingInset:headerHeight
+                                                                        orthogonalInset:0
+                                                                         mainItemMargin:0
+                                                                    alternateItemMargin:0
+                                                                        centeringOffset:0];
+        });
+
+        it(@"reflects only the header height if there are no entries", ^{
+            expect(grid.leadingInset).to.equal(headerHeight);
+            expect(grid.longestSectionDimension).to.equal(headerHeight);
+            expect(grid.shortestSectionDimension).to.equal(headerHeight);
+        });
+
+        it(@"reflects the header and entries if there are entries", ^{
+            CGFloat itemHeight = 10;
+
+            AddLayoutAttributesToSectionWithHeight(grid, 0, itemHeight);
+
+            expect(grid.leadingInset).to.equal(headerHeight);
+            expect(grid.longestSectionDimension).to.equal(headerHeight + itemHeight);
+            expect(grid.shortestSectionDimension).to.equal(headerHeight);
         });
     });
 

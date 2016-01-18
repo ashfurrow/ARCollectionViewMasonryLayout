@@ -1,6 +1,9 @@
 #import "ARCollectionViewMasonryLayout.h"
 #import "_ARCollectionViewMasonryAttributesGrid.h"
 
+NSString *const ARCollectionElementKindSectionStickyHeader = @"ARCollectionElementKindSectionStickyHeader";
+
+
 @interface ARCollectionViewMasonryLayout()
 @property (nonatomic, assign) enum ARCollectionViewMasonryLayoutDirection direction;
 
@@ -8,6 +11,7 @@
 
 @property (nonatomic, strong) UICollectionViewLayoutAttributes *headerAttributes;
 @property (nonatomic, strong) UICollectionViewLayoutAttributes *footerAttributes;
+@property (nonatomic, strong) UICollectionViewLayoutAttributes *stickyHeaderAttributes;
 
 @property (nonatomic, strong) _ARCollectionViewMasonryAttributesGrid *attributesGrid;
 
@@ -122,6 +126,9 @@
 {
     NSAssert(self.rank > 0, @"Rank for ARCollectionViewMasonryLayout should be greater than 0.");
     NSAssert(self.collectionView.numberOfSections == 1, @"ARCollectionViewmMasonry doesn't support multiple sections.");
+
+    UICollectionViewFlowLayoutInvalidationContext *invalidationContext = [[UICollectionViewFlowLayoutInvalidationContext alloc] init];
+
     self.dimensionLength = ceilf(self.dimensionLength);
     self.itemCount = variableDimensions.count;
     CGFloat centeringOffset = [self generateCenteringOffsetWithMainDimension:staticDimension];
@@ -156,8 +163,15 @@
     if (headerDimension != NSNotFound) {
         [self setupHeaderAtIndexPath:indexPathZero];
         leadingInset += headerDimension;
-    } else {
-        self.headerAttributes = nil;
+        [invalidationContext invalidateSupplementaryElementsOfKind:UICollectionElementKindSectionHeader atIndexPaths:@[indexPathZero]];
+    }
+
+    // Add an optional header, but this one can be sticky.
+    CGFloat stickyHeaderDimension = [self stickyHeaderDimensionAtIndexPath:indexPathZero];
+    if (stickyHeaderDimension != NSNotFound) {
+        leadingInset += stickyHeaderDimension;
+
+        [invalidationContext invalidateSupplementaryElementsOfKind:ARCollectionElementKindSectionStickyHeader atIndexPaths:@[indexPathZero]];
     }
 
     self.attributesGrid = [[_ARCollectionViewMasonryAttributesGrid alloc] initWithSectionCount:self.rank
@@ -188,9 +202,10 @@
     CGFloat footerLength = [self footerDimensionAtIndexPath:indexPathZero];
     if (footerLength != NSNotFound) {
         [self setupFooterAtIndexPath:indexPathZero];
-    } else {
-        self.footerAttributes = nil;
+        [invalidationContext invalidateSupplementaryElementsOfKind:UICollectionElementKindSectionFooter atIndexPaths:@[indexPathZero]];
     }
+
+    [self invalidateLayoutWithContext:invalidationContext];
 }
 
 - (CGFloat)headerDimensionAtIndexPath:(NSIndexPath *)indexPath
@@ -204,6 +219,19 @@
         return size.height;
     }
 }
+
+- (CGFloat)stickyHeaderDimensionAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGSize size = [self stickyHeaderSizeAtIndexPath:indexPath];
+    if (CGSizeEqualToSize(size, CGSizeZero)) { return NSNotFound; }
+
+    if ([self isHorizontal]) {
+        return size.width;
+    } else {
+        return size.height;
+    }
+}
+
 
 - (CGFloat)footerDimensionAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -219,11 +247,23 @@
 
 - (CGSize)headerSizeAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<UICollectionViewDelegateFlowLayout> delegate = self.delegate;
+    id<ARCollectionViewMasonryLayoutDelegate> delegate = self.delegate;
     CGSize size = CGSizeZero;
 
     if (delegate && [delegate respondsToSelector:@selector(collectionView:layout:referenceSizeForHeaderInSection:)]) {
         size = [delegate collectionView:self.collectionView layout:self referenceSizeForHeaderInSection:indexPath.section];
+    }
+
+    return size;
+}
+
+- (CGSize)stickyHeaderSizeAtIndexPath:(NSIndexPath *)indexPath
+{
+    id<ARCollectionViewMasonryLayoutDelegate> delegate = self.delegate;
+    CGSize size = CGSizeZero;
+
+    if (delegate && [delegate respondsToSelector:@selector(collectionView:layout:referenceSizeForStickyHeaderInSection:)]) {
+        size = [delegate collectionView:self.collectionView layout:self referenceSizeForStickyHeaderInSection:indexPath.section];
     }
 
     return size;
@@ -316,14 +356,9 @@
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
+    // Lays out all of the cells in the collection view
+    // extremely performance critical code.
     NSArray *attributes = self.attributesGrid.allItemAttributes;
-    if (self.headerAttributes) {
-        attributes = [attributes arrayByAddingObject:self.headerAttributes];
-    }
-    if (self.footerAttributes) {
-        attributes = [attributes arrayByAddingObject:self.footerAttributes];
-    }
-
     return [attributes filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         return CGRectIntersectsRect(rect, [evaluatedObject frame]);
     }]];
@@ -331,18 +366,71 @@
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    if (kind == UICollectionElementKindSectionHeader) {
+    if ([kind isEqualToString: ARCollectionElementKindSectionStickyHeader]) {
+        return [self attributesForStickyHeader];
+    } else if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         return self.headerAttributes;
-    } else if (kind == UICollectionElementKindSectionFooter) {
+    } else if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
         return self.footerAttributes;
-    } else {
-        return nil;
     }
+
+    return nil;
 }
+
+- (UICollectionViewLayoutAttributes *)attributesForStickyHeader
+{
+    NSIndexPath *indexPathZero = [NSIndexPath indexPathForRow:0 inSection:0];
+    CGFloat maxDistanceFromLeadingEdge = [self headerDimensionAtIndexPath:indexPathZero];
+    CGFloat edge = MAX(maxDistanceFromLeadingEdge, self.collectionView.contentOffset.y);
+
+    CGSize stickySize = CGSizeZero;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(collectionView:layout:referenceSizeForStickyHeaderInSection:)]) {
+        stickySize = [self.delegate collectionView:self.collectionView layout:self referenceSizeForStickyHeaderInSection:0];
+    }
+
+    if (!self.stickyHeaderAttributes) {
+        _stickyHeaderAttributes = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:ARCollectionElementKindSectionStickyHeader withIndexPath:indexPathZero];
+
+        _stickyHeaderAttributes.zIndex = 1024;
+        [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:ARCollectionElementKindSectionStickyHeader withReuseIdentifier:ARCollectionElementKindSectionStickyHeader];
+    }
+
+    if ([self isHorizontal]) {
+        self.stickyHeaderAttributes.frame = CGRectMake(edge, 0, stickySize.width, CGRectGetHeight(self.collectionView.bounds)/2);
+    } else {
+        self.stickyHeaderAttributes.frame = CGRectMake(0, edge, CGRectGetWidth(self.collectionView.bounds)/2, stickySize.height);
+    }
+
+    return self.stickyHeaderAttributes;
+}
+
+/// We allow this to always pass through (this is called on
+/// every scroll tick ) so we can do invalidation on the
+/// ARCollectionElementKindSectionStickyHeader
 
 - (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
 {
     return YES;
+}
+
+- (UICollectionViewLayoutInvalidationContext *)invalidationContextForBoundsChange:(CGRect)newBounds
+{
+    NSIndexPath *indexPathZero = [NSIndexPath indexPathForRow:0 inSection:0];
+
+    UICollectionViewFlowLayoutInvalidationContext *context = (UICollectionViewFlowLayoutInvalidationContext *)[super invalidationContextForBoundsChange:newBounds];
+
+    // Only invalidate the flow layout (masonry bits) when something drastic has happened
+    BOOL needsEverything = !CGSizeEqualToSize(newBounds.size, self.collectionView.bounds.size);
+    context.invalidateFlowLayoutDelegateMetrics = needsEverything;
+    if (needsEverything) {
+        [context invalidateSupplementaryElementsOfKind:UICollectionElementKindSectionFooter atIndexPaths:@[indexPathZero]];
+        [context invalidateSupplementaryElementsOfKind:UICollectionElementKindSectionHeader atIndexPaths:@[indexPathZero]];
+    }
+
+    // The sticky header should always be invalidated
+    [context invalidateSupplementaryElementsOfKind:ARCollectionElementKindSectionStickyHeader atIndexPaths:@[indexPathZero]];
+
+    return context;
 }
 
 // The offset used on the non-main direction to ensure centering

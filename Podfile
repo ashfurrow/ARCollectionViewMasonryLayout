@@ -1,13 +1,16 @@
-workspace 'ARCollectionViewMasonryLayout'
-xcodeproj 'Demo/Demo.xcodeproj'
+target 'Demo' do
 
-pod 'ARCollectionViewMasonryLayout', :path => 'ARCollectionViewMasonryLayout.podspec'
-pod 'EDColor', '0.4.0'
+  workspace 'ARCollectionViewMasonryLayout'
+  xcodeproj 'Demo/Demo.xcodeproj'
 
-target "IntegrationTests" do
-  pod 'Specta', '0.2.1'
-  pod 'Expecta', '0.3.0'
-  pod 'FBSnapshotTestCase', '1.4'
-  pod 'Expecta+Snapshots', '1.2'
+  pod 'ARCollectionViewMasonryLayout', :path => 'ARCollectionViewMasonryLayout.podspec'
+  pod 'EDColor', '0.4.0'
+
+  target "IntegrationTests" do
+    inherit! :search_paths
+    pod 'Specta'
+    pod 'Expecta'
+    pod 'Expecta+Snapshots'
+  end
 end
 

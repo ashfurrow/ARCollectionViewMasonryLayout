@@ -9,12 +9,18 @@
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout variableDimensionForItemAtIndexPath:(NSIndexPath *)indexPath;
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForStickyHeaderInSection:(NSInteger)section;
 @end
 
 typedef NS_ENUM(NSInteger, ARCollectionViewMasonryLayoutDirection){
     ARCollectionViewMasonryLayoutDirectionVertical,
     ARCollectionViewMasonryLayoutDirectionHorizontal
 };
+
+/// The class string for the supplementary view for a sticky header
+/// that sits under the 1st header.
+extern NSString *const ARCollectionElementKindSectionStickyHeader;
+
 
 /// The ARCollectionViewMasonryLayout is a collectionview layout that can
 /// lay out items in a horizontal or vertical layout in a way that flows all

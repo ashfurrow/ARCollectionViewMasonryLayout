@@ -1,7 +1,8 @@
 Next
 -----
 
-
+- [#27](https://github.com/ashfurrow/ARCollectionViewMasonryLayout/pull/27): Add support for Sticky headers in the collectionview - [@orta](https://github.com/orta)
+- [#27](https://github.com/ashfurrow/ARCollectionViewMasonryLayout/pull/27): Careful layout cache invalidation, should be a big speed boost from previous builds. - [@orta](https://github.com/orta)
 
 2.1.2
 -----

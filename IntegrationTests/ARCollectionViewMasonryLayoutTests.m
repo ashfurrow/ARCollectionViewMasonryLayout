@@ -171,8 +171,7 @@ describe(@"horizontal layout", ^{
     
     it(@"displays cells", ^{
         viewController.colorCount = 5;
-        expect(viewController.view).willNot.beNil();
-        expect(viewController.view).will.haveValidSnapshotNamed(@"horizontal");
+        expect(viewController.view).to.haveValidSnapshotNamed(@"horizontal");
         expect(layout.collectionViewContentSize.width).to.equal(150);
     });
     
@@ -180,7 +179,7 @@ describe(@"horizontal layout", ^{
         viewController.footerSize = CGSizeMake(20, 0);
         viewController.colorCount = 7;
         expect(viewController.view).willNot.beNil();
-        expect(viewController.view).will.haveValidSnapshotNamed(@"horizontalWithFooter");
+        expect(viewController.view).to.haveValidSnapshotNamed(@"horizontalWithFooter");
         expect(layout.collectionViewContentSize.width).to.equal(200);
     });
 
@@ -188,7 +187,7 @@ describe(@"horizontal layout", ^{
         viewController.footerSize = CGSizeMake(20, 0);
         viewController.colorCount = 0;
         expect(viewController.view).willNot.beNil();
-        expect(viewController.view).will.haveValidSnapshotNamed(@"horizontalFooterOnly");
+        expect(viewController.view).to.haveValidSnapshotNamed(@"horizontalFooterOnly");
         expect(layout.collectionViewContentSize.width).to.equal(20);
     });
 
@@ -196,7 +195,7 @@ describe(@"horizontal layout", ^{
         viewController.headerSize = CGSizeMake(10, 0);
         viewController.colorCount = 4;
         expect(viewController.view).willNot.beNil();
-        expect(viewController.view).will.haveValidSnapshotNamed(@"horizontalWithHeader");
+        expect(viewController.view).to.haveValidSnapshotNamed(@"horizontalWithHeader");
         expect(layout.collectionViewContentSize.width).to.equal(110);
     });
 
@@ -204,7 +203,7 @@ describe(@"horizontal layout", ^{
         viewController.headerSize = CGSizeMake(10, 0);
         viewController.colorCount = 0;
         expect(viewController.view).willNot.beNil();
-        expect(viewController.view).will.haveValidSnapshotNamed(@"horizontalHeaderOnly");
+        expect(viewController.view).to.haveValidSnapshotNamed(@"horizontalHeaderOnly");
         expect(layout.collectionViewContentSize.width).to.equal(10);
     });
 
@@ -213,7 +212,7 @@ describe(@"horizontal layout", ^{
         viewController.footerSize = CGSizeMake(5, 0);
         viewController.colorCount = 4;
         expect(viewController.view).willNot.beNil();
-        expect(viewController.view).will.haveValidSnapshotNamed(@"horizontalWithHeaderAndFooter");
+        expect(viewController.view).to.haveValidSnapshotNamed(@"horizontalWithHeaderAndFooter");
         expect(layout.collectionViewContentSize.width).to.equal(108);
     });
 
@@ -227,7 +226,7 @@ describe(@"horizontal layout", ^{
         it(@"applies correct margins and insets", ^{
             viewController.colorCount = 4;
             expect(viewController.view).willNot.beNil();
-            expect(viewController.view).will.haveValidSnapshotNamed(@"horizontalWithMarginsAndInsets");
+            expect(viewController.view).to.haveValidSnapshotNamed(@"horizontalWithMarginsAndInsets");
         });
 
         it(@"reports correct content size", ^{
@@ -250,7 +249,7 @@ describe(@"vertical layout", ^{
     it(@"displays cells", ^{
         viewController.colorCount = 7;
         expect(viewController.view).willNot.beNil();
-        expect(viewController.view).will.haveValidSnapshotNamed(@"vertical");
+        expect(viewController.view).to.haveValidSnapshotNamed(@"vertical");
         expect(layout.collectionViewContentSize.height).to.equal(180);
     });
 
@@ -258,7 +257,7 @@ describe(@"vertical layout", ^{
         viewController.footerSize = CGSizeMake(0, 20);
         viewController.colorCount = 7;
         expect(viewController.view).willNot.beNil();
-        expect(viewController.view).will.haveValidSnapshotNamed(@"verticalWithFooter");
+        expect(viewController.view).to.haveValidSnapshotNamed(@"verticalWithFooter");
         expect(layout.collectionViewContentSize.height).to.equal(200);
     });
 
@@ -266,7 +265,7 @@ describe(@"vertical layout", ^{
         viewController.footerSize = CGSizeMake(0, 20);
         viewController.colorCount = 0;
         expect(viewController.view).willNot.beNil();
-        expect(viewController.view).will.haveValidSnapshotNamed(@"verticalFooterOnly");
+        expect(viewController.view).to.haveValidSnapshotNamed(@"verticalFooterOnly");
         expect(layout.collectionViewContentSize.height).to.equal(20);
     });
 
@@ -274,7 +273,7 @@ describe(@"vertical layout", ^{
         viewController.headerSize = CGSizeMake(0, 10);
         viewController.colorCount = 4;
         expect(viewController.view).willNot.beNil();
-        expect(viewController.view).will.haveValidSnapshotNamed(@"verticalWithHeader");
+        expect(viewController.view).to.haveValidSnapshotNamed(@"verticalWithHeader");
         expect(layout.collectionViewContentSize.height).to.equal(110);
     });
 
@@ -282,7 +281,7 @@ describe(@"vertical layout", ^{
         viewController.headerSize = CGSizeMake(0, 10);
         viewController.colorCount = 0;
         expect(viewController.view).willNot.beNil();
-        expect(viewController.view).will.haveValidSnapshotNamed(@"verticalHeaderOnly");
+        expect(viewController.view).to.haveValidSnapshotNamed(@"verticalHeaderOnly");
         expect(layout.collectionViewContentSize.height).to.equal(10);
     });
 
@@ -291,7 +290,7 @@ describe(@"vertical layout", ^{
         viewController.footerSize = CGSizeMake(0, 5);
         viewController.colorCount = 4;
         expect(viewController.view).willNot.beNil();
-        expect(viewController.view).will.haveValidSnapshotNamed(@"verticalWithHeaderAndFooter");
+        expect(viewController.view).to.haveValidSnapshotNamed(@"verticalWithHeaderAndFooter");
         expect(layout.collectionViewContentSize.height).to.equal(135);
     });
 
@@ -305,7 +304,7 @@ describe(@"vertical layout", ^{
         it(@"applies correct margins and insets", ^{
             viewController.colorCount = 4;
             expect(viewController.view).willNot.beNil();
-            expect(viewController.view).will.haveValidSnapshotNamed(@"verticalWithMarginsAndInsets");
+            expect(viewController.view).to.haveValidSnapshotNamed(@"verticalWithMarginsAndInsets");
         });
 
         it(@"reports correct content size", ^{
@@ -313,6 +312,32 @@ describe(@"vertical layout", ^{
             expect(layout.collectionViewContentSize).to.equal(CGSizeZero);
         });
     });
+
+    describe(@"with sticky header", ^{
+
+        it(@"moves the content down under the sticky header", ^{
+            viewController.colorCount = 4;
+            viewController.headerSize = CGSizeMake(300, 30);
+            viewController.stickyHeaderSize = CGSizeMake(300, 60);
+            expect(viewController.view).to.haveValidSnapshotNamed(@"showsTheStickyHeader");
+        });
+
+        it(@"keeps the sticky header on screen while scrolling the header", ^{
+            viewController.colorCount = 200;
+            viewController.headerSize = CGSizeMake(300, 30);
+            viewController.stickyHeaderSize = CGSizeMake(300, 60);
+
+            [viewController beginAppearanceTransition:YES animated:NO];
+            [viewController endAppearanceTransition];
+
+            [viewController.collectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForItem:3 inSection:0]
+                                                  atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
+            
+            expect(viewController.view).to.haveValidSnapshotNamed(@"showsTheStickyHeaderOverTheHeader");
+        });
+
+    });
+
 });
 
 describe(@"trailing layout", ^{
@@ -327,13 +352,13 @@ describe(@"trailing layout", ^{
     it(@"allows an entry to the right to stick out if it sticks out <= 50% of its height", ^{
         viewController.heightPerEntry = @[@(100), @(150), @(100), @(100)];
         expect(viewController.view).willNot.beNil();
-        expect(viewController.view).will.haveValidSnapshotNamed(@"trailingStickingOut");
+        expect(viewController.view).to.haveValidSnapshotNamed(@"trailingStickingOut");
     });
 
     it(@"moves an entry to the left if it would normally be at the right and stick out from the rest by more than 50% of its height", ^{
         viewController.heightPerEntry = @[@(100), @(151), @(100), @(100)];
         expect(viewController.view).willNot.beNil();
-        expect(viewController.view).will.haveValidSnapshotNamed(@"trailingMoveToLeft");
+        expect(viewController.view).to.haveValidSnapshotNamed(@"trailingMoveToLeft");
     });
 });
 
@@ -346,5 +371,6 @@ describe(@"longestDimensionWithLengths", ^{
         expect([layout longestDimensionWithLengths:@[] withOppositeDimension:0]).to.equal(0);
     });
 });
+
 
 SpecEnd

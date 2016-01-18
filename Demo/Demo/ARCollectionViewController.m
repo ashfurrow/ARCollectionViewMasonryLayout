@@ -85,9 +85,20 @@ static NSString *CellIdentifier = @"Cell";
         UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:kind forIndexPath:indexPath];
         view.backgroundColor = [UIColor whiteColor];
         return view;
+
+    } if ([kind isEqualToString:ARCollectionElementKindSectionStickyHeader]) {
+        UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:kind forIndexPath:indexPath];
+        view.backgroundColor = [UIColor purpleColor];
+        return view;
+
     } else {
         return nil;
     }
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout referenceSizeForStickyHeaderInSection:(NSInteger)section
+{
+    return self.stickyHeaderSize;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section

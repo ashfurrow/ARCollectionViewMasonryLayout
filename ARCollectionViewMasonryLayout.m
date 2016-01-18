@@ -232,7 +232,6 @@ NSString *const ARCollectionElementKindSectionStickyHeader = @"ARCollectionEleme
     }
 }
 
-
 - (CGFloat)footerDimensionAtIndexPath:(NSIndexPath *)indexPath
 {
     CGSize size = [self footerSizeAtIndexPath:indexPath];

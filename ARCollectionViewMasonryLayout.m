@@ -396,9 +396,9 @@ NSString *const ARCollectionElementKindSectionStickyHeader = @"ARCollectionEleme
     }
 
     if ([self isHorizontal]) {
-        self.stickyHeaderAttributes.frame = CGRectMake(edge, 0, stickySize.width, CGRectGetHeight(self.collectionView.bounds)/2);
+        self.stickyHeaderAttributes.frame = CGRectMake(edge, 0, stickySize.width, CGRectGetHeight(self.collectionView.bounds));
     } else {
-        self.stickyHeaderAttributes.frame = CGRectMake(0, edge, CGRectGetWidth(self.collectionView.bounds)/2, stickySize.height);
+        self.stickyHeaderAttributes.frame = CGRectMake(0, edge, CGRectGetWidth(self.collectionView.bounds), stickySize.height);
     }
 
     return self.stickyHeaderAttributes;

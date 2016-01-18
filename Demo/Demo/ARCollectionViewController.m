@@ -98,7 +98,7 @@ static NSString *CellIdentifier = @"Cell";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout referenceSizeForStickyHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(200, 300);
+    return self.stickyHeaderSize;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section

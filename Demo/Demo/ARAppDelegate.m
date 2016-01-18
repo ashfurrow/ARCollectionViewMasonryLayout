@@ -22,7 +22,9 @@
     ARCollectionViewController *viewController = [[ARCollectionViewController alloc] initWithCollectionViewLayout:layout];
     viewController.colorCount = 100;
     viewController.headerSize = CGSizeMake(10, 20);
+    viewController.stickyHeaderSize = CGSizeMake(10, 12);
     viewController.footerSize = CGSizeMake(10, 2);
+
     self.window.rootViewController = viewController;
     
     [self.window makeKeyAndVisible];

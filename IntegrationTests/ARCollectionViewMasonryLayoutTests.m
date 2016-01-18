@@ -312,6 +312,32 @@ describe(@"vertical layout", ^{
             expect(layout.collectionViewContentSize).to.equal(CGSizeZero);
         });
     });
+
+    describe(@"with sticky header", ^{
+
+        it(@"moves the content down under the sticky header", ^{
+            viewController.colorCount = 4;
+            viewController.headerSize = CGSizeMake(300, 30);
+            viewController.stickyHeaderSize = CGSizeMake(300, 60);
+            expect(viewController.view).to.haveValidSnapshotNamed(@"showsTheStickyHeader");
+        });
+
+        it(@"keeps the sticky header on screen while scrolling the header", ^{
+            viewController.colorCount = 200;
+            viewController.headerSize = CGSizeMake(300, 30);
+            viewController.stickyHeaderSize = CGSizeMake(300, 60);
+
+            [viewController beginAppearanceTransition:YES animated:NO];
+            [viewController endAppearanceTransition];
+
+            [viewController.collectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForItem:3 inSection:0]
+                                                  atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
+            
+            expect(viewController.view).to.haveValidSnapshotNamed(@"showsTheStickyHeaderOverTheHeader");
+        });
+
+    });
+
 });
 
 describe(@"trailing layout", ^{
@@ -345,5 +371,6 @@ describe(@"longestDimensionWithLengths", ^{
         expect([layout longestDimensionWithLengths:@[] withOppositeDimension:0]).to.equal(0);
     });
 });
+
 
 SpecEnd

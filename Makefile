@@ -3,7 +3,7 @@ language: objective-c
 
 WORKSPACE = ARCollectionViewMasonryLayout.xcworkspace
 SCHEME = Demo
-DEVICE_HOST = platform='iOS Simulator',OS='7.1',name='iPhone 4s'
+DEVICE_HOST = platform='iOS Simulator',OS='8.1',name='iPhone 4s'
 
 all: ci
 

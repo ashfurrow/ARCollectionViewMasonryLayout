@@ -11,6 +11,8 @@
 
 @optional
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForStickyHeaderInSection:(NSInteger)section;
+
+- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout stickyHeaderHasChangedStickyness:(BOOL)isAttachedToLeadingEdge;
 @end
 
 typedef NS_ENUM(NSInteger, ARCollectionViewMasonryLayoutDirection){

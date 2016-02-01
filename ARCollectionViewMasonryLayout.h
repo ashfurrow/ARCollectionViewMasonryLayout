@@ -2,17 +2,22 @@
 
 @class ARCollectionViewMasonryLayout;
 
+/// An extension on UICollectionViewDelegateFlowLayout with some extras for the masonry.
+
 @protocol ARCollectionViewMasonryLayoutDelegate <UICollectionViewDelegateFlowLayout>
 
 /// If you have a vertical direction then this is the height
 /// and width for horizontal.
-
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout variableDimensionForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @optional
+
+/// The size of the sticky header if implemented
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForStickyHeaderInSection:(NSInteger)section;
 
+/// A callback for when a sticky header has changed it's attatched state
 - (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout stickyHeaderHasChangedStickyness:(BOOL)isAttachedToLeadingEdge;
+
 @end
 
 typedef NS_ENUM(NSInteger, ARCollectionViewMasonryLayoutDirection){
@@ -34,6 +39,7 @@ extern NSString *const ARCollectionElementKindSectionStickyHeader;
 /// Create a layout with a direction
 - (instancetype)initWithDirection:(enum ARCollectionViewMasonryLayoutDirection)direction;
 
+/// Deprecated
 - (instancetype)init __attribute__((unavailable("Invoke the designated initializer initWithDirection: instead.")));
 
 /// Direction of the collection view layout. Set in the initializer.

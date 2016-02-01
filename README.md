@@ -89,6 +89,44 @@ The masonry layout supports a fixed height header and footer that scroll along w
 }
 ```
 
+Sticky Headers
+------------------
+
+The layout supports having a custom sticky header ( similar to the ones in a `UITableView`. ) It behaves simiar to how Headers and footers work. However it needs the layout delegate to support `collectionView:layout:referenceSizeForStickyHeaderInSection:`. 
+
+``` objc
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    [..]
+    } if ([kind isEqualToString:ARCollectionElementKindSectionStickyHeader]) {
+        UICollectionReusableView *view = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:kind forIndexPath:indexPath];
+        view.backgroundColor = [UIColor purpleColor];
+        return view;
+
+    }
+    [..]
+}
+
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout referenceSizeForStickyHeaderInSection:(NSInteger)section
+{
+    return self.stickyHeaderSize;
+}
+
+
+```
+
+It also provides a callback incase you want to make transitions when the header is sticky or not:
+
+```
+- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout stickyHeaderHasChangedStickyness:(BOOL)isAttachedToLeadingEdge
+{
+    NSLog(@"Attatched: %@", @(isAttachedToLeadingEdge));
+}
+
+```
+
 Demo Project
 ------------
 

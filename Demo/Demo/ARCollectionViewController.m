@@ -118,4 +118,9 @@ static NSString *CellIdentifier = @"Cell";
     return [self.modelArray[indexPath.row] dimension];
 }
 
+- (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout stickyHeaderHasChangedStickyness:(BOOL)isAttachedToLeadingEdge
+{
+    self.stickyHeaderIsAttached = isAttachedToLeadingEdge;
+}
+
 @end

@@ -3,9 +3,13 @@
 /// This class uses ‘sections’ to indicate ‘columns’ in a vertical layout and ‘rows’ in a horizontal layout.
 @interface _ARCollectionViewMasonryAttributesGrid : NSObject
 
+/// All of the attributes
 @property (nonatomic, readonly) NSArray *allItemAttributes;
+
+/// So you can keep state easily.
 @property (nonatomic, readonly) CGFloat longestSectionDimension;
 
+/// Standard init function
 - (instancetype)initWithSectionCount:(NSUInteger)sectionCount
                         isHorizontal:(BOOL)isHorizontal
                         leadingInset:(CGFloat)leadingInset

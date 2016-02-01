@@ -336,6 +336,26 @@ describe(@"vertical layout", ^{
             expect(viewController.view).to.haveValidSnapshotNamed(@"showsTheStickyHeaderOverTheHeader");
         });
 
+        // We dupe the above test entirely, because of the FBSnapshot a lot of the more complex layout setup
+        // is done for us, and the method should be called correctly from that.
+
+        it(@"sends a delegate message for the sticky header", ^{
+            viewController.colorCount = 200;
+            viewController.headerSize = CGSizeMake(300, 30);
+            viewController.stickyHeaderSize = CGSizeMake(300, 60);
+
+            expect(viewController.stickyHeaderIsAttached).to.beFalsy();
+
+            [viewController beginAppearanceTransition:YES animated:NO];
+            [viewController endAppearanceTransition];
+            [viewController.collectionView scrollToItemAtIndexPath: [NSIndexPath indexPathForItem:3 inSection:0]
+                                                  atScrollPosition:UICollectionViewScrollPositionTop animated:NO];
+            expect(viewController.view).to.haveValidSnapshotNamed(@"showsTheStickyHeaderOverTheHeader");
+
+            
+            expect(viewController.stickyHeaderIsAttached).to.beTruthy();
+        });
+
     });
 
 });

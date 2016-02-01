@@ -14,4 +14,5 @@
 @property(assign) CGSize stickyHeaderSize;
 @property(assign) CGSize footerSize;
 @property(strong) NSArray *heightPerEntry;
+@property(assign) BOOL stickyHeaderIsAttached;
 @end

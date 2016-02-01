@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
   s.name                = "ARCollectionViewMasonryLayout"
-  s.version             = "2.1.2"
-  s.summary             = "ARCollectionViewMasonryLayout is a UICollectionViewLayout subclass for creating flow-like layouts with dynamic widths or heights."
+  s.version             = "2.2.0"
+  s.summary             = "ARCollectionViewMasonryLayout is a UICollectionViewLayout subclass for creating masonry / pintrest / flow-like layouts with dynamic widths or heights."
   s.homepage            = "https://github.com/AshFurrow/ARCollectionViewMasonryLayout"
   s.screenshots         = "https://raw.githubusercontent.com/AshFurrow/ARCollectionViewMasonryLayout/master/Screenshots/ARCollectionViewMasonryLayout.png"
   s.license             = 'MIT'
-  s.author              = { "Orta Therox" => "orta.therox@gmail.com" }
+  s.author              = { "Orta Therox" => "orta.therox@gmail.com", "Ash Furrow" => "ash@ashfurrow.com" }
   s.social_media_url    = "http://twitter.com/orta"
   s.platform            = :ios
   s.platform            = :ios, '7.0'

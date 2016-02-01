@@ -9,6 +9,8 @@ NSString *const ARCollectionElementKindSectionStickyHeader = @"ARCollectionEleme
 
 @property (nonatomic, assign) NSInteger itemCount;
 
+@property (nonatomic, assign) BOOL stickyHeaderIsScrolling;
+
 @property (nonatomic, strong) UICollectionViewLayoutAttributes *headerAttributes;
 @property (nonatomic, strong) UICollectionViewLayoutAttributes *footerAttributes;
 @property (nonatomic, strong) UICollectionViewLayoutAttributes *stickyHeaderAttributes;
@@ -382,6 +384,12 @@ NSString *const ARCollectionElementKindSectionStickyHeader = @"ARCollectionEleme
     CGFloat maxDistanceFromLeadingEdge = [self headerDimensionAtIndexPath:indexPathZero];
     CGFloat edge = MAX(maxDistanceFromLeadingEdge, self.collectionView.contentOffset.y);
 
+    BOOL isScrolling = edge != maxDistanceFromLeadingEdge;
+    if (isScrolling != self.stickyHeaderIsScrolling && self.delegate && [self.delegate respondsToSelector:@selector(collectionView:layout:stickyHeaderHasChangedStickyness:)]) {
+        [self.delegate collectionView:self.collectionView layout:self stickyHeaderHasChangedStickyness:isScrolling];
+    }
+    self.stickyHeaderIsScrolling = isScrolling;
+
     CGSize stickySize = CGSizeZero;
     if (self.delegate && [self.delegate respondsToSelector:@selector(collectionView:layout:referenceSizeForStickyHeaderInSection:)]) {
         stickySize = [self.delegate collectionView:self.collectionView layout:self referenceSizeForStickyHeaderInSection:0];
@@ -422,8 +430,12 @@ NSString *const ARCollectionElementKindSectionStickyHeader = @"ARCollectionEleme
     BOOL needsEverything = !CGSizeEqualToSize(newBounds.size, self.collectionView.bounds.size);
     context.invalidateFlowLayoutDelegateMetrics = needsEverything;
     if (needsEverything) {
-        [context invalidateSupplementaryElementsOfKind:UICollectionElementKindSectionFooter atIndexPaths:@[indexPathZero]];
-        [context invalidateSupplementaryElementsOfKind:UICollectionElementKindSectionHeader atIndexPaths:@[indexPathZero]];
+        if ([self footerDimensionAtIndexPath:indexPathZero] != NSNotFound) {
+            [context invalidateSupplementaryElementsOfKind:UICollectionElementKindSectionFooter atIndexPaths:@[indexPathZero]];
+        }
+        if ([self headerDimensionAtIndexPath:indexPathZero] != NSNotFound) {
+            [context invalidateSupplementaryElementsOfKind:UICollectionElementKindSectionHeader atIndexPaths:@[indexPathZero]];
+        }
     }
 
     // The sticky header should always be invalidated

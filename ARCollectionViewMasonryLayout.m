@@ -430,8 +430,12 @@ NSString *const ARCollectionElementKindSectionStickyHeader = @"ARCollectionEleme
     BOOL needsEverything = !CGSizeEqualToSize(newBounds.size, self.collectionView.bounds.size);
     context.invalidateFlowLayoutDelegateMetrics = needsEverything;
     if (needsEverything) {
-        [context invalidateSupplementaryElementsOfKind:UICollectionElementKindSectionFooter atIndexPaths:@[indexPathZero]];
-        [context invalidateSupplementaryElementsOfKind:UICollectionElementKindSectionHeader atIndexPaths:@[indexPathZero]];
+        if ([self footerDimensionAtIndexPath:indexPathZero] != NSNotFound) {
+            [context invalidateSupplementaryElementsOfKind:UICollectionElementKindSectionFooter atIndexPaths:@[indexPathZero]];
+        }
+        if ([self headerDimensionAtIndexPath:indexPathZero] != NSNotFound) {
+            [context invalidateSupplementaryElementsOfKind:UICollectionElementKindSectionHeader atIndexPaths:@[indexPathZero]];
+        }
     }
 
     // The sticky header should always be invalidated

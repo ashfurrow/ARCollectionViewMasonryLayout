@@ -1,3 +1,8 @@
+2.3.0
+-----
+
+- Added tvOS to Podspec - orta
+
 2.2.0
 -----
 

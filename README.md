@@ -3,7 +3,7 @@ ARCollectionViewMasonryLayout
 
 [![Build Status](https://travis-ci.org/ashfurrow/ARCollectionViewMasonryLayout.svg)](https://travis-ci.org/ashfurrow/ARCollectionViewMasonryLayout)
 
-ARCollectionViewMasonryLayout is a `UICollectionViewLayout` subclass for creating flow-like layouts with dynamic widths or heights.
+`ARCollectionViewMasonryLayout` is a `UICollectionViewLayout` subclass for creating flow-like layouts with dynamic widths or heights.
 
 ![Screenshot](Screenshots/ARCollectionViewMasonryLayout.png)
 
@@ -66,7 +66,7 @@ Create a collection view. Its delegate *must* conform to the `ARCollectionViewMa
 Headers and Footers
 -------------------
 
-The masonry layout supports a fixed height header and footer that scroll along with the contents of the view. These can be added by implementing the following delegate methods on the `UIViewController`.
+The masonry layout supports a fixed height header and footer that scroll along with the contents of the view. These can be added by implementing the standard [UICollectionViewDelegateFlowLayout](https://developer.apple.com/reference/uikit/uicollectionviewdelegateflowlayout) delegate methods on the `UIViewController`.
 
 ```objc
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
@@ -78,24 +78,23 @@ The masonry layout supports a fixed height header and footer that scroll along w
     return view;
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout dimensionForHeaderAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return 20; // header length
+    return CGSizeMake(0, 20); // header size
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout dimensionForFooterAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
-    return 10; // footer length
+    return CGSizeMake(0, 20); // header size
 }
 ```
 
 Sticky Headers
-------------------
+--------------
 
-The layout supports having a custom sticky header ( similar to the ones in a `UITableView`. ) It behaves simiar to how Headers and footers work. However it needs the layout delegate to support `collectionView:layout:referenceSizeForStickyHeaderInSection:`. 
+The layout supports having a custom sticky header ( similar to the ones in a `UITableView`. ) It behaves simiar to how Headers and footers work. However it needs the layout delegate to support [`collectionView:layout:referenceSizeForStickyHeaderInSection:`](https://github.com/ashfurrow/ARCollectionViewMasonryLayout/blob/5169040d3f072b4f1bf1fb4a5e6313fb97d1f7e1/ARCollectionViewMasonryLayout.h#L15-L16). 
 
 ``` objc
-
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     [..]
@@ -108,13 +107,10 @@ The layout supports having a custom sticky header ( similar to the ones in a `UI
     [..]
 }
 
-
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(ARCollectionViewMasonryLayout *)collectionViewLayout referenceSizeForStickyHeaderInSection:(NSInteger)section
 {
     return self.stickyHeaderSize;
 }
-
-
 ```
 
 It also provides a callback incase you want to make transitions when the header is sticky or not:
@@ -124,7 +120,6 @@ It also provides a callback incase you want to make transitions when the header 
 {
     NSLog(@"Attatched: %@", @(isAttachedToLeadingEdge));
 }
-
 ```
 
 Demo Project

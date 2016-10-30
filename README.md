@@ -78,14 +78,14 @@ The masonry layout supports a fixed height header and footer that scroll along w
     return view;
 }
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return 20; // header size
+    return CGSizeMake(0, 20); // header size
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
-    return 10; // footer size
+    return CGSizeMake(0, 20); // header size
 }
 ```
 

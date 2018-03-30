@@ -118,7 +118,7 @@ It also provides a callback incase you want to make transitions when the header 
 ```
 - (void)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout stickyHeaderHasChangedStickyness:(BOOL)isAttachedToLeadingEdge
 {
-    NSLog(@"Attatched: %@", @(isAttachedToLeadingEdge));
+    NSLog(@"Attached: %@", @(isAttachedToLeadingEdge));
 }
 ```
 

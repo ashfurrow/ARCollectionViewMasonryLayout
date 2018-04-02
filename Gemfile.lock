@@ -44,7 +44,7 @@ GEM
     fourflusher (0.3.0)
     fuzzy_match (2.0.4)
     i18n (0.7.0)
-    json (1.8.3)
+    json (1.8.6)
     minitest (5.8.3)
     molinillo (0.4.1)
     nap (1.0.0)
@@ -64,4 +64,4 @@ DEPENDENCIES
   cocoapods (= 1.0.0.beta.2)
 
 BUNDLED WITH
-   1.11.2
+   1.16.1

@@ -1,5 +1,5 @@
 PODS:
-  - ARCollectionViewMasonryLayout (2.1.2)
+  - ARCollectionViewMasonryLayout (2.3.0)
   - EDColor (0.4.0)
   - Expecta (1.0.5)
   - Expecta+Snapshots (2.0.0):
@@ -20,13 +20,13 @@ EXTERNAL SOURCES:
     :path: ARCollectionViewMasonryLayout.podspec
 
 SPEC CHECKSUMS:
-  ARCollectionViewMasonryLayout: 776730bdedd0c7570a5e904c370e4e120f98ea62
+  ARCollectionViewMasonryLayout: e4146491430da98385b85df6d754dcdae8939a66
   EDColor: 89d19a013279a5604d61650721c15f20fefaaf00
   Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
   Expecta+Snapshots: 29b38dd695bc72a0ed2bea833937d78df41943ba
   FBSnapshotTestCase: 7e85180d0d141a0cf472352edda7e80d7eaeb547
   Specta: ac94d110b865115fe60ff2c6d7281053c6f8e8a2
 
-PODFILE CHECKSUM: 60e0aa7ee8ac6c2a1a21ac163be8c4ddd81fa689
+PODFILE CHECKSUM: 1beebaed1666573f583734faab47f0dec51f917c
 
-COCOAPODS: 1.0.0.beta.2
+COCOAPODS: 1.4.0

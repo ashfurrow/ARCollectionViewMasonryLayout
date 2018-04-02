@@ -1,7 +1,9 @@
+platform :ios, '7.1'
+
 target 'Demo' do
 
   workspace 'ARCollectionViewMasonryLayout'
-  xcodeproj 'Demo/Demo.xcodeproj'
+  project 'Demo/Demo.xcodeproj'
 
   pod 'ARCollectionViewMasonryLayout', :path => 'ARCollectionViewMasonryLayout.podspec'
   pod 'EDColor', '0.4.0'
